@@ -14,7 +14,7 @@ public class ArtGalleryInfo {
 	private String imageURL;		// 이미지 url
 	private Integer cnt;			// 예매수
 	
-	public ArtGalleryInfo(String artName, String phone, String tag ,String addressName, String fee, String date, String placeURL, String id, String imageURL) {
+	public ArtGalleryInfo(String artName, String fee, String tag ,String addressName, String fee, String date, String placeURL, String id, String imageURL) {
 		this.artName = artName;
 		this.phone = phone;
 		this.tag = tag;
