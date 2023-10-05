@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class ArtGalleryInfo {
 	private String artName; 		// 전시회 이름
-	private String addressLink;		// 전시회 링크
+	//private String addressLink;		// 전시회 링크
 	private String fee;             // 입장료
 	private String place;			// 전시회 장소
 	private Date dateStart;       // 시작날짜
