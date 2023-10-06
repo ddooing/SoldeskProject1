@@ -7,6 +7,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import artDB.ArtGalleryList;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -16,15 +18,22 @@ import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 
 public class Home extends JPanel {
 
     private JLabel imageLabel;
     //private Timer imageTimer;
     ImageIcon icon;
+    JPanel framehomePanel;
 
     public Home() {
-    	
+    	this(null);
+    }
+    public Home(JPanel homePanel) {
+    	this.framehomePanel = homePanel;
+    	//list 객체생성
+    	ArtGalleryList artgallerylist = new ArtGalleryList();
 		
     	// JPanel 구조 설정
         setBackground(Color.white);
@@ -37,46 +46,10 @@ public class Home extends JPanel {
         	//선
         ImageIcon menuLine =new ImageIcon("./src/line3.png");
         
-        	// 필터 4개 
-        ImageIcon one= new ImageIcon("./src/popula.png");
-        ImageIcon two = new ImageIcon("./src/recent.png");
-        ImageIcon three= new ImageIcon("./src/free.png");
-        ImageIcon four = new ImageIcon("./src/soonEnd.png");
         
-        
-        
-       // JButton btnGal = new JButton("전시회");
-        //JButton btnPop = new JButton("팝업스토어");
         JButton btnSearch = new JButton(imageSearch);// 검색 버튼
-        JLabel menuline = new JLabel(menuLine);// 메뉴선
+        JLabel menuline = new JLabel(menuLine);// 메뉴선  
         
-        JButton popula_btn = new JButton(one);//인기 필터
-        JButton recent_btn = new JButton(two);// 최신 필터
-        JButton free_btn = new JButton(three);// 무료 필터
-        JButton soonEnd_btn = new JButton(four);// 곧 종료 필터 
-        
-        /*
-        JButton btnEnd = new JButton("");
-        JButton btnBack = new JButton("");
-        JButton btnHome = new JButton("");
-        JButton btnTicket = new JButton("");
-        JButton btnSoon = new JButton("");
-        
-        
-        btnGal.setSize(200, 50);
-        btnGal.setLocation(50, 25);
-        btnGal.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 26));
-        btnGal.setContentAreaFilled(false);
-        btnGal.setBorderPainted(false);
-        
-
-        btnPop.setSize(200, 50);
-        btnPop.setLocation(100, 25);
-        btnPop.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 26));
-        btnPop.setContentAreaFilled(false);
-        btnPop.setBorderPainted(false);
-        
-        */
         // 검색 아이콘
         btnSearch.setSize(50,50);
         btnSearch.setLocation(310, 40);
@@ -90,155 +63,172 @@ public class Home extends JPanel {
         //add(btnGal);
         //add(btnPop);
         
-        int btnsHeight = menuline.getY() + menuline.getHeight()+2;
+        int btnsHeight = menuline.getY() + menuline.getHeight()+10;
         
-        popula_btn.setSize(31, 16); 
-        popula_btn.setLocation(30,btnsHeight);
-        popula_btn.setBorderPainted(false); //버튼 외각선 지우기
-        popula_btn.setContentAreaFilled(false); //버튼 투명하게 지우기(이미지는 남음)
-        popula_btn.setFocusPainted(false);
+        //인기 필터
+        ImageIcon originalIcon1 = new ImageIcon("./src/인기.png");
+        Image originalImage1 = originalIcon1.getImage();
+        Image scaledImage1 = originalImage1.getScaledInstance(60, 30, Image.SCALE_SMOOTH);
         
-        recent_btn.setSize(31, 16); 
-        recent_btn.setLocation(popula_btn.getX() + popula_btn.getWidth()+5,btnsHeight);
-        recent_btn.setBorderPainted(false); //버튼 외각선 지우기
-        recent_btn.setContentAreaFilled(false); //버튼 투명하게 지우기(이미지는 남음)
-        recent_btn.setFocusPainted(false);
+		ImageIcon one = new ImageIcon(scaledImage1);
+		JButton one1 = new JButton(one);
+		one1.setBounds(30,btnsHeight,60, 30);
+		one1.setContentAreaFilled(false);
+		one1.setBorderPainted(false);
+		add(one1);
         
-        free_btn.setSize(31, 16); 
-        free_btn.setLocation(recent_btn.getX() + recent_btn.getWidth()+5, btnsHeight);
-        free_btn.setBorderPainted(false); //버튼 외각선 지우기
-        free_btn.setContentAreaFilled(false); //버튼 투명하게 지우기(이미지는 남음)
-        free_btn.setFocusPainted(false);
+		//최신 필터
+		ImageIcon originalIcon2 = new ImageIcon("./src/최신.png");
+        Image originalImage2 = originalIcon2.getImage();
+        Image scaledImage2 = originalImage2.getScaledInstance(60, 30, Image.SCALE_SMOOTH);
         
-        soonEnd_btn.setSize(37, 16); 
-        soonEnd_btn.setLocation(free_btn.getX() + free_btn.getWidth()+5,btnsHeight);
-        soonEnd_btn.setBorderPainted(false); //버튼 외각선 지우기
-        soonEnd_btn.setContentAreaFilled(false); //버튼 투명하게 지우기(이미지는 남음)
-        soonEnd_btn.setFocusPainted(false);
+		ImageIcon two = new ImageIcon(scaledImage2);
+		JButton two2 = new JButton(two);
+		two2.setBounds(one1.getX() + one1.getWidth() + 5,btnsHeight,60, 30);
+		two2.setContentAreaFilled(false);
+		two2.setBorderPainted(false);
+		add(two2);
+		
+		// 무료 필터
+		ImageIcon originalIcon3 = new ImageIcon("./src/무료.png");
+        Image originalImage3 = originalIcon3.getImage();
+        Image scaledImage3 = originalImage3.getScaledInstance(60, 30, Image.SCALE_SMOOTH);
+        
+		ImageIcon three = new ImageIcon(scaledImage3);
+		JButton three3 = new JButton(three);
+		three3.setBounds(two2.getX() + two2.getWidth() + 5,btnsHeight,60, 30);
+		three3.setContentAreaFilled(false);
+		three3.setBorderPainted(false);
+		add(three3);
+		
+		// 곧종료 필터
+		ImageIcon originalIcon4 = new ImageIcon("./src/곧종료.png");
+        Image originalImage4 = originalIcon4.getImage();
+        Image scaledImage4 = originalImage4.getScaledInstance(80, 30, Image.SCALE_SMOOTH);
+        
+		ImageIcon four = new ImageIcon(scaledImage4);
+		JButton four4 = new JButton(four);
+		four4.setBounds(three3.getX() + three3.getWidth() + 5,btnsHeight,80, 30);
+		four4.setContentAreaFilled(false);
+		four4.setBorderPainted(false);
+		add(four4);
         
         
         //필터 버튼 add 
         add(btnSearch);
         add(menuline);
-        add(popula_btn);
-        add(recent_btn);
-        add(free_btn);
-        add(soonEnd_btn);
+        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        int posterWidth = 120;
+        int posterHeight = 160;
+
+        // 1번 첫 번째 영역: 포스터 이미지
+        JButton posterImage1=new JButton(HtmlItils1.imgHtmlParser(artgallerylist.Info().get(0).getImageURL()));
+        posterImage1.setBounds(50, 160, posterWidth, posterHeight);
+        add(posterImage1);
+
+        // 1번 두 번째 영역: 포스터 제목
+        JLabel posterTitle1 = new JLabel(artgallerylist.Info().get(0).getArtName());
+        posterTitle1.setBounds(50, 330, posterWidth, 20);
+        posterTitle1.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 14));
+        add(posterTitle1);
+
+        // 1번 세 번째 영역: 포스터 기간
+        JLabel posterDate1 = new JLabel(dateFormat.format(artgallerylist.Info().get(0).getDateStart()) + "~" +dateFormat.format(artgallerylist.Info().get(0).getDateEnd()));
+        posterDate1.setBounds(50, 350, posterWidth, 20);
+        posterDate1.setFont(new Font("나눔스퀘어OTF Bold", Font.PLAIN, 8));
+        add(posterDate1);
+        
+       
+        // 2번 첫 번째 영역: 포스터 이미지
+        JButton posterImage2=new JButton(HtmlItils1.imgHtmlParser(artgallerylist.Info().get(1).getImageURL()));
+        posterImage2.setBounds(230, 160, posterWidth, posterHeight);
+        add(posterImage2);
+
+        // 2번 두 번째 영역: 포스터 제목
+        JLabel posterTitle2 = new JLabel(artgallerylist.Info().get(1).getArtName());
+        posterTitle2.setBounds(230, 330, posterWidth, 20);
+        posterTitle2.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 14));
+        add(posterTitle2);
+
+        // 2번 세 번째 영역: 포스터 기간
+        JLabel posterDate2 = new JLabel(dateFormat.format(artgallerylist.Info().get(1).getDateStart()) + "~" +dateFormat.format(artgallerylist.Info().get(1).getDateEnd()));
+        posterDate2.setBounds(230, 350, posterWidth, 20);
+        posterDate2.setFont(new Font("나눔스퀘어OTF Bold", Font.PLAIN, 8));
+        add(posterDate2);
         
         
         
-        /*
-        btnEnd.setBorderPainted(false);
-        btnEnd.setContentAreaFilled(false);
-        btnEnd.setFocusPainted(false);
+        // 3번 첫 번째 영역: 포스터 이미지
+        JButton posterImage3=new JButton(HtmlItils1.imgHtmlParser(artgallerylist.Info().get(2).getImageURL()));
+        posterImage3.setBounds(50, 380, posterWidth, posterHeight);
+        add(posterImage3);
 
-        btnBack.setBorderPainted(false);
-        btnBack.setContentAreaFilled(false);
-        btnBack.setFocusPainted(false);
+        // 3번 두 번째 영역: 포스터 제목
+        JLabel posterTitle3 = new JLabel(artgallerylist.Info().get(2).getArtName());
+        posterTitle3.setBounds(50, 550, posterWidth, 20);
+        posterTitle3.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 14));
+        add(posterTitle3);
 
-        btnHome.setBorderPainted(false);
-        btnHome.setContentAreaFilled(false);
-        btnHome.setFocusPainted(false);
+        // 3번 세 번째 영역: 포스터 기간
+        JLabel posterDate3 = new JLabel(dateFormat.format(artgallerylist.Info().get(2).getDateStart()) + "~" +dateFormat.format(artgallerylist.Info().get(2).getDateEnd()));
+        posterDate3.setBounds(50, 570, posterWidth, 20);
+        posterDate3.setFont(new Font("나눔스퀘어OTF Bold", Font.PLAIN, 8));
+        add(posterDate3);
+        
 
-        btnTicket.setBorderPainted(false);
-        btnTicket.setContentAreaFilled(false);
-        btnTicket.setFocusPainted(false);
 
-        btnSoon.setBorderPainted(false);
-        btnSoon.setContentAreaFilled(false);
-        btnSoon.setFocusPainted(false);
+        // 4번 첫 번째 영역: 포스터 이미지
+        JButton posterImage4=new JButton(HtmlItils1.imgHtmlParser(artgallerylist.Info().get(3).getImageURL()));
+        posterImage4.setBounds(230, 380, posterWidth, posterHeight);
+        add(posterImage4);
+
+        // 4번 두 번째 영역: 포스터 제목
+        JLabel posterTitle4 = new JLabel(artgallerylist.Info().get(3).getArtName());
+        posterTitle4.setBounds(230, 550, posterWidth, 20);
+        posterTitle4.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 14));
+        add(posterTitle4);
+
+        // 4번 세 번째 영역: 포스터 기간
+        JLabel posterDate4 = new JLabel(dateFormat.format(artgallerylist.Info().get(3).getDateStart()) + "~" +dateFormat.format(artgallerylist.Info().get(3).getDateEnd()));
+        posterDate4.setBounds(230, 570, posterWidth, 20);
+        posterDate4.setFont(new Font("나눔스퀘어OTF Bold", Font.PLAIN, 8));
+        add(posterDate4);
+       
+        
+        ImageIcon originalIcon5 = new ImageIcon("./src/다음페이지.png");
+        Image originalImage5 = originalIcon5.getImage();
+        Image scaledImage5 = originalImage5.getScaledInstance(40, 30, Image.SCALE_SMOOTH);
+        
+		ImageIcon nextpage = new ImageIcon(scaledImage5);
+		JButton nextpage1 = new JButton(nextpage);
+		nextpage1.setBounds(330,600,40, 30);
+		nextpage1.setContentAreaFilled(false);
+		nextpage1.setBorderPainted(false);
+		add(nextpage1);
+        
 		
-        int buttonWidth = 83;
-        int buttonSpacing = 10;
-        int yOffset = (int) getLocation().getY() / 2 + 630;
-        int totalWidth = 5 * (buttonWidth + buttonSpacing) - buttonSpacing;
-
-        btnEnd.setSize(83, 50);
-        btnBack.setSize(83, 50);
-        btnHome.setSize(83, 50);
-        btnTicket.setSize(83, 50);
-        btnSoon.setSize(83, 50);
-
-        btnEnd.setLocation((getWidth() - totalWidth) / 2, yOffset);
-        btnBack.setLocation((getWidth() - totalWidth) / 2 + buttonWidth + buttonSpacing, yOffset);
-        btnHome.setLocation((getWidth() - totalWidth) / 2 + 2 * (buttonWidth + buttonSpacing), yOffset);
-        btnTicket.setLocation((getWidth() - totalWidth) / 2 + 3 * (buttonWidth + buttonSpacing), yOffset);
-        btnSoon.setLocation((getWidth() - totalWidth) / 2 + 4 * (buttonWidth + buttonSpacing), yOffset);
-        */
+		nextpage1.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				
+			}
+		});
         
-        /*
-     // 이미지 레이블 생성
-        imageLabel = new JLabel();
-        imageLabel.setBounds(40, btnGal.getY() + btnGal.getHeight() + 10, 400, 400); // 위치를 버튼 아래로 조절
-        add(imageLabel);
         
-        add(btnEnd);
-        add(btnBack);
-        add(btnHome);
-        add(btnTicket);
-        add(btnSoon);
-
-        btnGal.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                
-            }
-        });
-
-        btnPop.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                
-            }
-        });
-        */
         btnSearch.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				// 검색 아이콘 클릭시 화면 바뀌는것 입력
+				// 검색페이지 이동
 			}
 		});
-
-        /*
-        btnEnd.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
-
-        btnBack.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                FrameBase.getDispose();
-            }
-        });
-
-        btnHome.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                FrameBase.getDispose();
-                FrameBase.getInstance(new Home());
-            }
-        });
-
-        btnTicket.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                
-            }
-        });
-
-        btnSoon.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                
-            }
-        });
         
-        */
+        
+        
 
         
     }

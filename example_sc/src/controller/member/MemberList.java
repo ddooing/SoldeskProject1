@@ -1,7 +1,6 @@
 package controller.member;
 
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -80,4 +79,28 @@ public class MemberList {
 		}
 		System.out.println("-----------------------------------");
 	}
+	
+	public String findID(String inputName, String inputTel) {
+        Iterator<Member> iterator = memberList.iterator();
+        while (iterator.hasNext()) {
+            Member member = iterator.next();
+            if (member.getName().equals(inputName)) {
+            	if(member.getTel().equals(inputTel)) {
+            		return member.getId();
+            	} 
+            } 
+        }
+        return null; 
+   }
+	
+   public String findPW(String inputID, String inputTel, String inputName) {
+        Iterator<Member> iterator = memberList.iterator();
+        while (iterator.hasNext()) {
+            Member member = iterator.next();
+            if (member.getId().equals(inputID) && member.getTel().equals(inputTel) && member.getName().equals(inputName)) {
+                return member.getPw();
+            }
+        }
+        return null; 
+   }
 }

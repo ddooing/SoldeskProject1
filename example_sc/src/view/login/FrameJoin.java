@@ -30,12 +30,16 @@ public class FrameJoin extends JPanel {
 
 	static String filename = "회원명단.txt";
 	JPanel frameJoinPanel;
+	
+	public FrameJoin() {
+		this(null);
+	}
 
 	public FrameJoin(JPanel homePanel) {
 		this.frameJoinPanel = homePanel;
 
 		// JPanel 구조
-		setBackground(new Color(255, 255, 255));
+		setBackground(new Color(255, 255, 240));
 		setLayout(null);
 		setSize(400, 700);
 
@@ -149,12 +153,13 @@ public class FrameJoin extends JPanel {
 						br.write(inputPW + "/");
 						br.write(inputName + "/");
 						br.write(inputTel + "\n");
-
+						System.out.println("저장완료");
 					} catch (Exception ex) {
 						JOptionPane.showMessageDialog(null, "회원가입이 실패했습니다.");
 					}
 
 					JOptionPane.showMessageDialog(null, "회원가입에 성공했습니다.");
+					System.out.println("회원가입 성공");
 					dispose();
 					FrameBase.getInstance(new FrameBegin());
 
