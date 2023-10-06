@@ -12,6 +12,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -49,10 +50,10 @@ public class Home extends JPanel {
         JButton btnSearch = new JButton(imageSearch);// 검색 버튼
         JLabel menuline = new JLabel(menuLine);// 메뉴선
         
-        JButton popula_btn = new JButton("one");//인기 필터
-        JButton recent_btn = new JButton("two");// 최신 필터
-        JButton free_btn = new JButton("three");// 무료 필터
-        JButton soonEnd_btn = new JButton("four");// 곧 종료 필터 
+        JButton popula_btn = new JButton(one);//인기 필터
+        JButton recent_btn = new JButton(two);// 최신 필터
+        JButton free_btn = new JButton(three);// 무료 필터
+        JButton soonEnd_btn = new JButton(four);// 곧 종료 필터 
         
         /*
         JButton btnEnd = new JButton("");
@@ -84,12 +85,47 @@ public class Home extends JPanel {
         btnSearch.setFocusPainted(false); //버튼 선택표시 지우기
         
         // 선 
-        menuline.setSize(380, 20);
+        menuline.setSize(380, 5);
         menuline.setLocation(10, btnSearch.getY() + btnSearch.getHeight());
         //add(btnGal);
         //add(btnPop);
+        
+        int btnsHeight = menuline.getY() + menuline.getHeight()+2;
+        
+        popula_btn.setSize(31, 16); 
+        popula_btn.setLocation(30,btnsHeight);
+        popula_btn.setBorderPainted(false); //버튼 외각선 지우기
+        popula_btn.setContentAreaFilled(false); //버튼 투명하게 지우기(이미지는 남음)
+        popula_btn.setFocusPainted(false);
+        
+        recent_btn.setSize(31, 16); 
+        recent_btn.setLocation(popula_btn.getX() + popula_btn.getWidth()+5,btnsHeight);
+        recent_btn.setBorderPainted(false); //버튼 외각선 지우기
+        recent_btn.setContentAreaFilled(false); //버튼 투명하게 지우기(이미지는 남음)
+        recent_btn.setFocusPainted(false);
+        
+        free_btn.setSize(31, 16); 
+        free_btn.setLocation(recent_btn.getX() + recent_btn.getWidth()+5, btnsHeight);
+        free_btn.setBorderPainted(false); //버튼 외각선 지우기
+        free_btn.setContentAreaFilled(false); //버튼 투명하게 지우기(이미지는 남음)
+        free_btn.setFocusPainted(false);
+        
+        soonEnd_btn.setSize(37, 16); 
+        soonEnd_btn.setLocation(free_btn.getX() + free_btn.getWidth()+5,btnsHeight);
+        soonEnd_btn.setBorderPainted(false); //버튼 외각선 지우기
+        soonEnd_btn.setContentAreaFilled(false); //버튼 투명하게 지우기(이미지는 남음)
+        soonEnd_btn.setFocusPainted(false);
+        
+        
+        //필터 버튼 add 
         add(btnSearch);
         add(menuline);
+        add(popula_btn);
+        add(recent_btn);
+        add(free_btn);
+        add(soonEnd_btn);
+        
+        
         
         /*
         btnEnd.setBorderPainted(false);
