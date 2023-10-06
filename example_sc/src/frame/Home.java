@@ -37,10 +37,10 @@ public class Home extends JPanel {
         ImageIcon menuLine =new ImageIcon("./src/line3.png");
         
         	// 필터 4개 
-        ImageIcon one= new ImageIcon("./src/30.png");
-        ImageIcon two = new ImageIcon("./src/30.png");
-        ImageIcon three= new ImageIcon("./src/30.png");
-        ImageIcon four = new ImageIcon("./src/30.png");
+        ImageIcon one= new ImageIcon("./src/popula.png");
+        ImageIcon two = new ImageIcon("./src/recent.png");
+        ImageIcon three= new ImageIcon("./src/free.png");
+        ImageIcon four = new ImageIcon("./src/soonEnd.png");
         
         
         
@@ -49,19 +49,19 @@ public class Home extends JPanel {
         JButton btnSearch = new JButton(imageSearch);// 검색 버튼
         JLabel menuline = new JLabel(menuLine);// 메뉴선
         
-        JButton popula_btn = new JButton("");//인기 필터
-        JButton recent_btn = new JButton("");// 최신 필터
-        JButton free_btn = new JButton("");// 무료 필터
-        JButton soonEnd_btn = new JButton("");// 곧 종료 필터 
+        JButton popula_btn = new JButton("one");//인기 필터
+        JButton recent_btn = new JButton("two");// 최신 필터
+        JButton free_btn = new JButton("three");// 무료 필터
+        JButton soonEnd_btn = new JButton("four");// 곧 종료 필터 
         
-        
+        /*
         JButton btnEnd = new JButton("");
         JButton btnBack = new JButton("");
         JButton btnHome = new JButton("");
         JButton btnTicket = new JButton("");
         JButton btnSoon = new JButton("");
         
-        /*
+        
         btnGal.setSize(200, 50);
         btnGal.setLocation(50, 25);
         btnGal.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 26));
@@ -111,7 +111,7 @@ public class Home extends JPanel {
         btnSoon.setBorderPainted(false);
         btnSoon.setContentAreaFilled(false);
         btnSoon.setFocusPainted(false);
-		*/
+		
         int buttonWidth = 83;
         int buttonSpacing = 10;
         int yOffset = (int) getLocation().getY() / 2 + 630;
@@ -128,11 +128,8 @@ public class Home extends JPanel {
         btnHome.setLocation((getWidth() - totalWidth) / 2 + 2 * (buttonWidth + buttonSpacing), yOffset);
         btnTicket.setLocation((getWidth() - totalWidth) / 2 + 3 * (buttonWidth + buttonSpacing), yOffset);
         btnSoon.setLocation((getWidth() - totalWidth) / 2 + 4 * (buttonWidth + buttonSpacing), yOffset);
-        /*
-        add(btnGal);
-        add(btnPop);
-        add(btnSearch);
         */
+        
         /*
      // 이미지 레이블 생성
         imageLabel = new JLabel();
@@ -168,6 +165,7 @@ public class Home extends JPanel {
 			}
 		});
 
+        /*
         btnEnd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -203,6 +201,8 @@ public class Home extends JPanel {
                 
             }
         });
+        
+        */
 
         
     }
