@@ -37,36 +37,9 @@ public class FrameBegin extends JPanel {
 		};
         
         // JPanel 구조 설정
-        setBackground(new Color(255, 192, 203));
+        setBackground(Color.white);
         setLayout(null);
         setSize(400, 700);
-        
-        // 오늘의 전시 추천 텍스트 레이블 생성 및 설정
-        recommendationtext = new JLabel("오늘의 전시 추천");
-        recommendationtext.setBounds(130, 10, 300, 30);
-        recommendationtext.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 18));
-        add(recommendationtext);
-        
-        // 이미지 배열 초기화
-        imageArray = new ImageIcon[4];
-        
-        // 이미지를 배열에 추가 (이미지 파일 경로에 따라 수정)
-        imageArray[0] = new ImageIcon("https://og-data.s3.amazonaws.com/media/exhibitions/image/13639/ei_13639.jpeg");
-        imageArray[1] = new ImageIcon("./src/디올 성수.jpg");
-        imageArray[2] = new ImageIcon("./src/라인프렌즈.jpg");
-        imageArray[3] = new ImageIcon("./src/쿨라링.jpg");
-        
-        
-        // 이미지를 표시할 레이블 생성
-        imageLabel = new JLabel();
-        imageLabel.setBounds(50, 50, 300, 400);
-        add(imageLabel);
-
-        // 랜덤 이미지 표시
-        Random random = new Random();
-        int randomIndex = random.nextInt(imageArray.length);
-        imageLabel.setIcon(imageArray[randomIndex]);
-
         
         JButton btnLogin = new JButton("로그인");
 		JButton btnJoin = new JButton("회원가입");

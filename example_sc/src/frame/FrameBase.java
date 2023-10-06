@@ -1,6 +1,5 @@
 package frame;
 
-import java.awt.Color;
 import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
@@ -41,15 +40,15 @@ public class FrameBase extends JFrame{
 	
 	//기본 프레임 이미지를 저장하기 위한 메소드
 	public static void getImage(JPanel e) {
-		ImageIcon backGround = new ImageIcon("./src/배경11.png");
-		ImageIcon imagebottom = new ImageIcon("./src/하단버튼배경.jpg");
+		ImageIcon backGround = new ImageIcon("./src/backimg.png");
+		//ImageIcon imagebottom = new ImageIcon("./src/하단버튼배경.jpg");
 		JLabel lblBackGround = new JLabel(backGround);
-		JLabel lblImagebottom = new JLabel(imagebottom);
+		//JLabel lblImagebottom = new JLabel(imagebottom);
 		lblBackGround.setSize(400, 700);
-		lblImagebottom.setSize(580, 124);
+		//lblImagebottom.setSize(580, 124);
 		lblBackGround.setLocation(0, 0); 
-		lblImagebottom.setLocation(-90, 600);
-		e.add(lblImagebottom);
+		//lblImagebottom.setLocation(-90, 600);
+		//e.add(lblImagebottom);
 		e.add(lblBackGround);
 	}
 

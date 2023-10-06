@@ -1,10 +1,10 @@
 package artDB;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ArtGalleryInfo {
 	private String artName; 		// 전시회 이름
-	//private String addressLink;		// 전시회 링크
 	private String fee;             // 입장료
 	private String place;			// 전시회 장소
 	private Date dateStart;       // 시작날짜
@@ -14,64 +14,102 @@ public class ArtGalleryInfo {
 	private String imageURL;		// 이미지 url
 	private Integer cnt;			// 예매수
 	
-	public ArtGalleryInfo(String artName, String fee, String tag ,String addressName, String fee, String date, String placeURL, String id, String imageURL) {
+	public ArtGalleryInfo(String artName, String fee,  String place, Date dateStart,
+			Date dateEnd,String time,String placeURL,String imageURL,Integer cnt ) {
 		this.artName = artName;
-		this.phone = phone;
-		this.tag = tag;
-		this.addressName = addressName;
-		this.fee = fee;
-		this.date = date;
+		this.fee=fee;
+		this.place=place;
+		this.dateStart=dateStart;
+		this.dateEnd=dateEnd;
+		this.time=time;
 		this.placeURL = placeURL;
-		this.id = id;
 		this.imageURL = imageURL;
+		this.cnt=cnt;
 	}
-
+	
 	public String getArtName() {
 		return artName;
 	}
 
-	public String getPhone() {
-		return phone;
-	}
-	
-	public String getTag() {
-		return tag;
-	}
-
-	public String getAddressName() {
-		return addressName;
+	public void setArtName(String artName) {
+		this.artName = artName;
 	}
 
 	public String getFee() {
 		return fee;
 	}
 
-	public String getDate() {
-		return date;
+	public void setFee(String fee) {
+		this.fee = fee;
+	}
+
+	public String getPlace() {
+		return place;
+	}
+
+	public void setPlace(String place) {
+		this.place = place;
+	}
+
+	public Date getDateStart() {
+		return dateStart;
+	}
+
+	public void setDateStart(Date dateStart) {
+		this.dateStart = dateStart;
+	}
+
+	public Date getDateEnd() {
+		return dateEnd;
+	}
+
+	public void setDateEnd(Date dateEnd) {
+		this.dateEnd = dateEnd;
+	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
 	}
 
 	public String getPlaceURL() {
 		return placeURL;
 	}
 
-	public String getId() {
-		return id;
+	public void setPlaceURL(String placeURL) {
+		this.placeURL = placeURL;
 	}
 
 	public String getImageURL() {
 		return imageURL;
 	}
-	
-	public void infoshortPrint() {
-		System.out.println("| "+ artName+" |");
-		System.out.println("| "+ date+" |");
-		System.out.println("| "+ tag + " |");
-		System.out.println("| "+ fee+" |");
+
+	public void setImageURL(String imageURL) {
+		this.imageURL = imageURL;
+	}
+
+	public Integer getCnt() {
+		return cnt;
+	}
+
+	public void setCnt(Integer cnt) {
+		this.cnt = cnt;
+	}
+
+	//예매 추가 
+	public void addCnt(int num)
+	{
+		this.cnt += num;
 	}
 	
-	public void infoFullPrint() {
-		System.out.println("| 전시 : " + artName);
-		System.out.println("| 태그 : " + tag);
-		System.out.println("| 전시 : " + artName);
-	} 
+	@Override
+	public String toString() {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		return this.artName +" "+this.fee+" 시작:"+dateFormat.format(this.dateStart)+ " 종료:"+dateFormat.format(this.dateEnd);
+	}
+	
+	
 }

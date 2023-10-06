@@ -15,14 +15,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Home extends JPanel {
-
+	/*
     private int currentImageIndex = 0;
+    
     private String[] imagePaths = {
             "./src/Between StarShine and Clay.jpg",
             "./src/디올 성수.jpg",
             "./src/라인프렌즈.jpg",
             "./src/쿨라링.jpg"
     };
+	*/
     private JLabel imageLabel;
     private Timer imageTimer;
     ImageIcon icon;
@@ -112,7 +114,7 @@ public class Home extends JPanel {
         imageLabel = new JLabel();
         imageLabel.setBounds(40, btnGal.getY() + btnGal.getHeight() + 10, 400, 400); // 위치를 버튼 아래로 조절
         add(imageLabel);
-
+        /*
         // 이미지 레이블 초기화
         updateImage();
 
@@ -124,7 +126,7 @@ public class Home extends JPanel {
                 updateImage();
             }
         });
-
+*/
         // 타이머 시작
         imageTimer.start();
         
@@ -195,7 +197,7 @@ public class Home extends JPanel {
 
         
     }
-
+    /*
     private void updateImage() {
         if (currentImageIndex >= 0 && currentImageIndex < imagePaths.length) {
             ImageIcon imageIcon = new ImageIcon(imagePaths[currentImageIndex]);
@@ -203,6 +205,6 @@ public class Home extends JPanel {
             imageLabel.setIcon(imageIcon);
             
         }
-    }
+    }*/
 
 }
