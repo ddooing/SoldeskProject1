@@ -125,7 +125,7 @@ public class FramePWSearch extends JPanel {
                  String foundPW = memberList.findPW(userId, userPhone, userName);
 
                  if (foundPW != null) {
-                     JOptionPane.showMessageDialog(null, "비밀번호를 찾았습니다: " + foundPW);
+                     JOptionPane.showMessageDialog(null, "비밀번호를 찾았습니다 : " + foundPW);
                      
                   // 비밀번호를 찾은 후에 입력된 텍스트를 지웁니다.
                      tfName.setText("");

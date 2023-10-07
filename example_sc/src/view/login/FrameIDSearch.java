@@ -110,7 +110,7 @@ public class FrameIDSearch extends JPanel{
                 String foundID = memberList.findID(userName,userPhone);
 
                 if (foundID != null) {
-                    JOptionPane.showMessageDialog(null, "아이디를 찾았습니다: " + foundID);
+                    JOptionPane.showMessageDialog(null, "아이디를 찾았습니다 : " + foundID);
                     tfName.setText("");
                     tfPhone.setText("");
                 } else {

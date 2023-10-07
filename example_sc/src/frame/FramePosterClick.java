@@ -1,7 +1,5 @@
 package frame;
 
-
-
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -11,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
@@ -20,43 +19,37 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.SwingUtilities;
 
+import artDB.ArtGalleryInfo;
 import artDB.ArtGalleryList;
 
-
-public class FrameRandomPage extends JPanel {
-
+public class FramePosterClick extends JPanel {
+	
 	JPanel framehomePanel;
 	private int ad;
+	private List<ArtGalleryInfo> posterInfoList;
 	
-	public FrameRandomPage() {
-		this(null);	//생성자 매개변수 없이 호출하면 밑에 있는 생성자 매개변수 있는 것으로 실행되는 코드
+	public FramePosterClick() {
+		this(null,null);
 	}
 	
-	public FrameRandomPage(JPanel homePanel) {
+	public FramePosterClick(ActionEvent e, String artname) {
+		
 		ArtGalleryList artgallerylist = new ArtGalleryList();
     	
         setSize(400, 700);
         setLayout(null);
-        
         setVisible(true);
         
-        JLabel titleLabel = new JLabel("랜덤 전시 추천");
-        titleLabel.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 24));
-        titleLabel.setForeground(Color.BLACK);
-        titleLabel.setBounds(120, 30, 300, 50);
-        add(titleLabel);
         
-      
         
-        while(true) {
-			int i=new Random().nextInt(artgallerylist.Info().size()-4);
-			ad=i;
-			
-				makeArtInfo(artgallerylist, i);
-				break;
-		}
+        for(int i=0; i<artgallerylist.Info().size();i++) {
+        	if(artname.equals(artgallerylist.Info().get(i).getArtName())) {
+        		makeArtInfo(artgallerylist, i);
+        		break;
+        	}
+        }
         
-       
+        
 	}
 	
 	public void makeArtInfo(ArtGalleryList artGalleryList, int i) {
@@ -87,16 +80,16 @@ public class FrameRandomPage extends JPanel {
 		// "예약" 버튼 생성
 		ImageIcon originalIcon = new ImageIcon("./src/예매.png");
         Image originalImage = originalIcon.getImage();
-		Image scaledImage = originalImage.getScaledInstance(50, 30, Image.SCALE_SMOOTH);
-		ImageIcon reservebtn = new ImageIcon(scaledImage);
+        Image scaledImage = originalImage.getScaledInstance(50, 30, Image.SCALE_SMOOTH);
+        ImageIcon reservebtn = new ImageIcon(scaledImage);
         JButton reservebtn1 = new JButton(reservebtn);
-		        
+        
         reservebtn1.setBounds(300, 450, 50, 30);
         reservebtn1.setBorderPainted(false); // 버튼 외각선 지우기
         reservebtn1.setContentAreaFilled(false); // 버튼 투명하게 지우기(이미지는 남음)
         reservebtn1.setFocusPainted(false); // 버튼 선택 표시 지우기
         add(reservebtn1);
-		
+        
 		title.setSize(400,30);
 		title.setLocation(30, 360);
 		title.setBackground(new Color(255, 255, 255));
@@ -123,9 +116,11 @@ public class FrameRandomPage extends JPanel {
 		separator2.setForeground(Color.BLACK); 
 		add(separator2);
 		
+		
 		add(title);
 		add(placendate);
 		add(story);
+		
 		
 		reservebtn1.addActionListener(new ActionListener() {
 			
@@ -136,15 +131,15 @@ public class FrameRandomPage extends JPanel {
 			}
 		});
 		
-		JButton back = new JButton();
-		back.setSize(50,40);
-		back.setLocation(30,640);
-		back.setBorderPainted(false);
-		back.setContentAreaFilled(false);
-		back.setFocusPainted(false);
-		add(back);
+		JButton back1 = new JButton();
+		back1.setSize(50,40);
+		back1.setLocation(30,640);
+		back1.setBorderPainted(false);
+		back1.setContentAreaFilled(false);
+		back1.setFocusPainted(false);
+		add(back1);
 		
-		back.addActionListener(new ActionListener() {
+		back1.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -158,5 +153,4 @@ public class FrameRandomPage extends JPanel {
 			}
 		});
 	}
-
 }

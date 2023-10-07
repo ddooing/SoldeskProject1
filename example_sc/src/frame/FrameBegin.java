@@ -17,9 +17,9 @@ import view.login.FrameJoin;
 import view.login.FrameLogin;
 
 public class FrameBegin extends JPanel {
-    private ImageIcon[] imageArray;
-    private JLabel imageLabel;
-    private JLabel recommendationtext;
+	
+	private JPanel posterPanel;
+   
     ImageIcon icon;
     public FrameBegin() {
     	this(null);
@@ -29,14 +29,20 @@ public class FrameBegin extends JPanel {
         // ArtGalleryList와 PopupList 객체 생성
         ArtGalleryList artgallerylist = new ArtGalleryList();
         
-
-        
+        posterPanel = new JPanel();
+	    posterPanel.setLayout(null);
+	    posterPanel.setSize(363,70);
+	    posterPanel.setLocation(20, 610);
+	    posterPanel.setVisible(true);
+	    add(posterPanel);
         
         // JPanel 구조 설정
         //setBackground(Color.white);
         
         setLayout(null);
         setSize(400, 700);
+        setVisible(true);
+        
         
         // 로고 이미지
         ImageIcon logoImage = new ImageIcon("./src/LOGO.jpg");
@@ -57,6 +63,7 @@ public class FrameBegin extends JPanel {
 		btnLogin.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 26));
 		btnLogin.setContentAreaFilled(false);
 		btnLogin.setBorderPainted(false);
+		btnLogin.setFocusPainted(false);
 		
 
 		btnJoin.setSize(250, 50);
@@ -64,6 +71,7 @@ public class FrameBegin extends JPanel {
 		btnJoin.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 26));
 		btnJoin.setContentAreaFilled(false);
 		btnJoin.setBorderPainted(false);
+		btnJoin.setFocusPainted(false);
 		
 		
 		add(btnLogin);

@@ -56,12 +56,13 @@ public class FrameBase extends JFrame{
 		e.add(lblBackGround);
 		e.add(lblImagebottom);
 		
-		JButton back = new JButton();
+		
 		JButton soon = new JButton();
 		JButton home = new JButton();
 		JButton ticket = new JButton();
 		JButton random = new JButton();
 		
+		JButton back = new JButton();
 		back.setSize(50,40);
 		back.setLocation(30,640);
 		back.setBorderPainted(false);
@@ -73,7 +74,7 @@ public class FrameBase extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				// 뒤로가기 버튼은 각 페이지에서 할당
 			}
 		});
 		
@@ -88,7 +89,12 @@ public class FrameBase extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				/* 곧 페이지이동
+				if(instance != null) {		// 1개 창 닫기
+					instance.dispose();
+					}
+				FrameBase.getInstance(new 클래스이름());
+				*/
 			}
 		});
 		
@@ -121,7 +127,12 @@ public class FrameBase extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				/* 티켓페이지이동
+				if(instance != null) {		// 1개 창 닫기
+					instance.dispose();
+					}
+				FrameBase.getInstance(new 클래스이름());
+				*/
 			}
 		});
 		
