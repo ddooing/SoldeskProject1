@@ -67,23 +67,26 @@ public class Home extends JPanel {
         
         int btnsHeight = menuline.getY() + menuline.getHeight()+2;
         
-        popula_btn.setBackground(Color.gray);
-        popula_btn.setSize(80,10); 
-        popula_btn.setLocation(30,btnsHeight);
-        popula_btn.setBorderPainted(false); //버튼 외각선 지우기
-        //popula_btn.setContentAreaFilled(false); //버튼 투명하게 지우기(이미지는 남음)
-        popula_btn.setFocusPainted(false);
-        
+       
         recent_btn.setBackground(Color.gray);
         recent_btn.setSize(80, 10); 
-        recent_btn.setLocation(popula_btn.getX() + popula_btn.getWidth()+5,btnsHeight);
+        recent_btn.setLocation(30,btnsHeight);
         recent_btn.setBorderPainted(false); //버튼 외각선 지우기
         //recent_btn.setContentAreaFilled(false); //버튼 투명하게 지우기(이미지는 남음)
         recent_btn.setFocusPainted(false);
         
+        popula_btn.setBackground(Color.gray);
+        popula_btn.setSize(80,10); 
+        popula_btn.setLocation(recent_btn.getX() + recent_btn.getWidth()+5,btnsHeight);
+        popula_btn.setBorderPainted(false); //버튼 외각선 지우기
+        //popula_btn.setContentAreaFilled(false); //버튼 투명하게 지우기(이미지는 남음)
+        popula_btn.setFocusPainted(false);
+        
+        
+        
         free_btn.setBackground(Color.gray);
         free_btn.setSize(80, 10); 
-        free_btn.setLocation(recent_btn.getX() + recent_btn.getWidth()+5, btnsHeight);
+        free_btn.setLocation(popula_btn.getX() + popula_btn.getWidth()+5, btnsHeight);
         free_btn.setBorderPainted(false); //버튼 외각선 지우기
         //free_btn.setContentAreaFilled(false); //버튼 투명하게 지우기(이미지는 남음)
         free_btn.setFocusPainted(false);
@@ -108,71 +111,7 @@ public class Home extends JPanel {
         
         add(listPanel);
         
-        /*
-        btnEnd.setBorderPainted(false);
-        btnEnd.setContentAreaFilled(false);
-        btnEnd.setFocusPainted(false);
 
-        btnBack.setBorderPainted(false);
-        btnBack.setContentAreaFilled(false);
-        btnBack.setFocusPainted(false);
-
-        btnHome.setBorderPainted(false);
-        btnHome.setContentAreaFilled(false);
-        btnHome.setFocusPainted(false);
-
-        btnTicket.setBorderPainted(false);
-        btnTicket.setContentAreaFilled(false);
-        btnTicket.setFocusPainted(false);
-
-        btnSoon.setBorderPainted(false);
-        btnSoon.setContentAreaFilled(false);
-        btnSoon.setFocusPainted(false);
-		
-        int buttonWidth = 83;
-        int buttonSpacing = 10;
-        int yOffset = (int) getLocation().getY() / 2 + 630;
-        int totalWidth = 5 * (buttonWidth + buttonSpacing) - buttonSpacing;
-
-        btnEnd.setSize(83, 50);
-        btnBack.setSize(83, 50);
-        btnHome.setSize(83, 50);
-        btnTicket.setSize(83, 50);
-        btnSoon.setSize(83, 50);
-
-        btnEnd.setLocation((getWidth() - totalWidth) / 2, yOffset);
-        btnBack.setLocation((getWidth() - totalWidth) / 2 + buttonWidth + buttonSpacing, yOffset);
-        btnHome.setLocation((getWidth() - totalWidth) / 2 + 2 * (buttonWidth + buttonSpacing), yOffset);
-        btnTicket.setLocation((getWidth() - totalWidth) / 2 + 3 * (buttonWidth + buttonSpacing), yOffset);
-        btnSoon.setLocation((getWidth() - totalWidth) / 2 + 4 * (buttonWidth + buttonSpacing), yOffset);
-        */
-        
-        /*
-     // 이미지 레이블 생성
-        imageLabel = new JLabel();
-        imageLabel.setBounds(40, btnGal.getY() + btnGal.getHeight() + 10, 400, 400); // 위치를 버튼 아래로 조절
-        add(imageLabel);
-        
-        add(btnEnd);
-        add(btnBack);
-        add(btnHome);
-        add(btnTicket);
-        add(btnSoon);
-
-        btnGal.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                
-            }
-        });
-
-        btnPop.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                
-            }
-        });
-        */
         btnSearch.addActionListener(new ActionListener() {
 			
 			@Override
