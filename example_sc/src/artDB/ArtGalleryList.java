@@ -157,6 +157,34 @@ public class ArtGalleryList {
     	return arr;
     }//getPosters()
 	
+    //최신 - dateStart가 최신인거 
+    public List<ArtGalleryInfo> getSortByDateStart() {
+        // Comparator를 사용하여 dateStart를 기준으로 정렬
+    	for (ArtGalleryInfo info : arr) {
+			// 시작날짜가 현재보다 이전이거나 같은
+			if (info.getDateStart().before(now) || info.getDateStart().equals(now)) 
+			{
+				filteredList.add(info);
+			}
+    	}
+		Collections.sort(filteredList, new Comparator<ArtGalleryInfo>() {
+            @Override
+            public int compare(ArtGalleryInfo o1, ArtGalleryInfo o2) {
+                Date date1 = o1.getDateStart();
+                Date date2 = o2.getDateStart();
+                return date2.compareTo(date1); // dateStart 내림차순 정렬
+            }
+        });
+		for(ArtGalleryInfo a:filteredList )
+        {
+        	System.out.println(a.getdateStart());
+        }
+		
+		return filteredList;
+			
+    }
+    
+    
 	// 곧 종료 - 종료 날짜가 currentDate 이후이면서 15일 이하로 차이나는 항목
 	public List<ArtGalleryInfo> getsoonEndPosters()
 	{

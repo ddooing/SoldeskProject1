@@ -43,7 +43,7 @@ public class ListPanel extends JPanel {
         
         if(filtername == "최신")
         {
-        	
+        	filteredPosterInfoList=artgallerylist.getSortByDateStart();
         }else if(filtername == "인기")
         {
         	filteredPosterInfoList = artgallerylist.getPopulaPosters();            
