@@ -1,3 +1,4 @@
+
 package frame;
 
 public class HtmlUtils {
@@ -20,4 +21,5 @@ public class HtmlUtils {
         return imgHtmlParser(url);
     }
     
+
 }

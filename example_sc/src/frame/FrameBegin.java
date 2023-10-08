@@ -12,53 +12,66 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import artDB.ArtGalleryList;
-import popupDB.PopupList;
+
 import view.login.FrameJoin;
 import view.login.FrameLogin;
 
 public class FrameBegin extends JPanel {
-    private ImageIcon[] imageArray;
-    private JLabel imageLabel;
-    private JLabel recommendationtext;
+	
+	private JPanel posterPanel;
+   
     ImageIcon icon;
-
     public FrameBegin() {
+    	this(null);
+    }
+
+    public FrameBegin(JPanel homePanel) {
         // ArtGalleryList와 PopupList 객체 생성
         ArtGalleryList artgallerylist = new ArtGalleryList();
-        PopupList popuplist = new PopupList();
-
-        JPanel panel = new JPanel() {
-			public void paintComponent(Graphics g) {
-				g.drawImage(icon.getImage(), 0, 0, null);
-
-				setOpaque(false);
-				super.paintComponent(g);
-			}
-		};
+        
+        posterPanel = new JPanel();
+	    posterPanel.setLayout(null);
+	    posterPanel.setSize(363,70);
+	    posterPanel.setLocation(20, 610);
+	    posterPanel.setVisible(true);
+	    add(posterPanel);
         
         // JPanel 구조 설정
-        setBackground(Color.white);
+        //setBackground(Color.white);
+        
         setLayout(null);
         setSize(400, 700);
+        setVisible(true);
+        
+        
+        // 로고 이미지
+        ImageIcon logoImage = new ImageIcon("./src/LOGO.jpg");
+        JLabel logoLabel = new JLabel(logoImage);
+        logoLabel.setSize(300, 300); 
+        logoLabel.setLocation(45, 100); 
+        
+        add(logoLabel);
         
         JButton btnLogin = new JButton("로그인");
 		JButton btnJoin = new JButton("회원가입");
 		
 		
-		panel.setLayout(null);
+		
 		
 		btnLogin.setSize(250, 50);
-		btnLogin.setLocation(80, 470);
+		btnLogin.setLocation(77, 470);
 		btnLogin.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 26));
 		btnLogin.setContentAreaFilled(false);
 		btnLogin.setBorderPainted(false);
+		btnLogin.setFocusPainted(false);
 		
 
 		btnJoin.setSize(250, 50);
-		btnJoin.setLocation(80, 540);
+		btnJoin.setLocation(77, 540);
 		btnJoin.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 26));
 		btnJoin.setContentAreaFilled(false);
 		btnJoin.setBorderPainted(false);
+		btnJoin.setFocusPainted(false);
 		
 		
 		add(btnLogin);
@@ -73,7 +86,7 @@ public class FrameBegin extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 
 				removeAll();
-				add(new FrameLogin(panel));
+				add(new FrameLogin());
 				revalidate();
 				repaint();
 
@@ -85,7 +98,7 @@ public class FrameBegin extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				removeAll();
-				add(new FrameJoin(panel));
+				add(new FrameJoin());
 				revalidate();
 				repaint();
 			}
