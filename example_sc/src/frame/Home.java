@@ -61,7 +61,7 @@ public class Home extends JPanel {
         
         baseButton(); //버튼 
         
-        listPanel = new ListPanel("무료"); // 리스트 보이게될 jpanel
+        listPanel = new ListPanel("인기"); // 리스트 보이게될 jpanel
         
     	add(listPanel);
 		recent_btn.addItemListener(new ItemListener() {
@@ -106,7 +106,7 @@ public class Home extends JPanel {
     				// 최신필터 페이지 이동
                      // a 패널에서 기존 ListPanel을 제거
                      remove(listPanel);
-                     listPanel = new ListPanel("다른");
+                     listPanel = new ListPanel("인기");
                      add(listPanel);
                      revalidate();
                      repaint();

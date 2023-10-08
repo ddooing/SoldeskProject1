@@ -47,7 +47,11 @@ public class ListPanel extends JPanel {
         	
         }else if(filtername == "인기")
         {
+        	filteredPosterInfoList = artgallerylist.getPopulaPosters();
         	
+        	this.totalPosters = filteredPosterInfoList.size();
+            this.totalPages = (int) Math.ceil((double) totalPosters / postersPerPage);
+            
         }
         else if(filtername == "무료")
         {

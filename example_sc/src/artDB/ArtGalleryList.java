@@ -22,7 +22,8 @@ public class ArtGalleryList {
         }
     }
     
-    public void init(){
+    public void init()
+    {
         arr = new ArrayList<ArtGalleryInfo>(); 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         
@@ -87,7 +88,8 @@ public class ArtGalleryList {
         	endDate = dateFormat.parse("2023-10-20");
         	arr.add(new ArtGalleryInfo("피터팬 전시회","22,000 원","k현대미술관 지하 1층",
     				startDate,endDate,"10:00 ~ 19:00","https://naver.me/535BKkXf",
-    				"https://cdn-pro-web-250-118.cdn-nhncommerce.com/exhibition2_godomall_com/data/goods/23/06/26/1000000101/1000000101_detail_025.jpg",0));
+    				"https://cdn-pro-web-250-118.cdn-nhncommerce.com/exhibition2_godomall_com/data/goods/23/06/26/1000000101/1000000101_detail_025.jpg"
+    				,0));
             
         	//곧종료 
         	// 12번
@@ -95,7 +97,8 @@ public class ArtGalleryList {
         	endDate = dateFormat.parse("2023-10-22");
         	arr.add(new ArtGalleryInfo("전자적 숲; 소진된 인간","2,000 원","국립현대미술관 서울",
     				startDate,endDate,"10:00 ~ 18:00","https://naver.me/54Vkke2z",
-    				"https://vulktiuibwqqvtbjzlie.supabase.co/storage/v1/object/public/images/exhibition/representative/11931fba-8122-4515-80e2-1e33d8bc9637_poster_2.jpg",9));
+    				"https://vulktiuibwqqvtbjzlie.supabase.co/storage/v1/object/public/images/exhibition/representative/11931fba-8122-4515-80e2-1e33d8bc9637_poster_2.jpg"
+    				,9));
         	
             // 13번
             startDate = dateFormat.parse("2023-07-27");
@@ -146,14 +149,15 @@ public class ArtGalleryList {
             e.printStackTrace();
         }
 
-    }
+    }//init()
+    
     
     // 정보 
     public List<ArtGalleryInfo> getPosters(){
     	return arr;
-    }
+    }//getPosters()
 	
-	// 곧 종료 정보 :종료 날짜가 currentDate 이후이면서 15일 이하로 차이나는 항목
+	// 곧 종료 - 종료 날짜가 currentDate 이후이면서 15일 이하로 차이나는 항목
 	public List<ArtGalleryInfo> getsoonEndPosters()
 	{
 		for (ArtGalleryInfo info : arr) {
@@ -161,9 +165,15 @@ public class ArtGalleryList {
 	            filteredList.add(info);
 	        }
 	    }
+		/* 확인용
+        for(ArtGalleryInfo a:filteredList )
+        {
+        	System.out.println(a.toString());
+        }
+        */
 		
 		return filteredList;
-	}
+	}//getsoonEndPosters()
 	
 	//15일 차이 함수 
 	public boolean isWithin15Days(Date currentDate, Date endDate) {
@@ -171,9 +181,10 @@ public class ArtGalleryList {
 	    long daysDifference = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
 
 	    return daysDifference <= 15;
-	}
+	}//isWithin15Days()
 	
-	// 가격이 무료인 전시회 정보들
+	
+	// 무료 필터 -가격이 무료인 전시회 정보들
 	public List<ArtGalleryInfo> getFreePosters()
 	{	
 		for (ArtGalleryInfo info : arr) {
@@ -182,29 +193,49 @@ public class ArtGalleryList {
 				if (info.getFee().equals("무료")) {
 	            	filteredList.add(info);
 	            }
-	            
+	            /* 확인용
 	            for(ArtGalleryInfo a:filteredList )
 	            {
 	            	System.out.println(a.toString());
 	            }
+	            */
 			}      
         }
 		return filteredList;
-	}
+	}//getFreePosters()
 
+		
+		
+	// 인기 필터 - 예매(cnt) 많은 순 
 	public List<ArtGalleryInfo> getPopulaPosters()
 	{
 		for (ArtGalleryInfo info : arr) {
+			// 시작날짜가 현재보다 이전이거나 같은
+			if (info.getDateStart().before(now) || info.getDateStart().equals(now)) 
+			{
+				
+		        filteredList.add(info); 
+			}
+		}
 		
-			// posterInfoList를 getcnt() 값에 따라 정렬
-	        Collections.sort(info, new Comparator<ArtGalleryInfo>() {
-	            @Override
-	            public int compare(ArtGalleryInfo o1, ArtGalleryInfo o2) {
-	                // getcnt() 값을 비교하여 오름차순 정렬
-	                return Integer.compare(o2.getCnt(), o1.getCnt());
-	            }
-	        });
-DF		
-	}
-	
+		Collections.sort(filteredList, new Comparator<ArtGalleryInfo>()
+		{
+            @Override
+            public int compare(ArtGalleryInfo o1, ArtGalleryInfo o2) 
+            {
+                // getcnt() 값을 비교하여 오름차순 정렬
+                return Integer.compare(o2.getCnt(), o1.getCnt());
+            }
+        });
+		
+		// 확인
+        
+        for(ArtGalleryInfo a:filteredList)
+        {
+        	System.out.println(a.getPo());
+        }
+        
+		return filteredList;
+	}//getPopulaPosters()
+		
 }

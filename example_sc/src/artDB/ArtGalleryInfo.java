@@ -111,5 +111,10 @@ public class ArtGalleryInfo {
 		return this.artName +" 가격!!:"+this.fee+" 시작:"+dateFormat.format(this.dateStart)+ " 종료:"+dateFormat.format(this.dateEnd);
 	}
 	
+	public String getPo()
+	{
+		return this.artName +" cnt:"+this.cnt;
+	}
+	
 	
 }
