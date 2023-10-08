@@ -76,16 +76,21 @@ public class FrameHomeFreeClick extends JPanel {
 
         // 이미지
         ImageIcon imageSearch = new ImageIcon("./src/30.png");
+        ImageIcon menuLine = new ImageIcon("./src/line3.png");
 
         JButton btnSearch = new JButton(imageSearch); // 검색 버튼
+        JLabel menuline = new JLabel(menuLine); // 메뉴선
 
         btnSearch.setSize(50, 50);
         btnSearch.setLocation(310, 40);
         btnSearch.setBorderPainted(false); // 버튼 외각선 지우기
         btnSearch.setContentAreaFilled(false); // 버튼 투명하게 지우기(이미지는 남음)
         btnSearch.setFocusPainted(false); // 버튼 선택 표시 지우기
+        
+        menuline.setSize(380, 5);
+        menuline.setLocation(10, btnSearch.getY() + btnSearch.getHeight());
 
-        int btnsHeight = 90; // 버튼 위치 조정
+        int btnsHeight = menuline.getY() + menuline.getHeight() + 10;
 
         // 필터 버튼 (인기, 최신, 무료, 곧 종료) 추가
         ImageIcon originalIcon1 = new ImageIcon("./src/인기.png");
@@ -226,6 +231,7 @@ public class FrameHomeFreeClick extends JPanel {
 
         // 컴포넌트 추가
         add(btnSearch);
+        add(menuline);
         posterPanel.add(nextpageButton);
         posterPanel.add(prepageButton);
         
