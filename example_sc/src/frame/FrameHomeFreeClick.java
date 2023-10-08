@@ -165,6 +165,8 @@ public class FrameHomeFreeClick extends JPanel {
 				
 			}
 		});
+        
+        
 
 
         // 전역으로 사용할 다음 페이지 이동 버튼
