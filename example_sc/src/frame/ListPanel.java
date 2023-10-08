@@ -35,9 +35,8 @@ public class ListPanel extends JPanel {
     List<ArtGalleryInfo> filteredPosterInfoList;
 
     public List<ArtGalleryInfo> getFreeList(String filtername) { //전시회 리스트 가져오기
-    	// ArtGalleryList 객체 생성
+
         ArtGalleryList artgallerylist = new ArtGalleryList();
-        //List<ArtGalleryInfo> allPosterInfoList = artgallerylist//artgallerylist.Info(); // 모든 포스터 정보 가져오기
 
         // 필터링된 포스터 정보를 담을 리스트
         filteredPosterInfoList = new ArrayList<>();
@@ -47,44 +46,25 @@ public class ListPanel extends JPanel {
         	
         }else if(filtername == "인기")
         {
-        	filteredPosterInfoList = artgallerylist.getPopulaPosters();
-        	
-        	this.totalPosters = filteredPosterInfoList.size();
-            this.totalPages = (int) Math.ceil((double) totalPosters / postersPerPage);
-            
+        	filteredPosterInfoList = artgallerylist.getPopulaPosters();            
         }
         else if(filtername == "무료")
         {
-        	/*
-            this.totalPosters = 7;
-            this.totalPages = (int) Math.ceil((double) totalPosters / postersPerPage);
-            
-            for (int i = 0; i < allPosterInfoList.size(); i++) {
-                ArtGalleryInfo posterInfo = allPosterInfoList.get(i);
-                if (posterInfo.getFee().equals("무료")) {
-                    filteredPosterInfoList.add(posterInfo);
-                }
-            }
-            */
-        	filteredPosterInfoList = artgallerylist.getFreePosters();
-        	
-        	this.totalPosters = filteredPosterInfoList.size();
-            this.totalPages = (int) Math.ceil((double) totalPosters / postersPerPage);
-            
-            
+        	filteredPosterInfoList = artgallerylist.getFreePosters(); 
         }
         else if(filtername == "곧종료")
         {
-        	
-        	
-            
             filteredPosterInfoList = artgallerylist.getsoonEndPosters();
             
-            this.totalPosters = filteredPosterInfoList.size();
-            this.totalPages = (int) Math.ceil((double) totalPosters / postersPerPage);
-
+            
+        }else if(filtername == "")
+        {
+        	filteredPosterInfoList = artgallerylist.getPosters();
         }
-             
+        
+        this.totalPosters = filteredPosterInfoList.size();
+        this.totalPages = (int) Math.ceil((double) totalPosters / postersPerPage);
+        
         return filteredPosterInfoList;
     }
     
@@ -94,67 +74,50 @@ public class ListPanel extends JPanel {
 		setSize(361,500);
 		setLocation(20, 137);
 		setLayout(null);
-	    // 패널의 배경색을 핑크색으로 설정
-	    setBackground(Color.GRAY);
+	    setBackground(new Color(241, 239, 239));//new Color(250, 241, 228) Color.white
 	    
-
-
-
-        // Home 처음 보이는 전시회 리스트 -> 최신순 
-        	// 후에 수정하기 아래 코드는 리스트 차례대로 부른거
-        
-        //artGalleryList.see();
-        
-        //galleryInfoList = artGalleryList.getArtGalleryInfoList();
-        
-        // 현재 날짜 기준 곧 종료 
-        	// 현재 날짜를 구함
-        Calendar currentDate = Calendar.getInstance();
-        Date now = currentDate.getTime();
-        //System.out.println(now);
-        //artGalleryList.soonEnd(now);
-
-       
         posterInfoList = getFreeList(filtername); // 필터링된 포스터 정보를 사용
         updatePosters(currentPage, postersPerPage,totalPosters,totalPages);
         
+        /*
+         * 필터링된 리스트 확인용
         for(ArtGalleryInfo a:posterInfoList )
 		{
 			System.out.println("posterInfoList : "+ a.toString());
 		}
+		*/
         
         
 	}
-	//int currentPage,int postersPerPage,int totalPosters, int totalPages
+	
 	private void updatePosters(int currentPage,int postersPerPage,int totalPosters, int totalPages) {
-
 
 		removeAll();
         revalidate();
         repaint();
         
         // 전역으로 사용할 다음 페이지 이동 버튼
-        ImageIcon originalIcon5 = new ImageIcon("./src/다음페이지.png");
+        ImageIcon originalIcon5 = new ImageIcon("./src/다음.png");
         Image originalImage5 = originalIcon5.getImage();
-        Image scaledImage5 = originalImage5.getScaledInstance(40, 30, Image.SCALE_SMOOTH);
+        Image scaledImage5 = originalImage5.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         ImageIcon nextpage = new ImageIcon(scaledImage5);
 
         // 전역으로 사용할 이전 페이지 이동 버튼
-        ImageIcon originalIcon6 = new ImageIcon("./src/이전페이지.png");
+        ImageIcon originalIcon6 = new ImageIcon("./src/이전.png");
         Image originalImage6 = originalIcon6.getImage();
-        Image scaledImage6 = originalImage6.getScaledInstance(40, 30, Image.SCALE_SMOOTH);
+        Image scaledImage6 = originalImage6.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         ImageIcon prepage = new ImageIcon(scaledImage6);
 
         // "다음 페이지" 버튼 생성
         JButton nextpageButton = new JButton(nextpage);
-        nextpageButton.setBounds(310, 460, 40, 30);
+        nextpageButton.setBounds(310, 460, 30, 30);
         nextpageButton.setContentAreaFilled(false);
         nextpageButton.setBorderPainted(false);
         nextpageButton.setFocusPainted(false);
 
         // "이전 페이지" 버튼 생성
         JButton prepageButton = new JButton(prepage);
-        prepageButton.setBounds(10, 460, 40, 30);
+        prepageButton.setBounds(20, 460, 30, 30);
         prepageButton.setContentAreaFilled(false);
         prepageButton.setBorderPainted(false);
         prepageButton.setFocusPainted(false);
@@ -198,14 +161,14 @@ public class ListPanel extends JPanel {
         int posterHeight = 160;
         int x1 = 10; // 패널의 왼쪽 모서리에서부터의 x 좌표
         int x2 = 190; // 패널의 왼쪽 모서리에서부터의 x 좌표
-        int y1 = 30; // 패널의 위쪽 모서리에서부터의 y 좌표
+        int y1 = 15; // 패널의 위쪽 모서리에서부터의 y 좌표
         int y2 = 250; // 패널의 위쪽 모서리에서부터의 y 좌표
 
-        //?? 쪽수인가 
         int startIndex = currentPage * postersPerPage;
         int endIndex = Math.min(startIndex + postersPerPage, posterInfoList.size());
-        // 쪽수이면 posterInfoList.size() 이건 왜 ??,,, post 개수인데 
-        System.out.println("posterInfoList.size(): "+posterInfoList.size());
+
+        // 포스터 개수 확인용
+        //System.out.println("posterInfoList.size(): "+posterInfoList.size());
         
         List<ArtGalleryInfo> filteredList = new ArrayList<>();
 
@@ -214,7 +177,6 @@ public class ListPanel extends JPanel {
             int y = (i < startIndex + 2) ? y1 : y2;
 
             ArtGalleryInfo posterInfo = posterInfoList.get(i);
-            System.out.println("posterInfoList.get(i): "+posterInfo);
             
                 filteredList.add(posterInfo);
 
@@ -232,7 +194,7 @@ public class ListPanel extends JPanel {
 
                 JLabel posterDate = new JLabel(dateFormat.format(posterInfo.getDateStart()) + "~" + dateFormat.format(posterInfo.getDateEnd()));
                 posterDate.setBounds(x + 20, y + 190, posterWidth, 20);
-                posterDate.setFont(new Font("나눔스퀘어OTF Bold", Font.PLAIN, 8));
+                posterDate.setFont(new Font("나눔스퀘어OTF Bold", Font.PLAIN, 10));
                 add(posterDate);
 
                 posterImage.addActionListener(new ActionListener() {

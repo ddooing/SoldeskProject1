@@ -228,13 +228,14 @@ public class ArtGalleryList {
             }
         });
 		
+		/*
 		// 확인
         
         for(ArtGalleryInfo a:filteredList)
         {
         	System.out.println(a.getPo());
         }
-        
+        */
 		return filteredList;
 	}//getPopulaPosters()
 		
