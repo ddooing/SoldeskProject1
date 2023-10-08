@@ -22,6 +22,7 @@ public class FrameBase extends JFrame{
 		//기본 JFrame 구조
 		setTitle("미술관소개");
 		setLayout(null);
+		
 		setBounds(((int) tk.getScreenSize().getWidth() / 3), 
 				((int) tk.getScreenSize().getHeight()) / 2 - 400,
 				415, 738);
