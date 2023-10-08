@@ -12,11 +12,15 @@ public class ArtGalleryList {
 	
 	public ArtGalleryList() {
 		if(arr == null) {
+			System.out.println("null");
 			init();
+		}
+		else {
+			getArtGalleryInfoList();
 		}
 	}
 	
-	public void init() {
+	public ArrayList<ArtGalleryInfo> init() {
 		arr = new ArrayList<ArtGalleryInfo>();
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -85,12 +89,18 @@ public class ArtGalleryList {
 	    			 startDate, endDate,"10:00 ~ 18:00","https://naver.me/54Vkke2z",
 					"https://vulktiuibwqqvtbjzlie.supabase.co/storage/v1/object/public/images/exhibition/representative/11931fba-8122-4515-80e2-1e33d8bc9637_poster_2.jpg",4));
 
+	    	
 		} catch (ParseException e) {
             e.printStackTrace();
         }
+		return arr;
 		
 	}
 
+	
+	public ArrayList<ArtGalleryInfo> getArtGalleryInfoList() {
+        return arr;
+    }
 	
 	//모든 정보 확인 최신순 x 
 	public void see()
