@@ -25,6 +25,7 @@ import artDB.ArtGalleryInfo;
 import artDB.ArtGalleryList;
 
 public class FrameSearch_1 extends JPanel {
+	
 
     private JPanel posterPanel;
     private int currentPage = 0; // 현재 페이지 인덱스
