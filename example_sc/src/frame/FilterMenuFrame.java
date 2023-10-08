@@ -6,14 +6,22 @@ import java.awt.Image;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import view.login.FrameLogin;
+
 public class FilterMenuFrame extends JPanel {
 
+	private ListPanel listPanel;
+	
 	public FilterMenuFrame() {
 		// 패널의 위치와 크기 설정
 		setSize(361,40);
@@ -63,13 +71,13 @@ public class FilterMenuFrame extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				/*
 				Window window1 = SwingUtilities.windowForComponent((Component) e.getSource());	// 현재 창 닫기
                 if (window1 != null) {
                     window1.dispose(); 
                 }
 				FrameBase.getInstance(new FrameHomePopularClick());
-			
+				*/
 			}
 		});
         
@@ -77,7 +85,26 @@ public class FilterMenuFrame extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				try {
+					BufferedImage m_numberImage = ImageIO.read(new File("./src/인기.png"));
+					ImageIcon bufimg = new ImageIcon(m_numberImage.getScaledInstance(60, 30, Image.SCALE_SMOOTH));
+			        two2.setIcon(bufimg);
+			        
+			        listPanel.setVisible(false);
+	                remove(listPanel);
+
+	                // Create and add BPanel again
+	                listPanel = new ListPanel("다른");
+	                add(listPanel);
+
+	                // Revalidate and repaint the panel
+	                revalidate();
+	                repaint();
+			        
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
 			}
 		});
@@ -86,12 +113,13 @@ public class FilterMenuFrame extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				/*
 				Window window1 = SwingUtilities.windowForComponent((Component) e.getSource());	// 현재 창 닫기
                 if (window1 != null) {
                     window1.dispose(); 
                 }
 				FrameBase.getInstance(new Home());
-			
+			*/
 				
 			}
 		});
@@ -104,6 +132,18 @@ public class FilterMenuFrame extends JPanel {
 				
 			}
 		});
+        
+        
+    	
 
 	}
+	
+	
+	public void setButton() {
+		ImageIcon originalIcon2 = new ImageIcon("./src/인기.png");
+        ImageIcon two = new ImageIcon(originalIcon2.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH));
+        JButton two2 = new JButton(two);
+	}
+	
+
 }

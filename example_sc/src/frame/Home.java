@@ -1,12 +1,20 @@
 
 package frame;
 
+
 import javax.swing.*;
 import artDB.ArtGalleryInfo;
 import artDB.ArtGalleryList;
+
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -14,15 +22,15 @@ public class Home extends JPanel {
 	
 	private JPanel posterPanel;
 	private JPanel homePanel;
-    private int currentPage = 0; // 현재 페이지 인덱스
-    private int postersPerPage = 4; // 한 페이지당 포스터 개수
-    private int totalPosters = 14; // 전체 포스터 개수
-    private int totalPages = (int) Math.ceil((double) totalPosters / postersPerPage); // 총 페이지 수
-    private List<ArtGalleryInfo> posterInfoList; // 전체 포스터 정보 리스트
-
-
     private JPanel listPanel;
     private JPanel filterMenuFrame;
+    
+    JToggleButton recent_btn;
+    JToggleButton popula_btn;
+    JToggleButton free_btn;
+    JToggleButton soonEnd_btn;
+    
+    
     public Home() {
 
         // JPanel 구조 설정
@@ -51,17 +59,164 @@ public class Home extends JPanel {
         add(menuline);
         
         
-    	filterMenuFrame= new FilterMenuFrame();
-    	
-    	add(filterMenuFrame);
-    	
-    	listPanel = new ListPanel(); // 리스트 보이게될 jpanel
+        baseButton(); //버튼 
+        
+        listPanel = new ListPanel("기본"); // 리스트 보이게될 jpanel
         
     	add(listPanel);
+		recent_btn.addItemListener(new ItemListener() {
+			
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if (e.getStateChange() == ItemEvent.SELECTED) {// 한번 눌렀을때(활성화)
+                	
+					ImageIcon originalIcon2 = new ImageIcon("./src/인기.png");
+                    Image scaledImage2 = originalIcon2.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
+                    ImageIcon two = new ImageIcon(scaledImage2);
+                    recent_btn.setIcon(two);
+            
+    				// 최신필터 페이지 이동
+                     // a 패널에서 기존 ListPanel을 제거
+                     remove(listPanel);
+                     listPanel = new ListPanel("다른");
+                     add(listPanel);
+                     revalidate();
+                     repaint();
+    				
+                } else {//두번눌렀을때(비활성화)..
+                	ImageIcon originalIcon2 = new ImageIcon("./src/최신.png");
+                    Image scaledImage2 = originalIcon2.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
+                    ImageIcon two = new ImageIcon(scaledImage2);
+                     recent_btn.setIcon(two);
+                }				
+			}
+        });
+
+        popula_btn.addItemListener(new ItemListener() {
+			
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if (e.getStateChange() == ItemEvent.SELECTED) {// 한번 눌렀을때(활성화)
+                	
+					ImageIcon originalIcon2 = new ImageIcon("./src/인기.png");
+                    Image scaledImage2 = originalIcon2.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
+                    ImageIcon two = new ImageIcon(scaledImage2);
+                    recent_btn.setIcon(two);
+            
+    				// 최신필터 페이지 이동
+                     // a 패널에서 기존 ListPanel을 제거
+                     remove(listPanel);
+                     listPanel = new ListPanel("다른");
+                     add(listPanel);
+                     revalidate();
+                     repaint();
+    				
+                } else {//두번눌렀을때(비활성화)..
+                	ImageIcon originalIcon2 = new ImageIcon("./src/최신.png");
+                    Image scaledImage2 = originalIcon2.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
+                    ImageIcon two = new ImageIcon(scaledImage2);
+                     recent_btn.setIcon(two);
+                }				
+			}
+        });
+        
+        
+        
+        free_btn.addItemListener(new ItemListener() {
+			
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if (e.getStateChange() == ItemEvent.SELECTED) {// 한번 눌렀을때(활성화)
+                	
+					ImageIcon originalIcon2 = new ImageIcon("./src/인기.png");
+                    Image scaledImage2 = originalIcon2.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
+                    ImageIcon two = new ImageIcon(scaledImage2);
+                    recent_btn.setIcon(two);
+            
+    				// 최신필터 페이지 이동
+                     // a 패널에서 기존 ListPanel을 제거
+                     remove(listPanel);
+                     listPanel = new ListPanel("무료");
+                     add(listPanel);
+                     revalidate();
+                     repaint();
+    				
+                } else {//두번눌렀을때(비활성화)..
+                	ImageIcon originalIcon2 = new ImageIcon("./src/최신.png");
+                    Image scaledImage2 = originalIcon2.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
+                    ImageIcon two = new ImageIcon(scaledImage2);
+                     recent_btn.setIcon(two);
+                }				
+			}
+        });
+        
+        soonEnd_btn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				/* 곧종료 필터 페이지 이동
+				Window window1 = SwingUtilities.windowForComponent((Component) e.getSource());	// 현재 창 닫기
+                if (window1 != null) {
+                    window1.dispose(); 
+                }
+				FrameBase.getInstance(new 클래스이름());
+				*/
+				
+			}
+		});
+        
+        
+    	
+    	
+    	
+    	
     
    
     }
   
+    
+    public void baseButton() { // 버튼 init
+    	
+    	int btnsHeight = 105;
+    	ImageIcon originalIcon2 = new ImageIcon("./src/최신.png");
+        Image scaledImage2 = originalIcon2.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
+        
+        
+        ImageIcon two = new ImageIcon(scaledImage2);
+         recent_btn  = new JToggleButton(two);
+        recent_btn .setBounds(30, btnsHeight, 60, 30);
+        recent_btn .setContentAreaFilled(false);
+        recent_btn .setBorderPainted(false);
+        add(recent_btn);
+        
+        ImageIcon originalIcon1 = new ImageIcon("./src/인기.png");
+        Image scaledImage1 = originalIcon1.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
+        ImageIcon one = new ImageIcon(scaledImage1);
+         popula_btn  = new JToggleButton(one);
+        popula_btn .setBounds(recent_btn.getX() + recent_btn.getWidth() + 5, btnsHeight, 60, 30);
+        popula_btn .setContentAreaFilled(false);
+        popula_btn .setBorderPainted(false);
+        add(popula_btn );
+
+
+        ImageIcon originalIcon3 = new ImageIcon("./src/무료.png");
+        Image scaledImage3 = originalIcon3.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
+        ImageIcon three = new ImageIcon(scaledImage3);
+         free_btn  = new JToggleButton(three);
+        free_btn .setBounds(popula_btn.getX() + popula_btn.getWidth() + 5, btnsHeight, 60, 30);
+        free_btn .setContentAreaFilled(false);
+        free_btn .setBorderPainted(false);
+        add(free_btn );
+
+        ImageIcon originalIcon4 = new ImageIcon("./src/곧종료.png");
+        Image scaledImage4 = originalIcon4.getImage().getScaledInstance(80, 30, Image.SCALE_SMOOTH);
+        ImageIcon four = new ImageIcon(scaledImage4);
+         soonEnd_btn = new JToggleButton(four);
+        soonEnd_btn.setBounds(free_btn.getX() + free_btn.getWidth() + 5, btnsHeight, 80, 30);
+        soonEnd_btn.setContentAreaFilled(false);
+        soonEnd_btn.setBorderPainted(false);
+        add(soonEnd_btn);
+    }
 
 
 }
