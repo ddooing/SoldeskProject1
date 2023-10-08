@@ -185,7 +185,7 @@ public class ListPanel extends JPanel {
                 posterImage.setBorderPainted(false);
                 posterImage.setContentAreaFilled(false);
                 add(posterImage);
-                System.out.println("posterImage 1 : "+posterInfo.getImageURL());
+                //System.out.println("posterImage 1 : "+posterInfo.getImageURL());
 
                 JLabel posterTitle = new JLabel(posterInfo.getArtName());
                 posterTitle.setBounds(x + 20, y + 170, posterWidth, 20);

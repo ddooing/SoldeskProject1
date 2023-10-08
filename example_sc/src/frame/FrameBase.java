@@ -109,6 +109,7 @@ public class FrameBase extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
 				if(instance != null) {		// 1개 창 닫기
 					instance.dispose();
 					}

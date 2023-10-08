@@ -5,7 +5,7 @@ package frame;
 import javax.swing.*;
 import artDB.ArtGalleryInfo;
 import artDB.ArtGalleryList;
-
+import view.login.FrameLogin;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -64,6 +64,26 @@ public class Home extends JPanel {
         listPanel = new ListPanel(""); // 리스트 보이게될 listPanel
     	add(listPanel);
     	
+    	
+    	btnSearch.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				remove(btnSearch);
+				remove(menuline);
+				//removeAll();
+				remove(listPanel);
+				remove(recent_btn);
+				remove (popula_btn);
+				remove (free_btn);
+				remove (soonEnd_btn);
+				add(new SearchPanel());
+				revalidate();
+				repaint();
+
+			}
+		});
 		recent_btn.addItemListener(new ItemListener() {
 			
 			@Override
