@@ -68,7 +68,7 @@ public class Home extends JPanel {
         btnSearch.setBorderPainted(false); // 버튼 외각선 지우기
         btnSearch.setContentAreaFilled(false); // 버튼 투명하게 지우기(이미지는 남음)
         btnSearch.setFocusPainted(false); // 버튼 선택 표시 지우기
-
+        
         menuline.setSize(380, 5);
         menuline.setLocation(10, btnSearch.getY() + btnSearch.getHeight());
 
@@ -223,6 +223,22 @@ public class Home extends JPanel {
         // 컴포넌트 추가
         add(btnSearch);
         add(menuline);
+        
+     // 검색 버튼 누르면
+        btnSearch.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Window window1 = SwingUtilities.windowForComponent((Component) e.getSource()); // 현재 창 닫기
+                if (window1 != null) {
+                    window1.dispose();
+                }
+                // 검색 창으로 이동
+                FrameBase.getInstance(new FrameSearch_1());
+
+            }
+        });
+        
         posterPanel.add(nextpageButton);
         posterPanel.add(prepageButton);
     	

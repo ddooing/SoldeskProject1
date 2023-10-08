@@ -226,6 +226,21 @@ public class FrameHomeFreeClick extends JPanel {
         add(btnSearch);
         posterPanel.add(nextpageButton);
         posterPanel.add(prepageButton);
+        
+        // 검색 버튼 누르면
+        btnSearch.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Window window1 = SwingUtilities.windowForComponent((Component) e.getSource()); // 현재 창 닫기
+                if (window1 != null) {
+                    window1.dispose();
+                }
+                // 검색 창으로 이동
+                FrameBase.getInstance(new FrameSearch_1());
+
+            }
+        });
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         int posterWidth = 120;

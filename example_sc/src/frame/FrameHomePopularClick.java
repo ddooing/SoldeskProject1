@@ -236,6 +236,23 @@ public class FrameHomePopularClick extends JPanel {
         add(menuline);
         posterPanel.add(nextpageButton);
         posterPanel.add(prepageButton);
+        
+        
+        
+     // 검색 버튼 누르면
+        btnSearch.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Window window1 = SwingUtilities.windowForComponent((Component) e.getSource()); // 현재 창 닫기
+                if (window1 != null) {
+                    window1.dispose();
+                }
+                // 검색 창으로 이동
+                FrameBase.getInstance(new FrameSearch_1());
+
+            }
+        });
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         int posterWidth = 120;
@@ -273,10 +290,16 @@ public class FrameHomePopularClick extends JPanel {
             posterImage.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    for (int i = 0; i < filteredList.size(); i++) {
-                        if (posterInfo.getImageURL().equals(filteredList.get(i).getImageURL())) {
-                            System.out.println(filteredList.get(i).getArtName());
-                            // 포스터 눌렀을 때
+                	for (int i = 0; i < posterInfoList.size(); i++) {
+                        if (posterInfo.getImageURL().equals(posterInfoList.get(i).getImageURL())) {
+                            System.out.println(posterInfoList.get(i).getArtName());							// 클릭 이미지 전시회이름 출력
+                            
+                            Window window = SwingUtilities.windowForComponent((Component) e.getSource());	// 현재 창 닫기
+                            if (window != null) {
+                                window.dispose(); 
+                            }
+                            
+                            FrameBase.getInstance(new FramePosterClick(e,posterInfo.getArtName()));			// 해당전시 페이지 출력
                         }
                     }
                 }

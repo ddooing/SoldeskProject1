@@ -4,11 +4,15 @@ package frame;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -61,7 +65,7 @@ public class FrameRandomPage extends JPanel {
 	
 	public void makeArtInfo(ArtGalleryList artGalleryList, int i) {
 		JLabel fImage=new JLabel(HtmlUtils.imgHtmlParser(artGalleryList.Info().get(i).getImageURL()));
-        fImage.setSize(360,280);
+        fImage.setSize(360,300);
         fImage.setLocation(20,70);
         add(fImage);
         
@@ -91,41 +95,73 @@ public class FrameRandomPage extends JPanel {
 		ImageIcon reservebtn = new ImageIcon(scaledImage);
         JButton reservebtn1 = new JButton(reservebtn);
 		        
-        reservebtn1.setBounds(300, 450, 50, 30);
+        reservebtn1.setBounds(300, 470, 50, 30);
         reservebtn1.setBorderPainted(false); // 버튼 외각선 지우기
         reservebtn1.setContentAreaFilled(false); // 버튼 투명하게 지우기(이미지는 남음)
         reservebtn1.setFocusPainted(false); // 버튼 선택 표시 지우기
         add(reservebtn1);
 		
 		title.setSize(400,30);
-		title.setLocation(30, 360);
+		title.setLocation(30, 380);
 		title.setBackground(new Color(255, 255, 255));
 		title.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 25));
 		
 		placendate.setSize(400,60);
-		placendate.setLocation(30, 410);
+		placendate.setLocation(30, 430);
 		placendate.setBackground(new Color(255, 255, 255));
 		placendate.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 18));
 		
 		story.setSize(400, 70);
-		story.setLocation(30, 500);
+		story.setLocation(30, 520);
 		story.setBackground(new Color(255, 255, 255));
 		story.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 16));
 		
 		// 구분선 추가
 		JSeparator separator1 = new JSeparator();
-		separator1.setBounds(20, 395, 360, 10); // 구분선의 위치와 크기 조정
+		separator1.setBounds(20, 415, 360, 10); // 구분선의 위치와 크기 조정
 		separator1.setForeground(Color.BLACK); 
 		add(separator1);
 		
 		JSeparator separator2 = new JSeparator();
-		separator2.setBounds(20, 490, 360, 10); // 구분선의 위치와 크기 조정
+		separator2.setBounds(20, 510, 360, 10); // 구분선의 위치와 크기 조정
 		separator2.setForeground(Color.BLACK); 
 		add(separator2);
 		
 		add(title);
 		add(placendate);
 		add(story);
+		
+		
+		
+		// "길찾기" 버튼 생성
+		 		ImageIcon originalIcon1 = new ImageIcon("./src/길찾기.png");
+		         Image originalImage1 = originalIcon1.getImage();
+		         Image scaledImage1 = originalImage1.getScaledInstance(50, 30, Image.SCALE_SMOOTH);
+		         ImageIcon mapgobtn = new ImageIcon(scaledImage1);
+		         JButton mapgobtn1 = new JButton(mapgobtn);
+		         
+		         mapgobtn1.setBounds(300, 550, 50, 30);
+		         mapgobtn1.setBorderPainted(false); // 버튼 외각선 지우기
+		         mapgobtn1.setContentAreaFilled(false); // 버튼 투명하게 지우기(이미지는 남음)
+		         mapgobtn1.setFocusPainted(false); // 버튼 선택 표시 지우기
+		         add(mapgobtn1);
+				
+				
+				mapgobtn1.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						try {
+				            // 크롬 브라우저 열기
+							String URL = artGalleryList.Info().get(i).getPlaceURL();
+				            Desktop.getDesktop().browse(new URI(URL));
+				        } catch (IOException | URISyntaxException ex) {
+				            ex.printStackTrace(); // 예외 처리
+				        }
+						
+					}
+				});
+				
 		
 		reservebtn1.addActionListener(new ActionListener() {
 			
