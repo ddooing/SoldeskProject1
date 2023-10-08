@@ -61,7 +61,7 @@ public class Home extends JPanel {
         
         baseButton(); //버튼 
         
-        listPanel = new ListPanel("기본"); // 리스트 보이게될 jpanel
+        listPanel = new ListPanel("무료"); // 리스트 보이게될 jpanel
         
     	add(listPanel);
 		recent_btn.addItemListener(new ItemListener() {
@@ -150,20 +150,33 @@ public class Home extends JPanel {
 			}
         });
         
-        soonEnd_btn.addActionListener(new ActionListener() {
+        soonEnd_btn.addItemListener(new ItemListener() {
 			
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				/* 곧종료 필터 페이지 이동
-				Window window1 = SwingUtilities.windowForComponent((Component) e.getSource());	// 현재 창 닫기
-                if (window1 != null) {
-                    window1.dispose(); 
-                }
-				FrameBase.getInstance(new 클래스이름());
-				*/
-				
+			public void itemStateChanged(ItemEvent e) {
+				if (e.getStateChange() == ItemEvent.SELECTED) {// 한번 눌렀을때(활성화)
+                	
+					ImageIcon originalIcon2 = new ImageIcon("./src/인기.png");
+                    Image scaledImage2 = originalIcon2.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
+                    ImageIcon two = new ImageIcon(scaledImage2);
+                    recent_btn.setIcon(two);
+            
+    				// 최신필터 페이지 이동
+                     // a 패널에서 기존 ListPanel을 제거
+                     remove(listPanel);
+                     listPanel = new ListPanel("곧종료");
+                     add(listPanel);
+                     revalidate();
+                     repaint();
+    				
+                } else {//두번눌렀을때(비활성화)..
+                	ImageIcon originalIcon2 = new ImageIcon("./src/최신.png");
+                    Image scaledImage2 = originalIcon2.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
+                    ImageIcon two = new ImageIcon(scaledImage2);
+                     recent_btn.setIcon(two);
+                }				
 			}
-		});
+        });
         
         
     	

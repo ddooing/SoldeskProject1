@@ -55,7 +55,7 @@ public class FrameHomePopularClick extends JPanel {
         setLayout(null);
         setSize(400, 700);
 
-        // posterInfoList를 최대 14개까지로 자르기
+        // posterInfoList를 최대 14개까지로 자르기??
         if (posterInfoList.size() > 14) {
             posterInfoList = posterInfoList.subList(0, 14);
         }

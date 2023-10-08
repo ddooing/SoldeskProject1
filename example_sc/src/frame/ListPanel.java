@@ -27,29 +27,60 @@ import java.util.List;
 
 public class ListPanel extends JPanel {
 
-	private int currentPage; // 현재 페이지 인덱스
-    private int postersPerPage; // 한 페이지당 포스터 개수
+	private int currentPage=0; // 현재 페이지 인덱스
+    private int postersPerPage=4; // 한 페이지당 포스터 개수
     private int totalPosters; // 전체 포스터 개수
     private int totalPages = (int) Math.ceil((double) totalPosters / postersPerPage); // 총 페이지 수
     private List<ArtGalleryInfo> posterInfoList; // 전체 포스터 정보 리스트
     List<ArtGalleryInfo> filteredPosterInfoList;
 
-    public List<ArtGalleryInfo> getFreeList() { //무료 전시회 가져오기
+    public List<ArtGalleryInfo> getFreeList(String filtername) { //전시회 리스트 가져오기
     	// ArtGalleryList 객체 생성
         ArtGalleryList artgallerylist = new ArtGalleryList();
-        List<ArtGalleryInfo> allPosterInfoList = artgallerylist.Info(); // 모든 포스터 정보 가져오기
+        //List<ArtGalleryInfo> allPosterInfoList = artgallerylist//artgallerylist.Info(); // 모든 포스터 정보 가져오기
 
         // 필터링된 포스터 정보를 담을 리스트
         filteredPosterInfoList = new ArrayList<>();
         
-
-     // 원래 리스트의 크기가 18인데, 앞에서 14개까지만 무료인 것을 필터링하여 새 리스트에 추가
-        for (int i = 0; i < Math.min(14, allPosterInfoList.size()); i++) {
-            ArtGalleryInfo posterInfo = allPosterInfoList.get(i);
-            if (posterInfo.getFee().equals("무료")) {
-                filteredPosterInfoList.add(posterInfo);
-            }
+        if(filtername == "최신")
+        {
+        	
+        }else if(filtername == "인기")
+        {
+        	
         }
+        else if(filtername == "무료")
+        {
+        	/*
+            this.totalPosters = 7;
+            this.totalPages = (int) Math.ceil((double) totalPosters / postersPerPage);
+            
+            for (int i = 0; i < allPosterInfoList.size(); i++) {
+                ArtGalleryInfo posterInfo = allPosterInfoList.get(i);
+                if (posterInfo.getFee().equals("무료")) {
+                    filteredPosterInfoList.add(posterInfo);
+                }
+            }
+            */
+        	filteredPosterInfoList = artgallerylist.getFreePosters();
+        	
+        	this.totalPosters = filteredPosterInfoList.size();
+            this.totalPages = (int) Math.ceil((double) totalPosters / postersPerPage);
+            
+            
+        }
+        else if(filtername == "곧종료")
+        {
+        	
+        	
+            
+            filteredPosterInfoList = artgallerylist.getsoonEndPosters();
+            
+            this.totalPosters = filteredPosterInfoList.size();
+            this.totalPages = (int) Math.ceil((double) totalPosters / postersPerPage);
+
+        }
+             
         return filteredPosterInfoList;
     }
     
@@ -79,36 +110,14 @@ public class ListPanel extends JPanel {
         //System.out.println(now);
         //artGalleryList.soonEnd(now);
 
+       
+        posterInfoList = getFreeList(filtername); // 필터링된 포스터 정보를 사용
+        updatePosters(currentPage, postersPerPage,totalPosters,totalPages);
         
-        if(filtername == "기본")
-        {
-        	ImageIcon originalIcon2 = new ImageIcon("./src/최신.png");
-            ImageIcon two = new ImageIcon(originalIcon2.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH));
-            JButton two2 = new JButton(two);
-            two2.setBounds(4, 2, 60, 30);
-            two2.setContentAreaFilled(false);
-            two2.setBorderPainted(false);
-           add(two2);
-        }else if(filtername == "다른")
-        {
-        	ImageIcon originalIcon2 = new ImageIcon("./src/인기.png");
-            ImageIcon two = new ImageIcon(originalIcon2.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH));
-            JButton two2 = new JButton(two);
-            two2.setBounds(4, 2, 60, 30);
-            two2.setContentAreaFilled(false);
-            two2.setBorderPainted(false);
-           add(two2);
-        }
-        else if(filtername == "무료")
-        {
-        	this.currentPage = 0; // 현재 페이지 인덱스
-            this.postersPerPage = 4; // 한 페이지당 포스터 개수
-            this.totalPosters = 7;
-            this.totalPages = (int) Math.ceil((double) totalPosters / postersPerPage);
-        	//getFreeList();
-            posterInfoList = getFreeList(); // 필터링된 포스터 정보를 사용
-            updatePosters(this.currentPage, this.postersPerPage, this.totalPosters, this.totalPages);
-        }
+        for(ArtGalleryInfo a:posterInfoList )
+		{
+			System.out.println("posterInfoList : "+ a.toString());
+		}
         
         
 	}
@@ -116,6 +125,10 @@ public class ListPanel extends JPanel {
 	private void updatePosters(int currentPage,int postersPerPage,int totalPosters, int totalPages) {
 
 
+		removeAll();
+        revalidate();
+        repaint();
+        
         // 전역으로 사용할 다음 페이지 이동 버튼
         ImageIcon originalIcon5 = new ImageIcon("./src/다음페이지.png");
         Image originalImage5 = originalIcon5.getImage();
@@ -184,9 +197,12 @@ public class ListPanel extends JPanel {
         int y1 = 30; // 패널의 위쪽 모서리에서부터의 y 좌표
         int y2 = 250; // 패널의 위쪽 모서리에서부터의 y 좌표
 
+        //?? 쪽수인가 
         int startIndex = currentPage * postersPerPage;
         int endIndex = Math.min(startIndex + postersPerPage, posterInfoList.size());
-
+        // 쪽수이면 posterInfoList.size() 이건 왜 ??,,, post 개수인데 
+        System.out.println("posterInfoList.size(): "+posterInfoList.size());
+        
         List<ArtGalleryInfo> filteredList = new ArrayList<>();
 
         for (int i = startIndex; i < endIndex; i++) {
@@ -194,8 +210,8 @@ public class ListPanel extends JPanel {
             int y = (i < startIndex + 2) ? y1 : y2;
 
             ArtGalleryInfo posterInfo = posterInfoList.get(i);
-
-            if (posterInfo.getFee().equals("무료")) {
+            System.out.println("posterInfoList.get(i): "+posterInfo);
+            
                 filteredList.add(posterInfo);
 
                 JButton posterImage = new JButton(HtmlItils1.imgHtmlParser(posterInfo.getImageURL()));
@@ -203,6 +219,7 @@ public class ListPanel extends JPanel {
                 posterImage.setBorderPainted(false);
                 posterImage.setContentAreaFilled(false);
                 add(posterImage);
+                System.out.println("posterImage 1 : "+posterInfo.getImageURL());
 
                 JLabel posterTitle = new JLabel(posterInfo.getArtName());
                 posterTitle.setBounds(x + 20, y + 170, posterWidth, 20);
@@ -232,7 +249,7 @@ public class ListPanel extends JPanel {
                     }
                 });
             }
-        }
+        
 
         // 다음,이전 페이지 버튼을 표시할지 여부를 결정
         if (endIndex < filteredList.size()) {
@@ -256,27 +273,6 @@ public class ListPanel extends JPanel {
             nextpageButton.setVisible(false);
         }
         
-        JButton back = new JButton();
-		back.setSize(50,40);
-		back.setLocation(30,640);
-		back.setBorderPainted(false);
-		back.setContentAreaFilled(false);
-		back.setFocusPainted(false);
-		add(back);
-		
-		back.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				Window window1 = SwingUtilities.windowForComponent((Component) e.getSource());	// 현재 창 닫기
-                if (window1 != null) {
-                    window1.dispose(); 
-                }
-				FrameBase.getInstance(new Home());
-				
-			}
-		});
 		
 		
     }

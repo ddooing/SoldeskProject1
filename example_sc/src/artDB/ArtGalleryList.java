@@ -3,21 +3,27 @@ package artDB;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class ArtGalleryList {
     private static ArrayList<ArtGalleryInfo> arr;
+    private List<ArtGalleryInfo> filteredList = new ArrayList<ArtGalleryInfo>();
+    Calendar currentDate = Calendar.getInstance();
+    Date now = currentDate.getTime();//현재 날짜
     
     public ArtGalleryList() {
         if (arr == null) {
-            Info();
+        	init();
         }
     }
     
-    public List<ArtGalleryInfo> Info() {
-        ArrayList<ArtGalleryInfo> arr = new ArrayList<ArtGalleryInfo>();
-        
+    public void init(){
+        arr = new ArrayList<ArtGalleryInfo>(); 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         
         try {
@@ -62,7 +68,7 @@ public class ArtGalleryList {
             endDate = dateFormat.parse("2023-10-22");
             arr.add(new ArtGalleryInfo("환혼 : 빛과 그림자", "무료", "탕 컨템포러리 아트",  startDate, endDate, "10:30 ~ 20:00",
                   "https://naver.me/FPuN115R", "https://cdn.mhns.co.kr/news/photo/202304/552099_672831_5133.jpg", 7));
-            // 9번
+         // 9번
             startDate = dateFormat.parse("2023-07-22");
         	endDate = dateFormat.parse("2023-10-27");
         	arr.add(new ArtGalleryInfo("알폰스무하 이모션 인 서울","20,000 원","DDP 뮤지엄 전시 1관",
@@ -83,23 +89,24 @@ public class ArtGalleryList {
     				startDate,endDate,"10:00 ~ 19:00","https://naver.me/535BKkXf",
     				"https://cdn-pro-web-250-118.cdn-nhncommerce.com/exhibition2_godomall_com/data/goods/23/06/26/1000000101/1000000101_detail_025.jpg",0));
             
+        	//곧종료 
         	// 12번
         	startDate = dateFormat.parse("2023-05-26");
-        	endDate = dateFormat.parse("2023-10-19");
+        	endDate = dateFormat.parse("2023-10-22");
         	arr.add(new ArtGalleryInfo("전자적 숲; 소진된 인간","2,000 원","국립현대미술관 서울",
     				startDate,endDate,"10:00 ~ 18:00","https://naver.me/54Vkke2z",
     				"https://vulktiuibwqqvtbjzlie.supabase.co/storage/v1/object/public/images/exhibition/representative/11931fba-8122-4515-80e2-1e33d8bc9637_poster_2.jpg",9));
         	
             // 13번
             startDate = dateFormat.parse("2023-07-27");
-            endDate = dateFormat.parse("2023-12-03");
+            endDate = dateFormat.parse("2023-10-15");
             arr.add(new ArtGalleryInfo("김범 개인전 바위가 되는 법", "12,000 원", "리움미술관", startDate, endDate,
                     "10:00 ~ 18:00", "https://naver.me/xxxR7VMU",
                     "https://og-data.s3.amazonaws.com/media/exhibitions/image/13472/ei_13472.jpg",
                     13));
             // 14번
             startDate = dateFormat.parse("2023-09-02");
-            endDate = dateFormat.parse("2023-10-31");
+            endDate = dateFormat.parse("2023-10-19");
             arr.add(new ArtGalleryInfo("Rai 개인전", "무료", "갤러리 플레이리스트", startDate, endDate,
                     "11:00 ~ 18:00", "https://naver.me/5nPbHtBL",
                     "https://og-data.s3.amazonaws.com/media/exhibitions/image/13623/ei_13623.jpg",
@@ -131,11 +138,73 @@ public class ArtGalleryList {
             arr.add(new ArtGalleryInfo("세르주 블로크展 ′KISS′","무료","뉴스뮤지엄 연희",startDate,endDate,
                   "11:00 ~ 19:00","https://naver.me/5QuqLMhp",
                   "https://timeticket.co.kr/wys2/file_attach_thumb/2023/09/27/1695799829-30-3_wonbon_N_7_255x357_70_2.jpg", 
-                  0));    
+                  0));  
+            
+            
+            
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        return arr;
     }
+    
+    // 정보 
+    public List<ArtGalleryInfo> getPosters(){
+    	return arr;
+    }
+	
+	// 곧 종료 정보 :종료 날짜가 currentDate 이후이면서 15일 이하로 차이나는 항목
+	public List<ArtGalleryInfo> getsoonEndPosters()
+	{
+		for (ArtGalleryInfo info : arr) {
+	        if (info.getDateEnd().after(now) && isWithin15Days(now, info.getDateEnd())) {
+	            filteredList.add(info);
+	        }
+	    }
+		
+		return filteredList;
+	}
+	
+	//15일 차이 함수 
+	public boolean isWithin15Days(Date currentDate, Date endDate) {
+	    long diffInMillis = endDate.getTime() - currentDate.getTime();
+	    long daysDifference = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
+
+	    return daysDifference <= 15;
+	}
+	
+	// 가격이 무료인 전시회 정보들
+	public List<ArtGalleryInfo> getFreePosters()
+	{	
+		for (ArtGalleryInfo info : arr) {
+			// 시작날짜가 현재보다 이전이거나 같은
+			if (info.getDateStart().before(now) || info.getDateStart().equals(now)) {
+				if (info.getFee().equals("무료")) {
+	            	filteredList.add(info);
+	            }
+	            
+	            for(ArtGalleryInfo a:filteredList )
+	            {
+	            	System.out.println(a.toString());
+	            }
+			}      
+        }
+		return filteredList;
+	}
+
+	public List<ArtGalleryInfo> getPopulaPosters()
+	{
+		for (ArtGalleryInfo info : arr) {
+		
+			// posterInfoList를 getcnt() 값에 따라 정렬
+	        Collections.sort(info, new Comparator<ArtGalleryInfo>() {
+	            @Override
+	            public int compare(ArtGalleryInfo o1, ArtGalleryInfo o2) {
+	                // getcnt() 값을 비교하여 오름차순 정렬
+	                return Integer.compare(o2.getCnt(), o1.getCnt());
+	            }
+	        });
+DF		
+	}
+	
 }
