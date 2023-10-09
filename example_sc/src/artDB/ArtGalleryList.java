@@ -296,6 +296,8 @@ public class ArtGalleryList {
 		
 		return filteredList;
 	}//getsoonEndPosters()
+	
+
 		
 		
 		
