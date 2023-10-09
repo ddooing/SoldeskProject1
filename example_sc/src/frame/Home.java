@@ -5,6 +5,7 @@ package frame;
 import javax.swing.*;
 import artDB.ArtGalleryInfo;
 import artDB.ArtGalleryList;
+import controller.member.MemberToken;
 import view.login.FrameLogin;
 
 import java.awt.*;
@@ -16,7 +17,11 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
+
+
+import model.member.*;
 
 public class Home extends JPanel {
 	
@@ -31,6 +36,8 @@ public class Home extends JPanel {
     JToggleButton soonEnd_btn;
     ButtonGroup buttonGroup;
     
+    List<ArtReserInfo> reserInfoList;
+    
     public Home() {
 
         // JPanel 구조 설정
@@ -38,7 +45,47 @@ public class Home extends JPanel {
         setLayout(null);
         setSize(400, 700);
         
-     
+        
+        
+        
+      //예매 추가하기
+
+        ArtReserInfoList a = new ArtReserInfoList();
+        //a.show();
+         reserInfoList =a.getArtReserInfoList();
+         /*
+          * 확인용
+         for( ArtReserInfo reser : reserInfoList)
+ 		{
+         	System.out.println(reser.toString());
+ 		}*/
+         
+         
+      // 예매 시뮬레이션
+         
+         // 선택한 전시회 객체 넣기 
+         ArtGalleryInfo selectArt = posterInfoList.get(i);
+         // 예매 시간 
+         String reseveTime=" 13:00 - 12:00";
+         // 예매 날짜
+         String reserveDate = "2023 - 09 - 11";
+         // 예매 개수 
+         int reserverInt = 2;
+         
+         ////로그인한 사용자의 id 로 
+         System.out.println("id:" + MemberToken.tokenID);
+         
+
+         //리스트 추가하기
+         reserInfoList.add(new ArtReserInfo(MemberToken.tokenID,selectArt,reseveTime , reserveDate,reserverInt));
+         
+        
+        
+        
+        
+        
+        
+        
      // 이미지
         ImageIcon imageSearch = new ImageIcon("./src/30.png");
         ImageIcon menuLine = new ImageIcon("./src/line3.png");

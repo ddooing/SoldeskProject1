@@ -129,7 +129,8 @@ public class FrameLogin extends JPanel {
 					JOptionPane.showMessageDialog(null, "아이디를 확인해주세요.");
 				} else {
 					if (idCheck.equals(new String(tfPW.getPassword()))) {
-						MemberToken.tokenID = id;
+						Member.tokeniD = id;
+						System.out.println("id : "+Member.tokeniD);
 						JOptionPane.showMessageDialog(null, id + "님, 환영합니다!");
 						FrameBase.getInstance(new Home());
 						dispose();

@@ -23,6 +23,8 @@ import javax.swing.SwingUtilities;
 
 import artDB.ArtGalleryInfo;
 import artDB.ArtGalleryList;
+import model.member.ArtReserInfo;
+import model.member.ArtReserInfoList;
 
 public class SearchPanel extends JPanel {
 	
@@ -38,6 +40,7 @@ public class SearchPanel extends JPanel {
     private JTextField textField; // 텍스트 필드를 인스턴스 변수로 선언
 
 
+
     public SearchPanel() {
         // 포스터 넣는 곳 패널 새로 생성
         
@@ -45,8 +48,8 @@ public class SearchPanel extends JPanel {
         setBackground(Color.pink); //SearchPanel() 보기용 
         setSize(400, 700);
         //setLocation(20, 40);
- 
-
+        
+         
         // ArtGalleryList 객체 생성
         ArtGalleryList artgallerylist = new ArtGalleryList();
         posterInfoList = artgallerylist.getPosters();

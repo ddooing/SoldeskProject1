@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import controller.member.MemberToken;
 import view.login.FrameIDSearch;
 
 public class FrameBase extends JFrame{
@@ -127,10 +128,11 @@ public class FrameBase extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
+				MemberToken.tokenID= "1"; //임시 토큰 id 
 				if(instance != null) {		// 1개 창 닫기
 					instance.dispose();
 					}
-				FrameBase.getInstance(new FrameTicketList());
+				FrameBase.getInstance(new FrameTicketList(MemberToken.tokenID));
 				
 			}
 		});

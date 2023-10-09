@@ -20,6 +20,7 @@ public class ArtGalleryList {
         if (arr == null) {
         	init();
         }
+
     }
     
     public void init()

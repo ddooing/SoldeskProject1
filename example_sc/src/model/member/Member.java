@@ -12,7 +12,15 @@ public class Member implements Serializable {
 	private String name;
 	private String tel;
 	
+	public static String tokeniD;
 
+	public static String getTokenID() {
+		return tokeniD;
+	}
+
+	public void setTokenID(String tokenID) {
+		this.tokeniD = tokenID;
+	}
 	public Member() {
 
 	}

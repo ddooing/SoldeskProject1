@@ -9,9 +9,11 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import controller.member.MemberToken;
+
 public class FrameTicketList extends JPanel{
 	
-	public FrameTicketList()
+	public FrameTicketList(String id)
 	{
 		// JPanel 구조 설정
         setBackground(Color.white);

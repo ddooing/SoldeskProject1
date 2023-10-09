@@ -23,6 +23,8 @@ import javax.swing.SwingUtilities;
 
 import artDB.ArtGalleryInfo;
 import artDB.ArtGalleryList;
+import controller.member.MemberToken;
+import model.member.MyArt;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -38,9 +40,6 @@ public class ListPanel extends JPanel {
     private List<ArtGalleryInfo> posterInfoList; // 전체 포스터 정보 리스트
     List<ArtGalleryInfo> filteredPosterInfoList;
 
-    
-    static String filename = "carList.txt";
-    
     
     public List<ArtGalleryInfo> getFreeList(String filtername) { //전시회 리스트 가져오기
 
@@ -211,26 +210,7 @@ public class ListPanel extends JPanel {
                     	for (int i = 0; i < posterInfoList.size(); i++) {
                             if (posterInfo.getImageURL().equals(posterInfoList.get(i).getImageURL())) {
                                 System.out.println(posterInfoList.get(i).getArtName());							// 클릭 이미지 전시회이름 출력
-                                
-                                // 예매 시뮬레이션
-                                
-                                // 선택한 전시회 객체 넣기 
-                                ArtGalleryInfo selectArt = posterInfoList.get(i);
-                                // 예매 시간 
-                                String reseveTime=" 13:00 - 12:00";
-                                // 예매 날짜
-                                String reserveDate = "2023 - 09 - 11";
-                                // 예매 개수 
-                                int reserverInt = 2;
-                                //예매 정보들 
-                                ArrayList orderList = new ArrayList();
-                                //orderList.add(selectArt);
-                                orderList.add(reseveTime);
-                                orderList.add(reserveDate);
-                                orderList.add(reserverInt);
-                                
-                                out(orderList);
-                                
+  
                                 Window window = SwingUtilities.windowForComponent((Component) e.getSource());	// 현재 창 닫기
                                 if (window != null) {
                                     window.dispose(); 
@@ -272,12 +252,19 @@ public class ListPanel extends JPanel {
 		
     }
 	
-	public void out(ArrayList a)
+	public void out(ArrayList a,String id)
 	{
+		
+		
+		
+		/*
+		System.out.println("id:" + id);
 		for(int i=0;i<a.size();i++)
 		{
 			System.out.println(i+" :"+ a.get(i));
 		}
+		*/
+		
 	}
 	
 	

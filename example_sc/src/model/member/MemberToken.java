@@ -1,6 +1,7 @@
 package model.member;
 
 public class MemberToken {
+	
 	public static String tokenID;
 
 	public static String getTokenID() {
