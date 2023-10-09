@@ -120,28 +120,29 @@ public class ArtGalleryList {
             // 곧전시 목록들
          // 15번
             startDate = dateFormat.parse("2023-10-19");
-            endDate = dateFormat.parse("2023-10-27");
+            endDate = dateFormat.parse("2023-11-29");
             arr.add(new ArtGalleryInfo("캣아트 : 고양이 미술사", "15,000 원", "서울특별시 송파구 신천동 29-1 KT송파타워 3층", startDate, endDate, "10:00 ~ 19:00", "https://naver.me/F9znHvY8", "https://image.aladin.co.kr/product/15876/24/cover500/k462533530_1.jpg", 0));
             
          // 16번
-            startDate = dateFormat.parse("2023-10-30");
-            endDate = dateFormat.parse("2023-10-14");
-            arr.add(new ArtGalleryInfo("문도멘도 판타스틱시티라이프", "15,000 원", "그라운드시소 서촌", startDate, endDate, "10:00 ~ 19:00", "https://naver.me/xKQWUady", "https://groundseesaw.co.kr/wp-content/uploads/2023/05/MENDO_KV_2%EC%B0%A8_230418-1-1-1500x2193.jpg", 0));
+            startDate = dateFormat.parse("2023-10-19");
+            endDate = dateFormat.parse("2024-03-31");
+            arr.add(new ArtGalleryInfo("세르주 블로크展 ′KISS′","무료","뉴스뮤지엄 연희",startDate,endDate,
+                  "11:00 ~ 19:00","https://naver.me/5QuqLMhp",
+                  "https://timeticket.co.kr/wys2/file_attach_thumb/2023/09/27/1695799829-30-3_wonbon_N_7_255x357_70_2.jpg", 
+                  0));
             
          // 17번
-        	startDate = dateFormat.parse("2023-09-05");
-        	endDate = dateFormat.parse("2023-10-21");
+        	startDate = dateFormat.parse("2023-10-23");
+        	endDate = dateFormat.parse("2023-11-21");
         	arr.add(new ArtGalleryInfo("요시토모 나라","무료","페이스갤러리",
     				startDate,endDate,"10:00 ~ 18:00","https://naver.me/GHEVTodl",
     				"https://og-data.s3.amazonaws.com/media/exhibitions/image/13608/ei_13608.png",0));
         	
          // 18번
-            startDate = dateFormat.parse("2023-05-26");
-            endDate = dateFormat.parse("2023-10-19");
-            arr.add(new ArtGalleryInfo("세르주 블로크展 ′KISS′","무료","뉴스뮤지엄 연희",startDate,endDate,
-                  "11:00 ~ 19:00","https://naver.me/5QuqLMhp",
-                  "https://timeticket.co.kr/wys2/file_attach_thumb/2023/09/27/1695799829-30-3_wonbon_N_7_255x357_70_2.jpg", 
-                  0));  
+        	 startDate = dateFormat.parse("2023-10-30");
+             endDate = dateFormat.parse("2023-12-31");
+             arr.add(new ArtGalleryInfo("문도멘도 판타스틱시티라이프", "15,000 원", "그라운드시소 서촌", startDate, endDate, "10:00 ~ 19:00", "https://naver.me/xKQWUady", "https://groundseesaw.co.kr/wp-content/uploads/2023/05/MENDO_KV_2%EC%B0%A8_230418-1-1-1500x2193.jpg", 0));
+            
             
             
             
@@ -152,12 +153,15 @@ public class ArtGalleryList {
     }//init()
     
     
-    // 정보 
+    //필터
+    	// 모든 전시회 정보 
     public List<ArtGalleryInfo> getPosters(){
     	return arr;
     }//getPosters()
 	
-    //최신 - dateStart가 최신인거 
+    
+    
+    	//최신 - dateStart가 최신인거 
     public List<ArtGalleryInfo> getSortByDateStart() {
         // Comparator를 사용하여 dateStart를 기준으로 정렬
     	for (ArtGalleryInfo info : arr) {
@@ -175,21 +179,24 @@ public class ArtGalleryList {
                 return date2.compareTo(date1); // dateStart 내림차순 정렬
             }
         });
+
+		/*
+		//확인용
 		for(ArtGalleryInfo a:filteredList )
         {
         	System.out.println(a.getdateStart());
         }
-		
+		*/
 		return filteredList;
 			
     }
     
     
-	// 곧 종료 - 종료 날짜가 currentDate 이후이면서 15일 이하로 차이나는 항목
+		// 곧 종료 - 종료 날짜가 currentDate 이후이면서 15일 이하로 차이나는 항목
 	public List<ArtGalleryInfo> getsoonEndPosters()
 	{
 		for (ArtGalleryInfo info : arr) {
-	        if (info.getDateEnd().after(now) && isWithin15Days(now, info.getDateEnd())) {
+	        if (info.getDateEnd().after(now) && endWithin15Days(now, info.getDateEnd())) {
 	            filteredList.add(info);
 	        }
 	    }
@@ -203,16 +210,17 @@ public class ArtGalleryList {
 		return filteredList;
 	}//getsoonEndPosters()
 	
-	//15일 차이 함수 
-	public boolean isWithin15Days(Date currentDate, Date endDate) {
+		//현재 날짜와 종료 날짜 15일 차이 함수 
+	public boolean endWithin15Days(Date currentDate, Date endDate) {
 	    long diffInMillis = endDate.getTime() - currentDate.getTime();
 	    long daysDifference = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
 
 	    return daysDifference <= 15;
-	}//isWithin15Days()
+	}//endWithin15Days()
 	
 	
-	// 무료 필터 -가격이 무료인 전시회 정보들
+	
+		// 무료 필터 -가격이 무료인 전시회 정보들
 	public List<ArtGalleryInfo> getFreePosters()
 	{	
 		for (ArtGalleryInfo info : arr) {
@@ -234,7 +242,7 @@ public class ArtGalleryList {
 
 		
 		
-	// 인기 필터 - 예매(cnt) 많은 순 
+		// 인기 필터 - 예매(cnt) 많은 순 
 	public List<ArtGalleryInfo> getPopulaPosters()
 	{
 		for (ArtGalleryInfo info : arr) {
@@ -266,5 +274,29 @@ public class ArtGalleryList {
         */
 		return filteredList;
 	}//getPopulaPosters()
+	
+	// 네비게이션 바 
+		// 곧 전시 - 시작 날짜가 currentDate(현재 날짜) 이후 
+	public List<ArtGalleryInfo> getsoonPosters()
+	{
+		for (ArtGalleryInfo info : arr) {
+	        if (info.getDateStart().after(now) ) {
+	            filteredList.add(info);
+	        }
+	    }
+		
+		/*
+		 //확인용
+        for(ArtGalleryInfo a:filteredList )
+        {
+        	System.out.println("곧 전시 : ");
+        	System.out.println(a.toString());
+        }
+        */
+		
+		return filteredList;
+	}//getsoonEndPosters()
+		
+		
 		
 }

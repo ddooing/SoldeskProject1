@@ -89,12 +89,10 @@ public class FrameBase extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				/* 곧 페이지이동
 				if(instance != null) {		// 1개 창 닫기
 					instance.dispose();
 					}
-				FrameBase.getInstance(new 클래스이름());
-				*/
+				FrameBase.getInstance(new FrameSoonPage());
 			}
 		});
 		
