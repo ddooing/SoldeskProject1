@@ -69,18 +69,10 @@ public class Home extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//새로운 FrameBase창 생성
+				FrameBase.getInstance(new SearchPanel());
+				dispose();
 
-				remove(btnSearch);
-				remove(menuline);
-				//removeAll();
-				remove(listPanel);
-				remove(recent_btn);
-				remove (popula_btn);
-				remove (free_btn);
-				remove (soonEnd_btn);
-				add(new SearchPanel());
-				revalidate();
-				repaint();
 
 			}
 		});
@@ -242,6 +234,10 @@ public class Home extends JPanel {
      
     }
 
+    public void dispose() {
+	    JFrame parent = (JFrame) this.getTopLevelAncestor();
+	    parent.dispose();
+	}
 
 }
 

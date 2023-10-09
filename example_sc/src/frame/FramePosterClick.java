@@ -26,56 +26,56 @@ public class FramePosterClick extends JPanel {
 	
 	JPanel framehomePanel;
 	private int ad;
-	private List<ArtGalleryInfo> posterInfoList;
-	
-	public FramePosterClick() {
-		this(null,null);
-	}
+	private ArtGalleryList artgallerylist;//전시회 정보 리스트
+	private ArtGalleryInfo art;//제목이 artname인 객체 넣을 공간 
 	
 	public FramePosterClick(ActionEvent e, String artname) {
 		
-		ArtGalleryList artgallerylist = new ArtGalleryList();
-    	
-        setSize(400, 700);
+		setSize(400, 700); // homepanel 과 같은 사이즈 
         setLayout(null);
         setVisible(true);
         
-        
-        
-        for(int i=0; i<artgallerylist.Info().size();i++) {
-        	if(artname.equals(artgallerylist.Info().get(i).getArtName())) {
-        		makeArtInfo(artgallerylist, i);
+		artgallerylist = new ArtGalleryList();
+
+
+        // 전시회 정보 리스트에서 제목이 artname인 객체 찾아내기 
+        for(int i=0; i<artgallerylist.getPosters().size();i++) {
+        	if(artname.equals(artgallerylist.getPosters().get(i).getArtName())) {
+        		//제목이 artname인 객체 art 에 넣기 
+        		art= artgallerylist.getPosters().get(i);
+        		//System.out.println(" 고른 객체 : "+art.getArtName());
+        		makeArtInfo(art);
         		break;
         	}
         }
         
         
 	}
-	
-	public void makeArtInfo(ArtGalleryList artGalleryList, int i) {
-		JLabel fImage=new JLabel(HtmlUtils.imgHtmlParser(artGalleryList.Info().get(i).getImageURL()));
+
+	public void makeArtInfo(ArtGalleryInfo artInfo) {
+		JLabel fImage=new JLabel(HtmlUtils.imgHtmlParser(artInfo.getImageURL()));
         fImage.setSize(360,280);
         fImage.setLocation(20,70);
         add(fImage);
         
         // dateStart 포맷팅
-        Date dateStart = artGalleryList.Info().get(i).getDateStart();
+        Date dateStart = artInfo.getDateStart();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDateStart = dateFormat.format(dateStart);
 
         // dateEnd 포맷팅
-        Date dateEnd = artGalleryList.Info().get(i).getDateEnd();
+        Date dateEnd = artInfo.getDateEnd();
         String formattedDateEnd = dateFormat.format(dateEnd);
 		
-        JLabel title = new JLabel("<HTML><body>" +artGalleryList.Info().get(i).getArtName() + "</body></HTML>");
+        JLabel title = new JLabel("<HTML><body>" +artInfo.getArtName() + "</body></HTML>");
         
-        JLabel placendate = new JLabel("<HTML><body>" +artGalleryList.Info().get(i).getPlace() + "<br>" 
+        JLabel placendate = new JLabel("<HTML><body>" +artInfo.getPlace() + "<br>" 
         + formattedDateStart + " ~ " + formattedDateEnd +"</body></HTML>");
         
 		JLabel story = new JLabel("<HTML><body>" +
-						"관람시간 : " + artGalleryList.Info().get(i).getTime() + "<br>" + 
-						"입장료 : " + artGalleryList.Info().get(i).getFee() + "<br>" + 
-						"주소 : " + artGalleryList.Info().get(i).getPlace() + "</body></HTML>");
+						"관람시간 : " + artInfo.getTime() + "<br>" + 
+						"입장료 : " + artInfo.getFee() + "<br>" + 
+						"주소 : " + artInfo.getPlace() + "</body></HTML>");
 		
 		// "예약" 버튼 생성
 		ImageIcon originalIcon = new ImageIcon("./src/예매.png");
@@ -127,7 +127,7 @@ public class FramePosterClick extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// 예매 버튼 클릭시
-				System.out.println(artGalleryList.Info().get(i).getArtName()+" : 예매 버튼 클릭");
+				System.out.println(artInfo.getArtName()+" : 예매 버튼 클릭");
 			}
 		});
 		
@@ -152,5 +152,6 @@ public class FramePosterClick extends JPanel {
 				
 			}
 		});
+		
 	}
 }
