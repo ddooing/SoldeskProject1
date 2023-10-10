@@ -34,5 +34,23 @@ public class ArtReserInfoList {
 		return arr;
 	}
     
+	// id의 예약 리스트 
+	public ArrayList<ArtReserInfo> getIdReserList(){
+		ArrayList<ArtReserInfo> idReserlist = new ArrayList<ArtReserInfo>();
+		
+		for( ArtReserInfo a :arr)
+		{
+			if(a.getId().equals(Member.tokeniD))
+			{
+				idReserlist.add(a);
+			}
+		}
+		return idReserlist;
+	}
+	public void showId() {
+			//토큰 잘 가져옴
+			System.out.println(Member.tokeniD);
+		
+	}
     
 }

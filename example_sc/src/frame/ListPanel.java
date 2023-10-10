@@ -24,7 +24,7 @@ import javax.swing.SwingUtilities;
 import artDB.ArtGalleryInfo;
 import artDB.ArtGalleryList;
 import controller.member.MemberToken;
-import model.member.MyArt;
+import model.member.Member;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -45,6 +45,9 @@ public class ListPanel extends JPanel {
 
         ArtGalleryList artgallerylist = new ArtGalleryList();
 
+        
+        System.out.println("home id : "+Member.tokeniD);
+        
         // 필터링된 포스터 정보를 담을 리스트
         filteredPosterInfoList = new ArrayList<>();
         
@@ -216,7 +219,7 @@ public class ListPanel extends JPanel {
                                     window.dispose(); 
                                 }
                                 
-                                FrameBase.getInstance(new FramePosterClick(e,posterInfo.getArtName()));			// 해당전시 페이지 출력
+                                FrameBase.getInstance(new FramePosterClick(Member.tokeniD,posterInfo.getArtName()));			// 해당전시 페이지 출력
                             }
                             
                         }			

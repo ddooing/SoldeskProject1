@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import controller.member.MemberToken;
+import model.member.Member;
 import view.login.FrameIDSearch;
 
 public class FrameBase extends JFrame{
@@ -128,11 +129,14 @@ public class FrameBase extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				MemberToken.tokenID= "1"; //임시 토큰 id 
+				System.out.println("티켓 클릭 Member.tokeniD : "+ Member.tokeniD);//맞음
+				Member m = new Member();
+				//FrameBase.getInstance(new FrameTicketList(m.getTiketList());
+				m.getTiketList();
 				if(instance != null) {		// 1개 창 닫기
 					instance.dispose();
 					}
-				FrameBase.getInstance(new FrameTicketList(MemberToken.tokenID));
+				//FrameBase.getInstance(new FrameTicketList(MemberToken.tokenID));
 				
 			}
 		});

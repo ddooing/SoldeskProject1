@@ -9,8 +9,8 @@ import frame.Home;
 public class ArtPopupMain {
 	public static void main(String[] args) {
 		
-		//FrameBase.getInstance(new FrameBegin());
+		FrameBase.getInstance(new FrameBegin());
 		
-		FrameBase.getInstance(new Home());
+		//FrameBase.getInstance(new Home());
 	}
 }

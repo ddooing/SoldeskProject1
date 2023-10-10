@@ -59,33 +59,7 @@ public class Home extends JPanel {
  		{
          	System.out.println(reser.toString());
  		}*/
-         
-         
-      // 예매 시뮬레이션
-         
-         // 선택한 전시회 객체 넣기 
-         ArtGalleryInfo selectArt = posterInfoList.get(i);
-         // 예매 시간 
-         String reseveTime=" 13:00 - 12:00";
-         // 예매 날짜
-         String reserveDate = "2023 - 09 - 11";
-         // 예매 개수 
-         int reserverInt = 2;
-         
-         ////로그인한 사용자의 id 로 
-         System.out.println("id:" + MemberToken.tokenID);
-         
-
-         //리스트 추가하기
-         reserInfoList.add(new ArtReserInfo(MemberToken.tokenID,selectArt,reseveTime , reserveDate,reserverInt));
-         
-        
-        
-        
-        
-        
-        
-        
+           
      // 이미지
         ImageIcon imageSearch = new ImageIcon("./src/30.png");
         ImageIcon menuLine = new ImageIcon("./src/line3.png");

@@ -27,4 +27,47 @@ public class ArtReserInfo {
 		// TODO Auto-generated method stub
 		return id +" "+reserveDate+ " "+reseveTime + " "+reserverInt;
 	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public ArtGalleryInfo getA() {
+		return a;
+	}
+
+	public void setA(ArtGalleryInfo a) {
+		this.a = a;
+	}
+
+	public String getReseveTime() {
+		return reseveTime;
+	}
+
+	public void setReseveTime(String reseveTime) {
+		this.reseveTime = reseveTime;
+	}
+
+	public String getReserveDate() {
+		return reserveDate;
+	}
+
+	public void setReserveDate(String reserveDate) {
+		this.reserveDate = reserveDate;
+	}
+
+	public int getReserverInt() {
+		return reserverInt;
+	}
+
+	public void setReserverInt(int reserverInt) {
+		this.reserverInt = reserverInt;
+	}
+	
+	
+	
 }

@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Member;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -21,6 +22,10 @@ import javax.swing.SwingUtilities;
 
 import artDB.ArtGalleryInfo;
 import artDB.ArtGalleryList;
+//import controller.member.MemberToken;
+//import model.member.Member;
+import model.member.ArtReserInfo;
+import model.member.ArtReserInfoList;
 
 public class FramePosterClick extends JPanel {
 	
@@ -29,14 +34,17 @@ public class FramePosterClick extends JPanel {
 	private ArtGalleryList artgallerylist;//전시회 정보 리스트
 	private ArtGalleryInfo art;//제목이 artname인 객체 넣을 공간 
 	
-	public FramePosterClick(ActionEvent e, String artname) {
+	List<ArtReserInfo> reserInfoList;
+	private String id ;
+	
+	public FramePosterClick(String id,String artname) {
 		
 		setSize(400, 700); // homepanel 과 같은 사이즈 
         setLayout(null);
         setVisible(true);
         
 		artgallerylist = new ArtGalleryList();
-
+		this.id= id;
 
         // 전시회 정보 리스트에서 제목이 artname인 객체 찾아내기 
         for(int i=0; i<artgallerylist.getPosters().size();i++) {
@@ -122,12 +130,34 @@ public class FramePosterClick extends JPanel {
 		add(story);
 		
 		
+		// 예매 시뮬레이션
+        
+		ArtReserInfoList a = new ArtReserInfoList();
+        //a.show();
+         reserInfoList =a.getArtReserInfoList();
+         
+        // 선택한 전시회 객체 넣기 
+        ArtGalleryInfo selectArt = art;
+        // 예매 시간 
+        String reseveTime=" 13:00 - 12:00";
+        // 예매 날짜
+        String reserveDate = "2023 - 09 - 11";
+        // 예매 개수 
+        int reserverInt = 2;
+        
+        System.out.println("poster쪽  id : "+id);
+        
+
+        
+        
 		reservebtn1.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// 예매 버튼 클릭시
 				System.out.println(artInfo.getArtName()+" : 예매 버튼 클릭");
+				reserInfoList.add(new ArtReserInfo(id,selectArt,reseveTime , reserveDate,reserverInt));
+				a.show();
 			}
 		});
 		
