@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.FontFormatException;
+import java.awt.Image;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -175,7 +176,11 @@ public class FrameSearch_1 extends JPanel {
 
             ArtGalleryInfo posterInfo = filteredList.get(i);
 
-            JButton posterImage = new JButton(HtmlItils1.imgHtmlParser(posterInfo.getImageURL()));
+            ImageIcon originalIcon9 = new ImageIcon(posterInfo.getImageURL());
+            Image originalImage9 = originalIcon9.getImage();
+            Image scaledImage9 = originalImage9.getScaledInstance(120, 160, Image.SCALE_SMOOTH);
+            ImageIcon posterImage1 = new ImageIcon(scaledImage9);
+            JButton posterImage = new JButton(posterImage1);
             posterImage.setBounds(x, y, 140, posterHeight);
             posterImage.setBorderPainted(false);
             posterImage.setContentAreaFilled(false);
@@ -207,7 +212,7 @@ public class FrameSearch_1 extends JPanel {
                     // 포스터 눌렀을 때
                     System.out.println(posterInfo.getArtName());
                     for (int i = 0; i < posterInfoList.size(); i++) {
-                        if (posterInfo.getImageURL().equals(posterInfoList.get(i).getImageURL())) {
+                        if (posterInfo.getImageURL().equals(filteredList.get(i).getImageURL())) {
                             System.out.println(posterInfoList.get(i).getArtName());							// 클릭 이미지 전시회이름 출력
                             
                             Window window = SwingUtilities.windowForComponent((Component) e.getSource());	// 현재 창 닫기
