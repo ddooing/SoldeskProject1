@@ -210,19 +210,20 @@ public class FrameSearch_1 extends JPanel {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     // 포스터 눌렀을 때
-                    System.out.println(posterInfo.getArtName());
-                    for (int i = 0; i < posterInfoList.size(); i++) {
+                    
+                    for (int i = 0; i < filteredList.size(); i++) {
                         if (posterInfo.getImageURL().equals(filteredList.get(i).getImageURL())) {
-                            System.out.println(posterInfoList.get(i).getArtName());							// 클릭 이미지 전시회이름 출력
-                            
-                            Window window = SwingUtilities.windowForComponent((Component) e.getSource());	// 현재 창 닫기
+                            System.out.println(filteredList.get(i).getArtName()); // 클릭 이미지 전시회이름 출력
+
+                            Window window = SwingUtilities.windowForComponent((Component) e.getSource()); // 현재 창 닫기
                             if (window != null) {
-                                window.dispose(); 
+                                window.dispose();
                             }
-                            
-                            FrameBase.getInstance(new FramePosterClick(e,posterInfo.getArtName()));			// 해당전시 페이지 출력
+
+                            FrameBase.getInstance(new FramePosterClick(e, posterInfo.getArtName())); // 해당전시 페이지 출력
                         }
                     }
+
                 }
             });
         }
