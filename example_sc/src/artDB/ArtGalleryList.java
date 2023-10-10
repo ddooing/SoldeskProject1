@@ -87,7 +87,7 @@ public class ArtGalleryList {
         	// 12번
         	startDate = dateFormat.parse("2023-05-26");
         	endDate = dateFormat.parse("2023-10-19");
-        	arr.add(new ArtGalleryInfo("전자적 숲; 소진된 인간","2,000 원","국립현대미술관 서울",
+        	arr.add(new ArtGalleryInfo("전자적 숲: 소진된 인간","2,000 원","국립현대미술관 서울",
     				startDate,endDate,"10:00 ~ 18:00","https://naver.me/54Vkke2z",
     				"https://vulktiuibwqqvtbjzlie.supabase.co/storage/v1/object/public/images/exhibition/representative/11931fba-8122-4515-80e2-1e33d8bc9637_poster_2.jpg",9));
         	
