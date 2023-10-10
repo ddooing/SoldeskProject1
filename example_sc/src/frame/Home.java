@@ -6,6 +6,8 @@ import artDB.ArtGalleryList;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -19,6 +21,7 @@ public class Home extends JPanel {
     private int totalPages = (int) Math.ceil((double) totalPosters / postersPerPage); // 총 페이지 수
     private List<ArtGalleryInfo> posterInfoList; // 전체 포스터 정보 리스트
 
+    String fontFilePath = "src/font/Orbit-regular.ttf"; // ttf 파일 경로
 
     public Home() {
         this(null);
@@ -75,7 +78,7 @@ public class Home extends JPanel {
         int btnsHeight = menuline.getY() + menuline.getHeight() + 10;
 
         // 필터 버튼 (인기, 최신, 무료, 곧 종료) 추가
-        ImageIcon originalIcon1 = new ImageIcon("./src/인기.png");
+        ImageIcon originalIcon1 = new ImageIcon("./src/인기버튼2.png");
         Image scaledImage1 = originalIcon1.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
         ImageIcon one = new ImageIcon(scaledImage1);
         JButton one1 = new JButton(one);
@@ -83,8 +86,12 @@ public class Home extends JPanel {
         one1.setContentAreaFilled(false);
         one1.setBorderPainted(false);
         add(one1);
+     // 호버 시에 표시할 이미지 설정
+        ImageIcon hoverIcon1 = new ImageIcon("./src/인기버튼.png");
+        Image scaledHoverImage1 = hoverIcon1.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
+        one1.setRolloverIcon(new ImageIcon(scaledHoverImage1));
 
-        ImageIcon originalIcon2 = new ImageIcon("./src/최신.png");
+        ImageIcon originalIcon2 = new ImageIcon("./src/최신버튼2.png");
         Image scaledImage2 = originalIcon2.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
         ImageIcon two = new ImageIcon(scaledImage2);
         JButton two2 = new JButton(two);
@@ -92,8 +99,12 @@ public class Home extends JPanel {
         two2.setContentAreaFilled(false);
         two2.setBorderPainted(false);
         add(two2);
+     // 호버 시에 표시할 이미지 설정
+        ImageIcon hoverIcon2 = new ImageIcon("./src/최신버튼.png");
+        Image scaledHoverImage2 = hoverIcon2.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
+        two2.setRolloverIcon(new ImageIcon(scaledHoverImage2));
 
-        ImageIcon originalIcon3 = new ImageIcon("./src/무료.png");
+        ImageIcon originalIcon3 = new ImageIcon("./src/무료버튼2.png");
         Image scaledImage3 = originalIcon3.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
         ImageIcon three = new ImageIcon(scaledImage3);
         JButton three3 = new JButton(three);
@@ -101,8 +112,12 @@ public class Home extends JPanel {
         three3.setContentAreaFilled(false);
         three3.setBorderPainted(false);
         add(three3);
+     // 호버 시에 표시할 이미지 설정
+        ImageIcon hoverIcon3 = new ImageIcon("./src/무료버튼.png");
+        Image scaledHoverImage3 = hoverIcon3.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
+        three3.setRolloverIcon(new ImageIcon(scaledHoverImage3));
 
-        ImageIcon originalIcon4 = new ImageIcon("./src/곧종료.png");
+        ImageIcon originalIcon4 = new ImageIcon("./src/곧종료버튼2.png");
         Image scaledImage4 = originalIcon4.getImage().getScaledInstance(80, 30, Image.SCALE_SMOOTH);
         ImageIcon four = new ImageIcon(scaledImage4);
         JButton four4 = new JButton(four);
@@ -110,6 +125,10 @@ public class Home extends JPanel {
         four4.setContentAreaFilled(false);
         four4.setBorderPainted(false);
         add(four4);
+     // 호버 시에 표시할 이미지 설정
+        ImageIcon hoverIcon4 = new ImageIcon("./src/곧종료버튼.png");
+        Image scaledHoverImage4 = hoverIcon4.getImage().getScaledInstance(80, 30, Image.SCALE_SMOOTH);
+        four4.setRolloverIcon(new ImageIcon(scaledHoverImage4));
         
         one1.addActionListener(new ActionListener() {
 			
@@ -127,13 +146,13 @@ public class Home extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				/* 최신필터 페이지 이동
+				
 				Window window1 = SwingUtilities.windowForComponent((Component) e.getSource());	// 현재 창 닫기
                 if (window1 != null) {
                     window1.dispose(); 
                 }
-				FrameBase.getInstance(new 클래스이름());
-				*/
+				FrameBase.getInstance(new FrameHomeRecentClick());
+				
 			}
 		});
         
@@ -153,39 +172,39 @@ public class Home extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				/* 곧종료 필터 페이지 이동
+				
 				Window window1 = SwingUtilities.windowForComponent((Component) e.getSource());	// 현재 창 닫기
                 if (window1 != null) {
                     window1.dispose(); 
                 }
-				FrameBase.getInstance(new 클래스이름());
-				*/
+				FrameBase.getInstance(new FrameHomeSoonEndClick());
+				
 				
 			}
 		});
 
         // 사용할 다음 페이지 이동 버튼
-        ImageIcon originalIcon5 = new ImageIcon("./src/다음페이지.png");
+        ImageIcon originalIcon5 = new ImageIcon("./src/다음.png");
         Image originalImage5 = originalIcon5.getImage();
-        Image scaledImage5 = originalImage5.getScaledInstance(40, 30, Image.SCALE_SMOOTH);
+        Image scaledImage5 = originalImage5.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         ImageIcon nextpage = new ImageIcon(scaledImage5);
 
         // 사용할 이전 페이지 이동 버튼
-        ImageIcon originalIcon6 = new ImageIcon("./src/이전페이지.png");
+        ImageIcon originalIcon6 = new ImageIcon("./src/이전.png");
         Image originalImage6 = originalIcon6.getImage();
-        Image scaledImage6 = originalImage6.getScaledInstance(40, 30, Image.SCALE_SMOOTH);
+        Image scaledImage6 = originalImage6.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         ImageIcon prepage = new ImageIcon(scaledImage6);
 
         // "다음 페이지" 버튼 생성
         JButton nextpageButton = new JButton(nextpage);
-        nextpageButton.setBounds(310, 460, 40, 30);
+        nextpageButton.setBounds(310, 460, 30, 30);
         nextpageButton.setContentAreaFilled(false);
         nextpageButton.setBorderPainted(false);
         nextpageButton.setFocusPainted(false);
 
         // "이전 페이지" 버튼 생성
         JButton prepageButton = new JButton(prepage);
-        prepageButton.setBounds(10, 460, 40, 30);
+        prepageButton.setBounds(10, 460, 30, 30);
         prepageButton.setContentAreaFilled(false);
         prepageButton.setBorderPainted(false);
         prepageButton.setFocusPainted(false);
@@ -238,7 +257,11 @@ public class Home extends JPanel {
 
             }
         });
-        
+        try {
+            // TTF 파일을 읽어서 Font 객체 생성
+            Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File(fontFilePath));
+            
+            
         posterPanel.add(nextpageButton);
         posterPanel.add(prepageButton);
     	
@@ -267,13 +290,16 @@ public class Home extends JPanel {
 
             JLabel posterTitle = new JLabel(posterInfo.getArtName());
             posterTitle.setBounds(x + 20, y + 170, posterWidth, 20);
-            posterTitle.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 14));
+            customFont = customFont.deriveFont(Font.PLAIN, 14); // 크기 24, 평범한 스타일로 설정
+            posterTitle.setFont(customFont);
             posterPanel.add(posterTitle);
 
             JLabel posterDate = new JLabel(dateFormat.format(posterInfo.getDateStart()) + "~" + dateFormat.format(posterInfo.getDateEnd()));
             posterDate.setBounds(x + 20, y + 190, posterWidth, 20);
-            posterDate.setFont(new Font("나눔스퀘어OTF Bold", Font.PLAIN, 8));
+            customFont = customFont.deriveFont(Font.PLAIN, 8);
+            posterDate.setFont(customFont);
             posterPanel.add(posterDate);
+            
 
             posterImage.addActionListener(new ActionListener() {
                 @Override
@@ -316,6 +342,7 @@ public class Home extends JPanel {
         } else {
             nextpageButton.setVisible(false);
         }
+        
 
         
         JButton back = new JButton();
@@ -339,11 +366,17 @@ public class Home extends JPanel {
 				
 			}
 		});
+        } catch (IOException | FontFormatException e) {
+            e.printStackTrace();
+        
 
         
+		
         }
         
     
+    
+    }
 
 
 }

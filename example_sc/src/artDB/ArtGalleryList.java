@@ -69,13 +69,14 @@ public class ArtGalleryList {
     				startDate,endDate,"10:00 ~ 20:00","https://naver.me/FRDLUpbE",
     				"https://cdn-pro-web-250-118.cdn-nhncommerce.com/exhibition2_godomall_com/data/goods/23/09/39/1000000113/1000000113_detail_010.jpg",
     				0));
+        	
         	// 10번
         	startDate = dateFormat.parse("2023-09-14");
         	endDate = dateFormat.parse("2023-10-14");
         	arr.add(new ArtGalleryInfo("동물 없는 동물원 展","15,000 원","DDP 뮤지엄 전시 1관",
     				startDate,endDate,"10:00 ~ 20:00","https://naver.me/FRDLUpbE",
     				"https://cdn.discoverynews.kr/news/photo/202309/1032783_1049509_1455.png",
-    				0));
+    				1));
         	// 11번
         	startDate = dateFormat.parse("2023-05-05");
         	endDate = dateFormat.parse("2023-10-20");

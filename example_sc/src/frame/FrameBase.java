@@ -22,7 +22,6 @@ public class FrameBase extends JFrame{
 		//기본 JFrame 구조
 		setTitle("미술관소개");
 		setLayout(null);
-		
 		setBounds(((int) tk.getScreenSize().getWidth() / 3), 
 				((int) tk.getScreenSize().getHeight()) / 2 - 400,
 				415, 738);
@@ -32,6 +31,7 @@ public class FrameBase extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //x버튼
 	}//생성자
 
+	
 	//싱글톤 기법을 사용하려고 한다
 	public static void getInstance(JPanel e) {
 			//static으로 선언했으므로 해당 메서드가 생성자보다도 먼저 호출된다
@@ -56,7 +56,7 @@ public class FrameBase extends JFrame{
 		lblImagebottom.setLocation(-90, 600);
 		e.add(lblBackGround);
 		e.add(lblImagebottom);
-		
+	
 		
 		JButton soon = new JButton();
 		JButton home = new JButton();
@@ -128,12 +128,12 @@ public class FrameBase extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				/* 티켓페이지이동
+				
 				if(instance != null) {		// 1개 창 닫기
 					instance.dispose();
 					}
-				FrameBase.getInstance(new 클래스이름());
-				*/
+				FrameBase.getInstance(new FrameTicketList());
+				
 			}
 		});
 		

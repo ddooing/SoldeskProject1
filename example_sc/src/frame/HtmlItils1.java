@@ -15,6 +15,7 @@ public class HtmlItils1 {
         htmlParse.append("</HTML>");
         return String.valueOf(htmlParse);
     }
+	
 
     public static String createImgHtml(String url){
         return imgHtmlParser(url);

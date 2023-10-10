@@ -1,12 +1,15 @@
 package frame;
 
 import java.awt.Color;
+import java.io.File;
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Image;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +31,8 @@ public class FrameHomeFreeClick extends JPanel {
     private int totalPosters = 7; // 전체 포스터 개수
     private int totalPages = (int) Math.ceil((double) totalPosters / postersPerPage); // 총 페이지 수
     private List<ArtGalleryInfo> posterInfoList; // 전체 포스터 정보 리스트
+    String fontFilePath = "src/font/Orbit-regular.ttf"; // ttf 파일 경로
+
 
     public FrameHomeFreeClick() {
         this(null);
@@ -79,21 +84,23 @@ public class FrameHomeFreeClick extends JPanel {
         ImageIcon menuLine = new ImageIcon("./src/line3.png");
 
         JButton btnSearch = new JButton(imageSearch); // 검색 버튼
-        JLabel menuline = new JLabel(menuLine); // 메뉴선
 
         btnSearch.setSize(50, 50);
         btnSearch.setLocation(310, 40);
         btnSearch.setBorderPainted(false); // 버튼 외각선 지우기
         btnSearch.setContentAreaFilled(false); // 버튼 투명하게 지우기(이미지는 남음)
         btnSearch.setFocusPainted(false); // 버튼 선택 표시 지우기
+
         
+        JLabel menuline = new JLabel(menuLine); // 메뉴선
         menuline.setSize(380, 5);
         menuline.setLocation(10, btnSearch.getY() + btnSearch.getHeight());
-
+        add(menuline);
+        
         int btnsHeight = menuline.getY() + menuline.getHeight() + 10;
 
         // 필터 버튼 (인기, 최신, 무료, 곧 종료) 추가
-        ImageIcon originalIcon1 = new ImageIcon("./src/인기.png");
+        ImageIcon originalIcon1 = new ImageIcon("./src/인기버튼2.png");
         ImageIcon one = new ImageIcon(originalIcon1.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH));
         JButton one1 = new JButton(one);
         one1.setBounds(30, btnsHeight, 60, 30);
@@ -101,7 +108,7 @@ public class FrameHomeFreeClick extends JPanel {
         one1.setBorderPainted(false);
         add(one1);
 
-        ImageIcon originalIcon2 = new ImageIcon("./src/최신.png");
+        ImageIcon originalIcon2 = new ImageIcon("./src/최신버튼2.png");
         ImageIcon two = new ImageIcon(originalIcon2.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH));
         JButton two2 = new JButton(two);
         two2.setBounds(one1.getX() + one1.getWidth() + 5, btnsHeight, 60, 30);
@@ -109,7 +116,7 @@ public class FrameHomeFreeClick extends JPanel {
         two2.setBorderPainted(false);
         add(two2);
 
-        ImageIcon originalIcon3 = new ImageIcon("./src/무료클릭.png");
+        ImageIcon originalIcon3 = new ImageIcon("./src/무료버튼.png");
         ImageIcon three = new ImageIcon(originalIcon3.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH));
         JButton three3 = new JButton(three);
         three3.setBounds(two2.getX() + two2.getWidth() + 5, btnsHeight, 60, 30);
@@ -117,13 +124,33 @@ public class FrameHomeFreeClick extends JPanel {
         three3.setBorderPainted(false);
         add(three3);
 
-        ImageIcon originalIcon4 = new ImageIcon("./src/곧종료.png");
+        ImageIcon originalIcon4 = new ImageIcon("./src/곧종료버튼2.png");
         ImageIcon four = new ImageIcon(originalIcon4.getImage().getScaledInstance(80, 30, Image.SCALE_SMOOTH));
         JButton four4 = new JButton(four);
         four4.setBounds(three3.getX() + three3.getWidth() + 5, btnsHeight, 80, 30);
         four4.setContentAreaFilled(false);
         four4.setBorderPainted(false);
         add(four4);
+        
+     // 호버 시에 표시할 이미지 설정
+        ImageIcon hoverIcon1 = new ImageIcon("./src/인기버튼.png");
+        Image scaledHoverImage1 = hoverIcon1.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
+        one1.setRolloverIcon(new ImageIcon(scaledHoverImage1));
+ 
+// 호버 시에 표시할 이미지 설정
+        ImageIcon hoverIcon2 = new ImageIcon("./src/최신버튼.png");
+        Image scaledHoverImage2 = hoverIcon2.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
+        two2.setRolloverIcon(new ImageIcon(scaledHoverImage2));
+
+// 호버 시에 표시할 이미지 설정
+        ImageIcon hoverIcon3 = new ImageIcon("./src/무료버튼2.png");
+        Image scaledHoverImage3 = hoverIcon3.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
+        three3.setRolloverIcon(new ImageIcon(scaledHoverImage3));
+
+// 호버 시에 표시할 이미지 설정
+        ImageIcon hoverIcon4 = new ImageIcon("./src/곧종료버튼.png");
+        Image scaledHoverImage4 = hoverIcon4.getImage().getScaledInstance(80, 30, Image.SCALE_SMOOTH);
+        four4.setRolloverIcon(new ImageIcon(scaledHoverImage4));
         
         one1.addActionListener(new ActionListener() {
 			
@@ -143,7 +170,12 @@ public class FrameHomeFreeClick extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				Window window1 = SwingUtilities.windowForComponent((Component) e.getSource());	// 현재 창 닫기
+                if (window1 != null) {
+                    window1.dispose(); 
+                }
+				FrameBase.getInstance(new FrameHomeRecentClick());
+				
 				
 			}
 		});
@@ -166,36 +198,40 @@ public class FrameHomeFreeClick extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+
+				Window window1 = SwingUtilities.windowForComponent((Component) e.getSource());	// 현재 창 닫기
+                if (window1 != null) {
+                    window1.dispose(); 
+                }
+				FrameBase.getInstance(new FrameHomeSoonEndClick());
+				
 				
 			}
 		});
-        
-        
 
 
         // 전역으로 사용할 다음 페이지 이동 버튼
-        ImageIcon originalIcon5 = new ImageIcon("./src/다음페이지.png");
+        ImageIcon originalIcon5 = new ImageIcon("./src/다음.png");
         Image originalImage5 = originalIcon5.getImage();
-        Image scaledImage5 = originalImage5.getScaledInstance(40, 30, Image.SCALE_SMOOTH);
+        Image scaledImage5 = originalImage5.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         ImageIcon nextpage = new ImageIcon(scaledImage5);
 
         // 전역으로 사용할 이전 페이지 이동 버튼
-        ImageIcon originalIcon6 = new ImageIcon("./src/이전페이지.png");
+        ImageIcon originalIcon6 = new ImageIcon("./src/이전.png");
         Image originalImage6 = originalIcon6.getImage();
-        Image scaledImage6 = originalImage6.getScaledInstance(40, 30, Image.SCALE_SMOOTH);
+        Image scaledImage6 = originalImage6.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         ImageIcon prepage = new ImageIcon(scaledImage6);
 
         // "다음 페이지" 버튼 생성
         JButton nextpageButton = new JButton(nextpage);
-        nextpageButton.setBounds(310, 460, 40, 30);
+        nextpageButton.setBounds(310, 460, 30, 30);
         nextpageButton.setContentAreaFilled(false);
         nextpageButton.setBorderPainted(false);
         nextpageButton.setFocusPainted(false);
 
         // "이전 페이지" 버튼 생성
         JButton prepageButton = new JButton(prepage);
-        prepageButton.setBounds(10, 460, 40, 30);
+        prepageButton.setBounds(10, 460, 30, 30);
         prepageButton.setContentAreaFilled(false);
         prepageButton.setBorderPainted(false);
         prepageButton.setFocusPainted(false);
@@ -231,7 +267,6 @@ public class FrameHomeFreeClick extends JPanel {
 
         // 컴포넌트 추가
         add(btnSearch);
-        add(menuline);
         posterPanel.add(nextpageButton);
         posterPanel.add(prepageButton);
         
@@ -280,13 +315,23 @@ public class FrameHomeFreeClick extends JPanel {
 
                 JLabel posterTitle = new JLabel(posterInfo.getArtName());
                 posterTitle.setBounds(x + 20, y + 170, posterWidth, 20);
-                posterTitle.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 14));
+                try {
+                    // TTF 파일을 읽어서 Font 객체 생성
+                    Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File(fontFilePath));
+
+                    // 원하는 폰트 스타일과 크기로 설정
+                    customFont = customFont.deriveFont(Font.BOLD, 14); 
+                posterTitle.setFont(customFont);
                 posterPanel.add(posterTitle);
 
                 JLabel posterDate = new JLabel(dateFormat.format(posterInfo.getDateStart()) + "~" + dateFormat.format(posterInfo.getDateEnd()));
                 posterDate.setBounds(x + 20, y + 190, posterWidth, 20);
-                posterDate.setFont(new Font("나눔스퀘어OTF Bold", Font.PLAIN, 8));
+                customFont = customFont.deriveFont(Font.PLAIN, 8);
+                posterDate.setFont(customFont);
                 posterPanel.add(posterDate);
+                } catch (IOException | FontFormatException e) {
+                    e.printStackTrace();
+                }
 
                 posterImage.addActionListener(new ActionListener() {
                     @Override
@@ -337,6 +382,7 @@ public class FrameHomeFreeClick extends JPanel {
 		back.setContentAreaFilled(false);
 		back.setFocusPainted(false);
 		add(back);
+		
 		
 		back.addActionListener(new ActionListener() {
 			

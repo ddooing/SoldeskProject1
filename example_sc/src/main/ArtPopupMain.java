@@ -12,3 +12,4 @@ public class ArtPopupMain {
 		FrameBase.getInstance(new FrameBegin());
 	}
 }
+

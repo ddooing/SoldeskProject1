@@ -3,11 +3,15 @@ package frame;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.io.IOException;
+import java.io.File;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,7 +29,6 @@ import artDB.ArtGalleryInfo;
 import artDB.ArtGalleryList;
 
 public class FrameSearch_1 extends JPanel {
-	
 
     private JPanel posterPanel;
     private int currentPage = 0; // 현재 페이지 인덱스
@@ -36,11 +39,13 @@ public class FrameSearch_1 extends JPanel {
     private List<ArtGalleryInfo> filteredList; // getcnt() 값이 0이 아닌 포스터 정보 리스트
     private String searchText; // 텍스트 필드의 내용을 저장할 변수
     private JTextField textField; // 텍스트 필드를 인스턴스 변수로 선언
+    String fontFilePath = "src/font/Orbit-regular.ttf"; // ttf 파일 경로
 
     public FrameSearch_1() {
         this(null);
     }
 
+    
     public FrameSearch_1(JPanel homePanel) {
         // 포스터 넣는 곳 패널 새로 생성
         posterPanel = new JPanel();
@@ -178,13 +183,23 @@ public class FrameSearch_1 extends JPanel {
 
             JLabel posterTitle = new JLabel(posterInfo.getArtName());
             posterTitle.setBounds(x + 20, y + 170, posterWidth, 20);
-            posterTitle.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 14));
+            try {
+                // TTF 파일을 읽어서 Font 객체 생성
+                Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File(fontFilePath));
+
+                // 원하는 폰트 스타일과 크기로 설정
+                customFont = customFont.deriveFont(Font.BOLD, 14); // 크기 24, 평범한 스타일로 설정
+            posterTitle.setFont(customFont);
             posterPanel.add(posterTitle);
 
             JLabel posterDate = new JLabel(dateFormat.format(posterInfo.getDateStart()) + "~" + dateFormat.format(posterInfo.getDateEnd()));
             posterDate.setBounds(x + 20, y + 190, posterWidth, 20);
-            posterDate.setFont(new Font("나눔스퀘어OTF Bold", Font.PLAIN, 8));
+            customFont = customFont.deriveFont(Font.PLAIN, 8);
+            posterDate.setFont(customFont);
             posterPanel.add(posterDate);
+            } catch (IOException | FontFormatException e) {
+                e.printStackTrace();
+            }
 
             posterImage.addActionListener(new ActionListener() {
                 @Override
@@ -227,6 +242,7 @@ public class FrameSearch_1 extends JPanel {
 				
 			}
 		});
+		
     }
 
     // 검색어를 이용하여 필터링

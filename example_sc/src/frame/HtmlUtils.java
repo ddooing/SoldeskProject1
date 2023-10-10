@@ -16,6 +16,7 @@ public class HtmlUtils {
         return String.valueOf(htmlParse);
     }
 
+    
     public static String createImgHtml(String url){
         return imgHtmlParser(url);
     }

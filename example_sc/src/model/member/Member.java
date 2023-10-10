@@ -16,6 +16,8 @@ public class Member implements Serializable {
 	public Member() {
 
 	}
+	
+	
 
 	// 생성자
 	public Member(String id, String pw, String name, String tel) {
