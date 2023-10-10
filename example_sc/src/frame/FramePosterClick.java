@@ -44,6 +44,7 @@ public class FramePosterClick extends JPanel {
 	public FramePosterClick(ActionEvent e, String artname) {
 		
 		ArtGalleryList artgallerylist = new ArtGalleryList();
+        posterInfoList = artgallerylist.Info();
     	
         setSize(400, 700);
         setLayout(null);
@@ -62,7 +63,12 @@ public class FramePosterClick extends JPanel {
 	}
 	
 	public void makeArtInfo(ArtGalleryList artGalleryList, int i) {
-		JLabel fImage=new JLabel(HtmlUtils.imgHtmlParser(artGalleryList.Info().get(i).getImageURL()));
+		ImageIcon originalIcon9 = new ImageIcon(posterInfoList.get(i).getImageURL());
+        Image originalImage9 = originalIcon9.getImage();
+        Image scaledImage9 = originalImage9.getScaledInstance(364, 300, Image.SCALE_SMOOTH);
+        ImageIcon posterImage1 = new ImageIcon(scaledImage9);
+        
+		JLabel fImage=new JLabel(posterImage1);
         fImage.setSize(360,300);
         fImage.setLocation(20,70);
         add(fImage);

@@ -309,7 +309,11 @@ public class FrameHomePopularClick extends JPanel {
 
             ArtGalleryInfo posterInfo = filteredList.get(i);
 
-            JButton posterImage = new JButton(HtmlItils1.imgHtmlParser(posterInfo.getImageURL()));
+            ImageIcon originalIcon9 = new ImageIcon(posterInfoList.get(i).getImageURL());
+            Image originalImage9 = originalIcon9.getImage();
+            Image scaledImage9 = originalImage9.getScaledInstance(120, 160, Image.SCALE_SMOOTH);
+            ImageIcon posterImage1 = new ImageIcon(scaledImage9);
+            JButton posterImage = new JButton(posterImage1);
             posterImage.setBounds(x, y, 140, posterHeight);
             posterImage.setBorderPainted(false);
             posterImage.setContentAreaFilled(false);

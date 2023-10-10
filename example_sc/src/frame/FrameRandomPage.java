@@ -17,6 +17,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
@@ -26,6 +27,7 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.SwingUtilities;
 
+import artDB.ArtGalleryInfo;
 import artDB.ArtGalleryList;
 
 
@@ -33,6 +35,7 @@ public class FrameRandomPage extends JPanel {
 
 	JPanel framehomePanel;
 	private int ad;
+	private List<ArtGalleryInfo> posterInfoList; // 전체 포스터 정보 리스트
 	String fontFilePath = "src/font/Orbit-regular.ttf"; // ttf 파일 경로
 	
 	public FrameRandomPage() {
@@ -41,6 +44,7 @@ public class FrameRandomPage extends JPanel {
 	
 	public FrameRandomPage(JPanel homePanel) {
 		ArtGalleryList artgallerylist = new ArtGalleryList();
+        posterInfoList = artgallerylist.Info();
     	
         setSize(400, 700);
         setLayout(null);
@@ -78,7 +82,12 @@ public class FrameRandomPage extends JPanel {
 	}
 	
 	public void makeArtInfo(ArtGalleryList artGalleryList, int i) {
-		JLabel fImage=new JLabel(HtmlUtils.imgHtmlParser(artGalleryList.Info().get(i).getImageURL()));
+		ImageIcon originalIcon9 = new ImageIcon(posterInfoList.get(i).getImageURL());
+        Image originalImage9 = originalIcon9.getImage();
+        Image scaledImage9 = originalImage9.getScaledInstance(364, 300, Image.SCALE_SMOOTH);
+        ImageIcon posterImage1 = new ImageIcon(scaledImage9);
+        
+		JLabel fImage=new JLabel(posterImage1);
         fImage.setSize(360,300);
         fImage.setLocation(20,70);
         add(fImage);
