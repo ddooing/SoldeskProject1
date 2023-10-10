@@ -43,7 +43,7 @@ public class ArtGalleryList {
 		            Date startDate = dateFormat.parse("2023-09-22");
 		            Date endDate = dateFormat.parse("2023-10-12");
 		            arr.add(new ArtGalleryInfo("열작", "무료", "커넥트플레이스 서울역4층", startDate, endDate, 
-		            		"11:00 ~ 21:00", "https://naver.me/GyNv7dGv", 
+		            		"11:00 ~ 21:00", "https://naver.me/GyNv7dGv, wi", 
 		            		"https://og-data.s3.amazonaws.com/media/exhibitions/image/13639/ei_13639.jpeg", 1));
 
 		            // 2번

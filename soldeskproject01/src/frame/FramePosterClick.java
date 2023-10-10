@@ -22,67 +22,61 @@ import javax.swing.SwingUtilities;
 import artDB.ArtGalleryInfo;
 import artDB.ArtGalleryList;
 
-public class FramePosterClick extends JPanel {
+public class FramePosterClick  extends JPanel {
 	// 전시회 조회 페이지
 	JPanel framehomePanel;
 	private int ad;
-	private List<ArtGalleryInfo> posterInfoList;
-	private ArtGalleryInfo artGalleryInfo;
+	private ArtGalleryList artgallerylist;//전시회 정보 리스트
+	private ArtGalleryInfo art;//제목이 artname인 객체 넣을 공간 
 	
-	public FramePosterClick() {
-		this(null,null);
-	}
-	
-	public FramePosterClick(ActionEvent e, String artname) {
-	    ArtGalleryList artgallerylist = new ArtGalleryList();
-	    setSize(400, 700);
-	    setLayout(null);
-	    setVisible(true);
+	public FramePosterClick (ActionEvent e, String artname) {
+		
+		setSize(400, 700); // homepanel 과 같은 사이즈 
+        setLayout(null);
+        setVisible(true);
+        
+        artgallerylist = new ArtGalleryList();
 
-	    for (ArtGalleryInfo info : artgallerylist.Info()) {
-	        if (info.getArtName().equals(artname)) {
-	            this.artGalleryInfo = info; // save the selected exhibition info
-	            break;
+		
+		// 전시회 정보 리스트에서 제목이 artname인 객체 찾아내기 
+        for(int i=0; i<artgallerylist.getPosters().size();i++) {
+        	if(artname.equals(artgallerylist.getPosters().get(i).getArtName())) {
+        		//제목이 artname인 객체 art 에 넣기 
+        		art= artgallerylist.getPosters().get(i);
+        		//System.out.println(" 고른 객체 : "+art.getArtName());
+        		makeArtInfo(art);
+        		break;
+	
 	        }
 	    }
 
-	    if (this.artGalleryInfo != null) { // if a valid exhibition is selected
-	        makeArtInfo(this.artGalleryInfo); // make the screen with the selected exhibition's info
-	    }
+	    
 	}
 	
-	public void makeArtInfo(ArtGalleryInfo info) {
-		JLabel fImage=new JLabel(HtmlUtils.imgHtmlParser(info.getImageURL()));
-		fImage.setSize(360,280);
-		fImage.setLocation(20,70);
-		add(fImage);
+	public void makeArtInfo(ArtGalleryInfo artInfo) {
+		JLabel fImage=new JLabel(HtmlUtils.imgHtmlParser(artInfo.getImageURL()));
+        fImage.setSize(360,280);
+        fImage.setLocation(20,70);
+        add(fImage);
+        
+        // dateStart 포맷팅
+        Date dateStart = artInfo.getDateStart();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDateStart = dateFormat.format(dateStart);
 
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-		// dateStart 포맷팅
-		Date dateStart = info.getDateStart();
-		String formattedDateStart = dateFormat.format(dateStart);
-
-		// dateEnd 포맷팅
-		Date dateEnd = info.getDateEnd();
-		String formattedDateEnd = dateFormat.format(dateEnd);
-
-		JLabel title = new JLabel("<HTML><body>" +info.getArtName() + "</body></HTML>");
-
-		JLabel placendate = new JLabel("<HTML><body>" +info.getPlace() + "<br>" 
-		+ formattedDateStart + " ~ " + formattedDateEnd +"</body></HTML>");
-
-		 ImageIcon menuLine =new ImageIcon("./src/line3.png");
-	        JLabel menuline = new JLabel(menuLine);// 메뉴선
-	        menuline.setSize(380, 5);
-	        menuline.setLocation(30, 450 );
-	        add(menuline);
-	        
+        // dateEnd 포맷팅
+        Date dateEnd = artInfo.getDateEnd();
+        String formattedDateEnd = dateFormat.format(dateEnd);
 		
+        JLabel title = new JLabel("<HTML><body>" +artInfo.getArtName() + "</body></HTML>");
+        
+        JLabel placendate = new JLabel("<HTML><body>" +artInfo.getPlace() + "<br>" 
+        + formattedDateStart + " ~ " + formattedDateEnd +"</body></HTML>");
+        
 		JLabel story = new JLabel("<HTML><body>" +
-						"관람시간 : " + info.getTime() + "<br>" +
-						"입장료 : " + info.getFee() + "<br>" +
-						"주소 : " + info.getPlace() + "</body></HTML>");
+						"관람시간 : " + artInfo.getTime() + "<br>" + 
+						"입장료 : " + artInfo.getFee() + "<br>" + 
+						"주소 : " + artInfo.getPlace() + "</body></HTML>");
 		
 		// "예약" 버튼 생성
 		ImageIcon originalIcon = new ImageIcon("./src/예매.png");
@@ -119,7 +113,7 @@ public class FramePosterClick extends JPanel {
 		add(separator1);
 		
 		JSeparator separator2 = new JSeparator();
-		separator2.setBounds(10, 490, 360, 10); // 구분선의 위치와 크기 조정
+		separator2.setBounds(20, 490, 360, 10); // 구분선의 위치와 크기 조정
 		separator2.setForeground(Color.BLACK); 
 		add(separator2);
 		
@@ -130,29 +124,13 @@ public class FramePosterClick extends JPanel {
 		
 		
 		reservebtn1.addActionListener(new ActionListener() {
-
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(info.getArtName()+" : 예매 버튼 클릭");
+				// 예매 버튼 클릭시
+				System.out.println(artInfo.getArtName()+" : 예매 버튼 클릭");
+				FrameBase.getInstance(new FrameReserve(artInfo, artInfo.getArtName()));	
 			}
-		});
-		
-		reservebtn1.addActionListener(new ActionListener() {
-		    @Override
-		    public void actionPerformed(ActionEvent e) {
-		        // 예매 버튼 클릭 시 실행되는 코드
-		        // FrameReserve 인스턴스 생성
-		        FrameReserve frameReserve = new FrameReserve(info);
-		        
-		        // 현재 창 닫기
-		        Window window1 = SwingUtilities.windowForComponent((Component) e.getSource());
-		        if (window1 != null) {
-		            window1.dispose();
-		        }
-		        
-		        // FrameReserve 페이지로 이동
-		        FrameBase.getInstance(frameReserve);
-		    }
 		});
 		
 		JButton back1 = new JButton();

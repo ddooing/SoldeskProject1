@@ -38,7 +38,7 @@ public class FilterMenuFrame extends JPanel {
         two2.setBounds(4, 2, 60, 30);
         two2.setContentAreaFilled(false);
         two2.setBorderPainted(false);
-       add(two2);
+        add(two2);
        
         ImageIcon originalIcon1 = new ImageIcon("./src/인기버튼.png");
         ImageIcon one = new ImageIcon(originalIcon1.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH));

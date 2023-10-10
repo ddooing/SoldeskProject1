@@ -32,9 +32,12 @@ import net.sourceforge.jdatepicker.impl.UtilDateModel;
 public class FrameReserve extends JPanel {
 
     private ArtGalleryInfo info;
-
-    public FrameReserve(ArtGalleryInfo info) {
+    private String artName; // 추가: 전달된 예약에 필요한 예술 작품 이름
+   
+    public FrameReserve(ArtGalleryInfo info, String artName) {
         this.info = info;
+        this.artName = artName;
+        
         setSize(400, 700);
         setLayout(null);
         setVisible(true);
@@ -51,7 +54,7 @@ public class FrameReserve extends JPanel {
         add(ticketLabel); // 라벨을 패널에 추가
 
         // 티켓 수량을 선택할 수 있는 스피너 생성
-        SpinnerModel ticketSpinnerModel = new SpinnerNumberModel(0, 0, 99, 1); // 스피너 모델 생성 (최소값: 0, 최대값: 9, 증가값: 1)
+        SpinnerModel ticketSpinnerModel = new SpinnerNumberModel(1, 0, 99, 1); // 스피너 모델 생성 (최소값: 0, 최대값: 9, 증가값: 1)
         JSpinner ticketSpinner = new JSpinner(ticketSpinnerModel); // 스피너 생성 및 모델 설정
         JFormattedTextField ticketTextField = ((JSpinner.DefaultEditor) ticketSpinner.getEditor()).getTextField(); // 텍스트 필드 가져오기 (선택된 값 표시를 위해)
         ticketTextField.setEditable(false); // 텍스트 필드를 수정 불가능하도록 설정 (스피너 값을 직접 입력하지 못하게 함)
