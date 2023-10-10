@@ -29,7 +29,7 @@ public class ArtGalleryList {
             // 2번
             startDate = dateFormat.parse("2023-10-11");
             endDate = dateFormat.parse("2023-10-25");
-            arr.add(new ArtGalleryInfo("히피한남 단체전:WABABABA", "무료", "히피 한남", startDate, endDate, "11:00 ~ 19:00", "https://naver.me/GfM6tYKk", "https://archivist.kr/show/image/20231005_hippiehannamgallery.jpg", 2));
+            arr.add(new ArtGalleryInfo("히피한남 단체전:WABABABA", "무료", "히피 한남", startDate, endDate, "11:00 ~ 19:00", "https://naver.me/GfM6tYKk", "src/poster/히피한남 단체전.jpg", 2));
             
             // 3번
             startDate = dateFormat.parse("2023-09-21");
