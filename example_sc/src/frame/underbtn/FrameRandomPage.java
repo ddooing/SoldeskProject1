@@ -1,4 +1,4 @@
-package frame;
+package frame.underbtn;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -25,6 +25,9 @@ import javax.swing.SwingUtilities;
 
 import artDB.ArtGalleryInfo;
 import artDB.ArtGalleryList;
+import frame.base.FrameBase;
+import frame.home.Home;
+import frame.reserve.FrameReserve;
 import model.member.ArtReserInfo;
 
 public class FrameRandomPage extends JPanel {

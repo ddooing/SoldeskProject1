@@ -24,8 +24,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import controller.member.MemberController;
-import frame.FrameBase;
-import frame.FrameBegin;
+import frame.base.FrameBase;
+import frame.home.FrameBegin;
 import model.member.Member;
 import model.member.MemberList;
 

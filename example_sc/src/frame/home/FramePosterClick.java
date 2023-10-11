@@ -1,4 +1,4 @@
-package frame;
+package frame.home;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -26,6 +26,11 @@ import javax.swing.SwingUtilities;
 
 import artDB.ArtGalleryInfo;
 import artDB.ArtGalleryList;
+import frame.base.FrameBase;
+import frame.reserve.FrameReserve;
+import frame.underbtn.FrameSearch_1;
+import frame.underbtn.FrameSoonPage;
+import frame.underbtn.FrameTicketList;
 //import controller.member.MemberToken;
 //import model.member.Member;
 import model.member.ArtReserInfo;

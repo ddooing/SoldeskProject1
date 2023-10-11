@@ -26,11 +26,9 @@ import javax.swing.SwingUtilities;
 
 import controller.member.MemberController;
 import controller.member.MemberToken;
-
-import frame.FrameBase;
-import frame.FrameBegin;
-
-import frame.Home;
+import frame.base.FrameBase;
+import frame.home.FrameBegin;
+import frame.home.Home;
 import model.member.Member;
 import model.member.MemberList;
 

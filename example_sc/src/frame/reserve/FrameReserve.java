@@ -1,4 +1,4 @@
-package frame;
+package frame.reserve;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -33,6 +33,8 @@ import javax.swing.table.DefaultTableModel;
 
 import artDB.ArtGalleryInfo;
 import artDB.ArtGalleryList;
+import frame.base.FrameBase;
+import frame.home.FramePosterClick;
 import model.member.ArtReserInfo;
 import model.member.ArtReserInfoList;
 import model.member.Member;

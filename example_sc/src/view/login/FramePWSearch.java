@@ -23,7 +23,7 @@ import javax.swing.SwingUtilities;
 
 import controller.member.MemberController;
 import controller.member.MemberList;
-import frame.FrameBase;
+import frame.base.FrameBase;
 import model.member.Member;
 
 public class FramePWSearch extends JPanel {

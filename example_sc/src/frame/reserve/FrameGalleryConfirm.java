@@ -1,8 +1,11 @@
-package frame;
+package frame.reserve;
 
 import javax.swing.*;
 
 import artDB.ArtGalleryInfo;
+import frame.base.FrameBase;
+import frame.home.FramePosterClick;
+import frame.home.Home;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

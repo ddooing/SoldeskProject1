@@ -1,4 +1,4 @@
-package frame;
+package frame.underbtn;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -28,6 +28,9 @@ import javax.swing.SwingUtilities;
 
 import artDB.ArtGalleryInfo;
 import artDB.ArtGalleryList;
+import frame.base.FrameBase;
+import frame.home.FramePosterClick;
+import frame.home.Home;
 import model.member.Member;
 
 public class FrameSearch_1 extends JPanel {

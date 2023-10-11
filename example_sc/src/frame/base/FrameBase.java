@@ -1,4 +1,4 @@
-package frame;
+package frame.base;
 
 import java.awt.Frame;
 import java.awt.Toolkit;
@@ -14,6 +14,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import controller.member.MemberToken;
+import frame.home.Home;
+import frame.underbtn.FrameRandomPage;
+import frame.underbtn.FrameSoonPage;
+import frame.underbtn.FrameTicketList;
 import model.member.Member;
 import view.login.FrameIDSearch;
 

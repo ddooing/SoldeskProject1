@@ -1,8 +1,10 @@
-package frame;
+package frame.underbtn;
 
 import javax.swing.*;
 import artDB.ArtGalleryInfo;
 import artDB.ArtGalleryList;
+import frame.base.FrameBase;
+import frame.home.FramePosterClick;
 import model.member.Member;
 
 import java.awt.*;
