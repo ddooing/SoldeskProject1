@@ -87,7 +87,7 @@ public class FrameRandomPage extends JPanel {
 		JLabel placendate = new JLabel("<HTML><body>" + artInfo.getPosters().get(i).getPlace() + "<br>"
 				+ formattedDateStart + " ~ " + formattedDateEnd + "</body></HTML>");
 
-		JLabel story = new JLabel("<HTML><body>" + "관람시간 : " + artInfo.getPosters().get(i).getTime() + "<br>" + "입장료 : "
+		JLabel story = new JLabel("<HTML><body>" + "관람시간 : " + artInfo.getPosters().get(i).getStarttime() + " ~ "+artInfo.getPosters().get(i).getEndtime() +  "<br>" + "입장료 : "
 				+ artInfo.getPosters().get(i).getFee() + "<br>" + "주소 : " + artInfo.getPosters().get(i).getPlace()
 				+ "</body></HTML>");
 

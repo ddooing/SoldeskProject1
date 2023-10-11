@@ -139,7 +139,7 @@ public class FramePosterClick extends JPanel {
         + formattedDateStart + " ~ " + formattedDateEnd +"</body></HTML>");
         
 		JLabel story = new JLabel("<HTML><body>" +
-						"관람시간 : " + artInfo.getTime() + "<br>" + 
+						"관람시간 : " + artInfo.getStarttime() + " ~ " + artInfo.getEndtime() + "<br>" + 
 						"입장료 : " + artInfo.getFee() + "<br>" + 
 						"주소 : " + artInfo.getPlace() + "</body></HTML>");
 		
