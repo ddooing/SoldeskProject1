@@ -8,12 +8,9 @@ public class ArtReserInfo {
 	private String reseveTime;
 	private String reserveDate;
 	private int reserverInt;
-	
-
 						//로그인한 사용자의 id 
 	public ArtReserInfo(String id,ArtGalleryInfo a,String reseveTime,String reserveDate,int reserverInt)
 	{
-		
 		this.id=id;
 		this.a=a;
 		this.reserveDate=reserveDate;

@@ -1,9 +1,11 @@
 package frame;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.FontFormatException;
+import java.awt.Image;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +15,7 @@ import java.io.File;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -32,7 +35,6 @@ public class FrameTicketList extends JPanel {
 	        String fontFilePath = "src/font/Orbit-regular.ttf"; // ttf 파일 경로
 
 	        ImageIcon menuLine = new ImageIcon("./src/line3.png");
-
 	        
 	        try {
 	            // TTF 파일을 읽어서 Font 객체 생성
@@ -58,28 +60,53 @@ public class FrameTicketList extends JPanel {
 	            List<ArtReserInfo> reservationList = artReserInfoList.getArtReserInfoList();
 		            
 	         // 예약 정보를 반복하며 티켓 목록을 생성하는 코드
-	            int y = menuline.getY() + menuline.getHeight() + 20; // 시작 위치 설정
-
+	            int y = menuline.getY() + menuline.getHeight() + 20; // 시작 위치 
+	            
 	            for (ArtReserInfo reservation : reservationList) {
 	                if (reservation != null && reservation.getA() != null) { 
-	                    JLabel ticketInfo = new JLabel();
-	                    ticketInfo.setSize(350, 40);
-	                    ticketInfo.setLocation(30, y);
+	                    String ticketText = reservation.getA().getArtName();
 
-	                    String ticketText = "예약 번호: " + reservation.getId() + ", 예술 작품: " + reservation.getA().getArtName();
-	                    ticketInfo.setText(ticketText);
+	                    JButton ticketButton = new JButton();
+	                    ticketButton.setLayout(new BorderLayout());
+	                    ticketButton.setSize(this.getWidth(), 40); // 패널의 너비와 동일하게 설정
+	                    ticketButton.setLocation(0, y); // x 위치는 0으로 변경
+	                    
+	            	    ImageIcon artIcon = new ImageIcon(reservation.getA().getImageURL()); // 각 예약에 대한 전시회 이미지 경로
+	            	    JLabel artLabel = new JLabel(artIcon);
+	            	    artLabel.setHorizontalAlignment(JLabel.LEFT);
 
-	                    add(ticketInfo);
+	            	    JLabel nameLabel = new JLabel(ticketText);
+	            	    nameLabel.setHorizontalAlignment(JLabel.CENTER);
 
-	                    y += ticketInfo.getHeight() + 10; 
+	            	    ImageIcon icon = new ImageIcon("./src/티켓상세.png");
+	            	    JLabel imageLabel = new JLabel(icon);
+	            	    imageLabel.setHorizontalAlignment(JLabel.RIGHT);
+
+	            		ticketButton.add(artLabel, BorderLayout.WEST); // 왼쪽에 예약의 전시회 이미지 추가
+	            		ticketButton.add(nameLabel, BorderLayout.CENTER); // 중앙에 '전시회 이름' 레이블 추가
+	            		ticketButton.add(imageLabel, BorderLayout.EAST); // 오른쪽에 '>' 이미지 레이블 추가
+
+	            		ticketButton.setBorderPainted(false); // 테두리 그리지 않기
+	            		ticketButton.setContentAreaFilled(false); // 내용 영역 채우지 않기
+
+	            		// 버튼 클릭 시 동작 추가
+	            		ticketButton.addActionListener(e -> {
+	            		    FrameInqueryPage frameInqueryPage = new FrameInqueryPage(reservation); 
+	            		    JFrame frame = new JFrame("예약 상세 정보"); 
+	            		    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
+	            		    frame.add(frameInqueryPage); 
+	            		    frame.setSize(400, 700);
+	            		    frame.setVisible(true);
+	            		});
+
+	            		add(ticketButton);
+
+	            		y += ticketButton.getHeight() + 10; 
 	                }
 	            }
-		        
 	        } catch (IOException | FontFormatException e) {
 	            e.printStackTrace();
 	        }
-	        
-	        
 	        
 	        JButton back = new JButton();
 			back.setSize(50,40);
@@ -102,6 +129,7 @@ public class FrameTicketList extends JPanel {
 					
 				}
 			});
+			
 	    }
 	  
 }
