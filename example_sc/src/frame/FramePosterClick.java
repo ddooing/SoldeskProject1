@@ -138,9 +138,12 @@ public class FramePosterClick extends JPanel {
         JLabel placendate = new JLabel("<HTML><body>" +artInfo.getPlace() + "<br>" 
         + formattedDateStart + " ~ " + formattedDateEnd +"</body></HTML>");
         
+        if(artInfo.getFee().equals("무료")) {
+        	
+        }
 		JLabel story = new JLabel("<HTML><body>" +
 						"관람시간 : " + artInfo.getStarttime() + " ~ " + artInfo.getEndtime() + "<br>" + 
-						"입장료 : " + artInfo.getFee() + "<br>" + 
+						"입장료 : " + artInfo.getFee() +" 원" + "<br>" + 
 						"주소 : " + artInfo.getPlace() + "</body></HTML>");
 		
 		// "예약" 버튼 생성

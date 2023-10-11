@@ -88,7 +88,7 @@ public class FrameRandomPage extends JPanel {
 				+ formattedDateStart + " ~ " + formattedDateEnd + "</body></HTML>");
 
 		JLabel story = new JLabel("<HTML><body>" + "관람시간 : " + artInfo.getPosters().get(i).getStarttime() + " ~ "+artInfo.getPosters().get(i).getEndtime() +  "<br>" + "입장료 : "
-				+ artInfo.getPosters().get(i).getFee() + "<br>" + "주소 : " + artInfo.getPosters().get(i).getPlace()
+				+ artInfo.getPosters().get(i).getFee() + " 원" + "<br>" + "주소 : " + artInfo.getPosters().get(i).getPlace()
 				+ "</body></HTML>");
 
 		// "예약" 버튼 생성
@@ -209,8 +209,6 @@ reservebtn1.addActionListener(new ActionListener() {
 				
                 FrameBase.getInstance(new FrameReserve(posterInfoList.get(i), posterInfoList.get(i).getArtName()));
 	
-				
-				
 			}
 		});
 	}

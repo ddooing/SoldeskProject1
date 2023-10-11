@@ -213,7 +213,7 @@ public class FrameReserve extends JPanel {
                             timeComboBox.setSelectedIndex(0);
                             datePicker.getModel().setValue(null);
 
-                            FrameGalleryConfirm confirmFrame = new FrameGalleryConfirm(selectedName, selectedDate, selectedTime, selectedTicket);
+                            FrameGalleryConfirm confirmFrame = new FrameGalleryConfirm(selectedName, selectedDate, selectedTime, selectedTicket,info);
                             confirmFrame.setVisible(true);
                         } else if (selectedTicket == 0) {
                             JOptionPane.showMessageDialog(FrameReserve.this, "티켓 수량을 확인해주세요.", "경고", JOptionPane.WARNING_MESSAGE);

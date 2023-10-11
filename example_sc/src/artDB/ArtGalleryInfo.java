@@ -24,7 +24,6 @@ public class ArtGalleryInfo {
 		this.dateEnd=dateEnd;
 		this.starttime=starttime;
 		this.endtime=endtime;
-		
 		this.placeURL = placeURL;
 		this.imageURL = imageURL;
 		this.cnt=cnt;

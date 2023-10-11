@@ -44,7 +44,7 @@ public class ArtGalleryList {
             // 3번
             startDate = dateFormat.parse("2023-09-21");
             endDate = dateFormat.parse("2024-01-07");
-            arr.add(new ArtGalleryInfo("스티키몬스터랩: 스틸 라이프", "15,000 원", "그라운드시소 성수", startDate, endDate, "10:00","19:00", "https://naver.me/5pNEZlT0", 
+            arr.add(new ArtGalleryInfo("스티키몬스터랩: 스틸 라이프", "15,000", "그라운드시소 성수", startDate, endDate, "10:00","19:00", "https://naver.me/5pNEZlT0", 
             		"./src/poster/스티키몬스터랩.gif", 3));
             
             // 4번
@@ -66,7 +66,7 @@ public class ArtGalleryList {
             // 7번
             startDate = dateFormat.parse("2023-09-05");
             endDate = dateFormat.parse("2023-10-14");
-            arr.add(new ArtGalleryInfo("유에 민쥔 개인전", "20,000 원", "갤러리광화",  startDate, endDate, "11:00","19:00",
+            arr.add(new ArtGalleryInfo("유에 민쥔 개인전", "20,000", "갤러리광화",  startDate, endDate, "11:00","19:00",
                   "https://naver.me/FPuN115R", "./src/poster/유에 민쥔 개인전.jpg", 5));
             // 8번
             startDate = dateFormat.parse("2023-06-15");
@@ -76,21 +76,21 @@ public class ArtGalleryList {
          // 9번
             startDate = dateFormat.parse("2023-07-22");
         	endDate = dateFormat.parse("2023-10-27");
-        	arr.add(new ArtGalleryInfo("알폰스무하 이모션 인 서울","20,000 원","DDP 뮤지엄 전시 1관",
+        	arr.add(new ArtGalleryInfo("알폰스무하 이모션 인 서울","20,000","DDP 뮤지엄 전시 1관",
     				startDate,endDate,"10:00","20:00","https://naver.me/FRDLUpbE",
     				"./src/poster/알폰스무하 이모션 인 서울.jpg",
     				0));
         	// 10번
         	startDate = dateFormat.parse("2023-09-14");
         	endDate = dateFormat.parse("2023-10-14");
-        	arr.add(new ArtGalleryInfo("동물 없는 동물원 展","15,000 원","DDP 뮤지엄 전시 1관",
+        	arr.add(new ArtGalleryInfo("동물 없는 동물원 展","15,000","DDP 뮤지엄 전시 1관",
     				startDate,endDate,"10:00","20:00","https://naver.me/FRDLUpbE",
     				"./src/poster/동물 없는 동물원 展.png",
     				0));
         	// 11번
         	startDate = dateFormat.parse("2023-05-05");
         	endDate = dateFormat.parse("2023-10-20");
-        	arr.add(new ArtGalleryInfo("피터팬 전시회","22,000 원","k현대미술관 지하 1층",
+        	arr.add(new ArtGalleryInfo("피터팬 전시회","22,000","k현대미술관 지하 1층",
     				startDate,endDate,"10:00","19:00","https://naver.me/535BKkXf",
     				"./src/poster/피터팬 전시회.jpg"
     				,0));
@@ -99,7 +99,7 @@ public class ArtGalleryList {
         	// 12번
         	startDate = dateFormat.parse("2023-05-26");
         	endDate = dateFormat.parse("2023-10-22");
-        	arr.add(new ArtGalleryInfo("전자적 숲; 소진된 인간","2,000 원","국립현대미술관 서울",
+        	arr.add(new ArtGalleryInfo("전자적 숲; 소진된 인간","2,000","국립현대미술관 서울",
     				startDate,endDate,"10:00","18:00","https://naver.me/54Vkke2z",
     				"./src/poster/전자적 숲.jpg"
     				,9));
@@ -107,7 +107,7 @@ public class ArtGalleryList {
             // 13번
             startDate = dateFormat.parse("2023-07-27");
             endDate = dateFormat.parse("2023-10-15");
-            arr.add(new ArtGalleryInfo("김범 개인전 바위가 되는 법", "12,000 원", "리움미술관", startDate, endDate,
+            arr.add(new ArtGalleryInfo("김범 개인전 바위가 되는 법", "12,000", "리움미술관", startDate, endDate,
                     "10:00","18:00", "https://naver.me/xxxR7VMU",
                     "./src/poster/김범 개인전 바위가 되는 법.jpg",
                     13));
@@ -125,7 +125,7 @@ public class ArtGalleryList {
          // 15번
             startDate = dateFormat.parse("2023-10-19");
             endDate = dateFormat.parse("2023-11-29");
-            arr.add(new ArtGalleryInfo("캣아트 : 고양이 미술사", "15,000 원", "서울특별시 송파구 신천동 29-1 KT송파타워 3층", startDate, endDate, "10:00","19:00", "https://naver.me/F9znHvY8", 
+            arr.add(new ArtGalleryInfo("캣아트 : 고양이 미술사", "15,000", "서울특별시 송파구 신천동 29-1 KT송파타워 3층", startDate, endDate, "10:00","19:00", "https://naver.me/F9znHvY8", 
             		"./src/poster/캣아트.jpg", 0));
             
          // 16번
@@ -146,7 +146,7 @@ public class ArtGalleryList {
          // 18번
         	 startDate = dateFormat.parse("2023-10-30");
              endDate = dateFormat.parse("2023-12-31");
-             arr.add(new ArtGalleryInfo("문도멘도 판타스틱시티라이프", "15,000 원", "그라운드시소 서촌", startDate, endDate, "10:00","19:00", "https://naver.me/xKQWUady",
+             arr.add(new ArtGalleryInfo("문도멘도 판타스틱시티라이프", "15,000", "그라운드시소 서촌", startDate, endDate, "10:00","19:00", "https://naver.me/xKQWUady",
             		 "./src/poster/문도멘도 판타스틱시티라이프.jpg", 0));
             
             
