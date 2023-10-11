@@ -15,7 +15,6 @@ public class ArtReserInfoList {
         if (arr == null) {
         	init();
         }
-
     }
     
     public void init()
@@ -52,5 +51,10 @@ public class ArtReserInfoList {
 			System.out.println(Member.tokeniD);
 		
 	}
-    
+
+	public static void addReservation(ArtReserInfo reservation) {
+		// TODO Auto-generated method stub
+		arr.add(reservation);
+	}
+
 }

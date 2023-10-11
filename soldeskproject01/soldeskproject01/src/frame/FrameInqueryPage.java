@@ -3,6 +3,7 @@ package frame;
 import javax.swing.*;
 
 import artDB.ArtGalleryInfo;
+import model.member.ArtReserInfo;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
@@ -17,43 +18,67 @@ import java.util.Date;
 import java.util.List;
 
 public class FrameInqueryPage extends JPanel {
-/*
-    private ArtGalleryInfo info;
-    private String artName; // 추가: 전달된 예약에 필요한 예술 작품 이름
-   
-    public FrameInqueryPage(ArtGalleryInfo info, String artName) {
-        this.info = info;
-        this.artName = artName;
-        
-        setSize(400, 700);
-        setLayout(null);
-        setVisible(true);
+	
+	private ArtReserInfo reservation; // 예약 정보를 저장할 변수
 
-        // 이미지 표시
-        JLabel imageLabel = new JLabel(HtmlUtils.imgHtmlParser(info.getImageURL()));
-        imageLabel.setSize(360, 250);
-        imageLabel.setLocation(20, 70);
-        add(imageLabel);
-        
-        JLabel posterTitle = new JLabel(ArtGalleryInfo.getArtName());
-        posterTitle.setBounds(x + 20, y + 160, posterWidth, 20);
-        posterTitle.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 14));
-        add(posterTitle);
-        
-        JLabel posterplace = new JLabel(posterInfo.getPlace());
-        posterplace.setBounds(x + 20, y + 175, posterWidth, 20);
-        posterplace.setFont(new Font("나눔스퀘어OTF Bold", Font.PLAIN, 10));
-        add(posterplace);
-        
-        JLabel posterDate = new JLabel(dateFormat.format(posterInfo.getDateStart()) + "~" + dateFormat.format(posterInfo.getDateEnd()));
-        posterDate.setBounds(x + 20, y + 190, posterWidth, 20);
-        posterDate.setFont(new Font("나눔스퀘어OTF Bold", Font.PLAIN, 10));
-        add(posterDate);
+	 public FrameInqueryPage(ArtReserInfo reservation) {
+	        this.reservation = reservation; // 생성자에서 예약 정보를 전달받음
+	        setLayout(null);
+	        setSize(400, 700);
 
-        // 구분선 추가
-        JSeparator separator1 = new JSeparator();
-        separator1.setBounds(20, 395, 360, 10); // 구분선의 위치와 크기 조정
-        separator1.setForeground(Color.BLACK);
-        add(separator1);
-    }*/
+	        // 이미지 표시
+	        JLabel imageLabel = new JLabel("예약된 작품 이미지"); // 예약된 작품 이미지를 표시
+	        imageLabel.setSize(360, 250);
+	        imageLabel.setLocation(20, 70);
+	        add(imageLabel);
+
+	        // 예약 정보 표시
+	        JLabel idLabel = new JLabel("예약자 ID: " + reservation.getId());
+	        idLabel.setBounds(20, 330, 200, 20);
+	        add(idLabel);
+
+	        JLabel artNameLabel = new JLabel("예약된 작품: " + reservation.getA().getArtName());
+	        artNameLabel.setBounds(20, 360, 300, 20);
+	        add(artNameLabel);
+
+	        JLabel dateLabel = new JLabel("예약일: " + reservation.getReserveDate());
+	        dateLabel.setBounds(20, 390, 200, 20);
+	        add(dateLabel);
+
+	        JLabel timeLabel = new JLabel("예약 시간: " + reservation.getReseveTime());
+	        timeLabel.setBounds(20, 420, 200, 20);
+	        add(timeLabel);
+
+	        JLabel ticketLabel = new JLabel("티켓 수량: " + reservation.getReserverInt());
+	        ticketLabel.setBounds(20, 450, 200, 20);
+	        add(ticketLabel);
+
+	        // 뒤로 가는 버튼
+	        JButton backButton = new JButton("뒤로 가기");
+	        backButton.setBounds(20, 550, 120, 40);
+	        add(backButton);
+
+	        backButton.addActionListener(e -> {
+	            // 뒤로 가기 버튼을 클릭하면 FrameTicketList 페이지로 이동
+	            FrameTicketList frameTicketList = new FrameTicketList(); // FrameTicketList 페이지의 인스턴스 생성
+	            JFrame frame = new JFrame("티켓 목록"); // JFrame 생성
+	            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // 현재 창만 닫도록 설정
+	            frame.add(frameTicketList); // FrameTicketList 페이지를 JFrame에 추가
+	            frame.setSize(400, 700);
+	            frame.setVisible(true);
+	            
+	            // 현재 창 닫기
+	            Window currentWindow = SwingUtilities.windowForComponent(this);
+	            if (currentWindow != null) {
+	                currentWindow.dispose();
+	            }
+	        });
+	        
+	        // 구분선 추가
+	        JSeparator separator1 = new JSeparator();
+	        separator1.setBounds(20, 395, 360, 10); // 구분선의 위치와 크기 조정
+	        separator1.setForeground(Color.BLACK);
+	        add(separator1);
+	 
+    }
 }

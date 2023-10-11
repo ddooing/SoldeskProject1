@@ -8,6 +8,14 @@ public class Member implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	public static String tokeniD;
+	public static String getTokeniD() {
+		return tokeniD;
+	}
+
+	public static void setTokeniD(String tokeniD) {
+		Member.tokeniD = tokeniD;
+	}
+
 	private String id;
 	private String pw;
 	private String name;

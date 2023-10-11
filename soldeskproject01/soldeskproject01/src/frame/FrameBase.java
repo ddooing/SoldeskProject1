@@ -43,127 +43,127 @@ public class FrameBase extends JFrame{
 	}//getInstance()
 	
 	//기본 프레임 이미지를 저장하기 위한 메소드
-	public static void getImage(JPanel e) {
-		ImageIcon backGround = new ImageIcon("./src/backimg.png");
-		ImageIcon imagebottom = new ImageIcon("./src/하단바.png");
-		JLabel lblBackGround = new JLabel(backGround);
-		JLabel lblImagebottom = new JLabel(imagebottom);
-		lblBackGround.setSize(400, 700);
-		lblImagebottom.setSize(580, 124);
-		lblBackGround.setLocation(0, 0); 
-		lblImagebottom.setLocation(-90, 600);
-		e.add(lblBackGround);
-		e.add(lblImagebottom);
+		public static void getImage(JPanel e) {
+			ImageIcon backGround = new ImageIcon("./src/backimg.png");
+			ImageIcon imagebottom = new ImageIcon("./src/하단바.png");
+			JLabel lblBackGround = new JLabel(backGround);
+			JLabel lblImagebottom = new JLabel(imagebottom);
+			lblBackGround.setSize(400, 700);
+			lblImagebottom.setSize(580, 124);
+			lblBackGround.setLocation(0, 0); 
+			lblImagebottom.setLocation(-90, 600);
+			e.add(lblBackGround);
+			e.add(lblImagebottom);
 		
-		
-		JButton soon = new JButton();
-		JButton home = new JButton();
-		JButton ticket = new JButton();
-		JButton random = new JButton();
-		
-		JButton back = new JButton();
-		back.setSize(50,40);
-		back.setLocation(30,640);
-		back.setBorderPainted(false);
-		back.setContentAreaFilled(false);
-		back.setFocusPainted(false);
-		e.add(back);
-		
-		back.addActionListener(new ActionListener() {
 			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// 뒤로가기 버튼은 각 페이지에서 할당
-			}
-		});
-		
-		soon.setSize(50,40);
-		soon.setLocation(97,640);
-		soon.setBorderPainted(false);
-		soon.setContentAreaFilled(false);
-		soon.setFocusPainted(false);
-		e.add(soon);
-		
-		soon.addActionListener(new ActionListener() {
+			JButton soon = new JButton();
+			JButton home = new JButton();
+			JButton ticket = new JButton();
+			JButton random = new JButton();
 			
-			@Override
-			public void actionPerformed(ActionEvent e) {
+			JButton back = new JButton();
+			back.setSize(50,40);
+			back.setLocation(30,640);
+			back.setBorderPainted(false);
+			back.setContentAreaFilled(false);
+			back.setFocusPainted(false);
+			e.add(back);
+			
+			back.addActionListener(new ActionListener() {
 				
-				if(instance != null) {		// 1개 창 닫기
-					instance.dispose();
-					}
-				FrameBase.getInstance(new FrameSoonPage());
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// 뒤로가기 버튼은 각 페이지에서 할당
+				}
+			});
+			
+			soon.setSize(50,40);
+			soon.setLocation(97,640);
+			soon.setBorderPainted(false);
+			soon.setContentAreaFilled(false);
+			soon.setFocusPainted(false);
+			e.add(soon);
+			
+			soon.addActionListener(new ActionListener() {
 				
-			}
-		});
-		
-		home.setSize(50,40);
-		home.setLocation(175,640);
-		home.setBorderPainted(false);
-		home.setContentAreaFilled(false);
-		home.setFocusPainted(false);
-		e.add(home);
-		
-		home.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					
+					if(instance != null) {		// 1개 창 닫기
+						instance.dispose();
+						}
+					FrameBase.getInstance(new FrameSoonPage());
+					
+				}
+			});
 			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(instance != null) {		// 1개 창 닫기
-					instance.dispose();
-					}
-				FrameBase.getInstance(new Home());
-			}
-		});
-		
-		ticket.setSize(50,40);
-		ticket.setLocation(245,640);
-		ticket.setBorderPainted(false);
-		ticket.setContentAreaFilled(false);
-		ticket.setFocusPainted(false);
-		e.add(ticket);
-		
-		ticket.addActionListener(new ActionListener() {
+			home.setSize(50,40);
+			home.setLocation(175,640);
+			home.setBorderPainted(false);
+			home.setContentAreaFilled(false);
+			home.setFocusPainted(false);
+			e.add(home);
 			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				/* 티켓페이지이동
-				if(instance != null) {		// 1개 창 닫기
-					instance.dispose();
-					}
-				FrameBase.getInstance(new 클래스이름());
-				*/
-			}
-		});
-		
-		
-		random.setSize(50,40);
-		random.setLocation(315,640);
-		random.setBorderPainted(false);
-		random.setContentAreaFilled(false);
-		random.setFocusPainted(false);
-		e.add(random);
-		
-		random.addActionListener(new ActionListener() {
+			home.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if(instance != null) {		// 1개 창 닫기
+						instance.dispose();
+						}
+					FrameBase.getInstance(new Home());
+				}
+			});
 			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(instance != null) {		// 1개 창 닫기
-					instance.dispose();
-					}
-				FrameBase.getInstance(new FrameRandomPage());
-			}
-		});
-		
-		
-		
-	}
+			ticket.setSize(50,40);
+			ticket.setLocation(245,640);
+			ticket.setBorderPainted(false);
+			ticket.setContentAreaFilled(false);
+			ticket.setFocusPainted(false);
+			e.add(ticket);
+			
+			ticket.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					
+					if(instance != null) {		// 1개 창 닫기
+						instance.dispose();
+						}
+					FrameBase.getInstance(new FrameTicketList());
+					
+				}
+			});
+			
+			
+			random.setSize(50,40);
+			random.setLocation(315,640);
+			random.setBorderPainted(false);
+			random.setContentAreaFilled(false);
+			random.setFocusPainted(false);
+			e.add(random);
+			
+			random.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if(instance != null) {		// 1개 창 닫기
+						instance.dispose();
+						}
+					FrameBase.getInstance(new FrameRandomPage());
+				}
+			});
+			
+			
+			
+		}
 
-	@Override
-	public void dispose() {
-		super.dispose();
-	}
-	
-	public static void getDispose() {
-		instance.dispose();
-	}
+		@Override
+		public void dispose() {
+			super.dispose();
+		}
+		
+		public static void getDispose() {
+			instance.dispose();
+		}
 }
