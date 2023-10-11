@@ -3,6 +3,8 @@ package frame;
 import javax.swing.*;
 import artDB.ArtGalleryInfo;
 import artDB.ArtGalleryList;
+import model.member.Member;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -48,8 +50,8 @@ public class FrameSoonPage extends JPanel {
     private void updatePosters() {
 
     	// 이미지
-        ImageIcon imageSearch = new ImageIcon("./src/30.png");
-        ImageIcon menuLine = new ImageIcon("./src/line3.png");
+        ImageIcon imageSearch = new ImageIcon("./src/img/30.png");
+        ImageIcon menuLine = new ImageIcon("./src/img/line3.png");
 
         JButton btnSearch = new JButton(imageSearch); // 검색 버튼
         JLabel menuline = new JLabel(menuLine); // 메뉴선
@@ -57,7 +59,7 @@ public class FrameSoonPage extends JPanel {
         JLabel text = new JLabel("전시 예정"); //!!
         
         text.setSize(200,50);
-        text.setLocation(40, 85);
+        text.setLocation(40, 40);
         text.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 30));
         add(text);
 
@@ -74,6 +76,18 @@ public class FrameSoonPage extends JPanel {
         // 컴포넌트 추가
         add(btnSearch);
         add(menuline);
+        btnSearch.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Window window = SwingUtilities.windowForComponent((Component) e.getSource()); // 현재 창 닫기
+                if (window != null) {
+                    window.dispose();
+                }
+				//새로운 FrameBase창 생성
+				FrameBase.getInstance(new FrameSearch_1());
+			}
+		});
         
     	
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -90,24 +104,29 @@ public class FrameSoonPage extends JPanel {
 
 
         for (int i = startIndex; i < endIndex; i++) {
-            int x = (i % 2 == 0) ? x1 : x2;
+            int x = (i % 2 == 0) ? x1 +15: x2 +15;
             int y = (i < startIndex + 2) ? y1 : y2;
 
             ArtGalleryInfo posterInfo = posterInfoList.get(i);
 
-            JButton posterImage = new JButton(HtmlItils1.imgHtmlParser(posterInfo.getImageURL()));
+            
+            ImageIcon originalIcon9 = new ImageIcon(posterInfoList.get(i).getImageURL());
+            Image originalImage9 = originalIcon9.getImage();
+            Image scaledImage9 = originalImage9.getScaledInstance(120, 160, Image.SCALE_SMOOTH);
+            ImageIcon posterImage1 = new ImageIcon(scaledImage9);
+            JButton posterImage = new JButton(posterImage1);
             posterImage.setBounds(x, y, 140, posterHeight);
             posterImage.setBorderPainted(false);
             posterImage.setContentAreaFilled(false);
             add(posterImage);
 
             JLabel posterTitle = new JLabel(posterInfo.getArtName());
-            posterTitle.setBounds(x + 20, y + 170, posterWidth, 20);
+            posterTitle.setBounds(x + 10, y + 170, posterWidth, 20);
             posterTitle.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 14));
             add(posterTitle);
 
             JLabel posterDate = new JLabel(dateFormat.format(posterInfo.getDateStart()) + "~" + dateFormat.format(posterInfo.getDateEnd()));
-            posterDate.setBounds(x + 20, y + 190, posterWidth, 20);
+            posterDate.setBounds(x + 10, y + 190, posterWidth, 20);
             posterDate.setFont(new Font("나눔스퀘어OTF Bold", Font.PLAIN, 8));
             add(posterDate);
 
@@ -123,7 +142,7 @@ public class FrameSoonPage extends JPanel {
                                 window.dispose(); 
                             }
                             
-                            FrameBase.getInstance(new FramePosterClick(e,posterInfo.getArtName()));			// 해당전시 페이지 출력
+                            FrameBase.getInstance(new FramePosterClick(Member.tokeniD,posterInfo.getArtName(),"FrameSoonPage"));	// 해당전시 페이지 출력
                         }
                     }
                 }
@@ -132,27 +151,7 @@ public class FrameSoonPage extends JPanel {
 
         
         
-        JButton back = new JButton();
-		back.setSize(50,40);
-		back.setLocation(30,640);
-		back.setBorderPainted(false);
-		back.setContentAreaFilled(false);
-		back.setFocusPainted(false);
-		add(back);
-		
-		back.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				Window window1 = SwingUtilities.windowForComponent((Component) e.getSource());	// 현재 창 닫기
-                if (window1 != null) {
-                    window1.dispose(); 
-                }
-				FrameBase.getInstance(new Home());
-				
-			}
-		});
+        
 
         
         }

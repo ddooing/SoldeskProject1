@@ -1,15 +1,21 @@
 package frame;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import artDB.ArtGalleryList;
 
@@ -44,34 +50,76 @@ public class FrameBegin extends JPanel {
         setVisible(true);
         
         
-        // 로고 이미지
-        ImageIcon logoImage = new ImageIcon("./src/LOGO.jpg");
-        JLabel logoLabel = new JLabel(logoImage);
-        logoLabel.setSize(300, 300); 
-        logoLabel.setLocation(45, 100); 
+     // 로고 이미지
+        ImageIcon originalLoginIcon5 = new ImageIcon("./src/img/LOGO.png");
+        Image scaledLoginImage5 = originalLoginIcon5.getImage().getScaledInstance(300, 180, Image.SCALE_SMOOTH);
+        ImageIcon loginIcon5 = new ImageIcon(scaledLoginImage5);
+        JLabel logoLabel = new JLabel(loginIcon5);
+        logoLabel.setSize(300, 110); 
+        logoLabel.setLocation(50, 180); 
         
         add(logoLabel);
         
-        JButton btnLogin = new JButton("로그인");
-		JButton btnJoin = new JButton("회원가입");
-		
-		
-		
-		
-		btnLogin.setSize(250, 50);
-		btnLogin.setLocation(77, 470);
-		btnLogin.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 26));
-		btnLogin.setContentAreaFilled(false);
-		btnLogin.setBorderPainted(false);
-		btnLogin.setFocusPainted(false);
-		
+        // 로그인 버튼
+        ImageIcon originalLoginIcon = new ImageIcon("./src/img/로그인.png");
+        Image scaledLoginImage = originalLoginIcon.getImage().getScaledInstance(140, 40, Image.SCALE_SMOOTH);
+        ImageIcon loginIcon = new ImageIcon(scaledLoginImage);
+        JButton btnLogin = new JButton(loginIcon);
 
-		btnJoin.setSize(250, 50);
-		btnJoin.setLocation(77, 540);
-		btnJoin.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 26));
-		btnJoin.setContentAreaFilled(false);
-		btnJoin.setBorderPainted(false);
-		btnJoin.setFocusPainted(false);
+        // 회원가입 버튼
+        ImageIcon originalJoinIcon = new ImageIcon("./src/img/회원가입.png");
+        Image scaledJoinImage = originalJoinIcon.getImage().getScaledInstance(140, 40, Image.SCALE_SMOOTH);
+        ImageIcon joinIcon = new ImageIcon(scaledJoinImage);
+        JButton btnJoin = new JButton(joinIcon);
+        
+        
+        // 회원가입 버튼 이미지와 리스너 설정
+        ImageIcon originalJoinHoverIcon = new ImageIcon("./src/img/회원가입hover.png");
+        Image scaledJoinHoverImage = originalJoinHoverIcon.getImage().getScaledInstance(140, 40, Image.SCALE_SMOOTH);
+        ImageIcon joinHoverIcon = new ImageIcon(scaledJoinHoverImage);
+
+        btnJoin.setSize(140, 40);
+        btnJoin.setLocation(135, 540);
+        btnJoin.setContentAreaFilled(false);
+        btnJoin.setBorderPainted(false);
+        btnJoin.setFocusPainted(false);
+
+        // 회원가입 버튼에 마우스 리스너 추가
+        btnJoin.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                btnJoin.setIcon(joinHoverIcon); // 마우스를 가져다 대면 hover 이미지로 변경
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                btnJoin.setIcon(joinIcon); // 마우스를 떼면 원래 이미지로 변경
+            }
+        });
+
+        // 로그인 버튼 이미지와 리스너 설정
+        ImageIcon originalLoginHoverIcon = new ImageIcon("./src/img/로그인hover.png");
+        Image scaledLoginHoverImage = originalLoginHoverIcon.getImage().getScaledInstance(140, 40, Image.SCALE_SMOOTH);
+        ImageIcon loginHoverIcon = new ImageIcon(scaledLoginHoverImage);
+
+        btnLogin.setSize(140, 40);
+        btnLogin.setLocation(135, 470);
+        btnLogin.setContentAreaFilled(false);
+        btnLogin.setBorderPainted(false);
+        btnLogin.setFocusPainted(false);
+
+        // 로그인 버튼에 마우스 리스너 추가
+        btnLogin.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                btnLogin.setIcon(loginHoverIcon); // 마우스를 가져다 대면 hover 이미지로 변경
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                btnLogin.setIcon(loginIcon); // 마우스를 떼면 원래 이미지로 변경
+            }
+        });
 		
 		
 		add(btnLogin);
@@ -80,28 +128,29 @@ public class FrameBegin extends JPanel {
 		
 		
 		//로그인 버튼 
-		btnLogin.addActionListener(new ActionListener() {
+				btnLogin.addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						Window window1 = SwingUtilities.windowForComponent((Component) e.getSource());	// 현재 창 닫기
+		                if (window1 != null) {
+		                    window1.dispose(); 
+		                }
+						FrameBase.getInstance(new FrameLogin());
 
-				removeAll();
-				add(new FrameLogin());
-				revalidate();
-				repaint();
+					}
+				});
 
-			}
-		});
-
-		// 회원가입 버튼
-		btnJoin.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				removeAll();
-				add(new FrameJoin());
-				revalidate();
-				repaint();
-			}
-		});
+				// 회원가입 버튼
+				btnJoin.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						Window window1 = SwingUtilities.windowForComponent((Component) e.getSource());	// 현재 창 닫기
+		                if (window1 != null) {
+		                    window1.dispose(); 
+		                }
+						FrameBase.getInstance(new FrameJoin());
+					}
+				});
 }
 }

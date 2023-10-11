@@ -61,8 +61,8 @@ public class Home extends JPanel {
  		}*/
            
      // 이미지
-        ImageIcon imageSearch = new ImageIcon("./src/30.png");
-        ImageIcon menuLine = new ImageIcon("./src/line3.png");
+        ImageIcon imageSearch = new ImageIcon("./src/img/30.png");
+        ImageIcon menuLine = new ImageIcon("./src/img/line3.png");
 
         JButton btnSearch = new JButton(imageSearch); // 검색 버튼
         JLabel menuline = new JLabel(menuLine); // 메뉴선
@@ -91,7 +91,7 @@ public class Home extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//새로운 FrameBase창 생성
-				FrameBase.getInstance(new SearchPanel());
+				FrameBase.getInstance(new FrameSearch_1());
 				dispose();
 
 
@@ -103,7 +103,7 @@ public class Home extends JPanel {
 			public void itemStateChanged(ItemEvent e) {
 				if (e.getStateChange() == ItemEvent.SELECTED) {// 한번 눌렀을때(활성화)
                 	
-					ImageIcon originalIcon2 = new ImageIcon("./src/최신버튼.png");
+					ImageIcon originalIcon2 = new ImageIcon("./src/img/최신버튼.png");
                     Image scaledImage2 = originalIcon2.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
                     ImageIcon two = new ImageIcon(scaledImage2);
                     recent_btn.setIcon(two);
@@ -115,7 +115,7 @@ public class Home extends JPanel {
                      repaint();
     				
                 } else {//비활성화 버튼
-                	ImageIcon originalIcon2 = new ImageIcon("./src/최신버튼2.png");
+                	ImageIcon originalIcon2 = new ImageIcon("./src/img/최신버튼2.png");
                     Image scaledImage2 = originalIcon2.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
                     ImageIcon two = new ImageIcon(scaledImage2);
                      recent_btn.setIcon(two);
@@ -129,7 +129,7 @@ public class Home extends JPanel {
 			public void itemStateChanged(ItemEvent e) {
 				if (e.getStateChange() == ItemEvent.SELECTED) {// 한번 눌렀을때(활성화)
                 	
-					ImageIcon originalIcon2 = new ImageIcon("./src/인기버튼.png");
+					ImageIcon originalIcon2 = new ImageIcon("./src/img/인기버튼.png");
                     Image scaledImage2 = originalIcon2.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
                     ImageIcon two = new ImageIcon(scaledImage2);
                     popula_btn.setIcon(two);
@@ -141,7 +141,7 @@ public class Home extends JPanel {
                      repaint();
     				
                 } else {//비활성화 버튼
-                	ImageIcon originalIcon2 = new ImageIcon("./src/인기버튼2.png");
+                	ImageIcon originalIcon2 = new ImageIcon("./src/img/인기버튼2.png");
                     Image scaledImage2 = originalIcon2.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
                     ImageIcon two = new ImageIcon(scaledImage2);
                     popula_btn.setIcon(two);
@@ -157,7 +157,7 @@ public class Home extends JPanel {
 			public void itemStateChanged(ItemEvent e) {
 				if (e.getStateChange() == ItemEvent.SELECTED) {// 한번 눌렀을때(활성화)
                 	
-					ImageIcon originalIcon2 = new ImageIcon("./src/무료버튼.png");
+					ImageIcon originalIcon2 = new ImageIcon("./src/img/무료버튼.png");
                     Image scaledImage2 = originalIcon2.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
                     ImageIcon two = new ImageIcon(scaledImage2);
                     free_btn.setIcon(two);
@@ -170,7 +170,7 @@ public class Home extends JPanel {
                      repaint();
     				
                 } else {//비활성화 버튼
-                	ImageIcon originalIcon2 = new ImageIcon("./src/무료버튼2.png");
+                	ImageIcon originalIcon2 = new ImageIcon("./src/img/무료버튼2.png");
                     Image scaledImage2 = originalIcon2.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
                     ImageIcon two = new ImageIcon(scaledImage2);
                     free_btn.setIcon(two);
@@ -184,7 +184,7 @@ public class Home extends JPanel {
 			public void itemStateChanged(ItemEvent e) {
 				if (e.getStateChange() == ItemEvent.SELECTED) {// 한번 눌렀을때(활성화)
                 	
-					ImageIcon originalIcon2 = new ImageIcon("./src/곧종료버튼.png");
+					ImageIcon originalIcon2 = new ImageIcon("./src/img/곧종료버튼.png");
                     Image scaledImage2 = originalIcon2.getImage().getScaledInstance(80, 30, Image.SCALE_SMOOTH);
                     ImageIcon two = new ImageIcon(scaledImage2);
                     soonEnd_btn.setIcon(two);
@@ -196,7 +196,7 @@ public class Home extends JPanel {
                      repaint();
     				
                 } else {//비활성화 버튼
-                	ImageIcon originalIcon2 = new ImageIcon("./src/곧종료버튼2.png");
+                	ImageIcon originalIcon2 = new ImageIcon("./src/img/곧종료버튼2.png");
                     Image scaledImage2 = originalIcon2.getImage().getScaledInstance(80, 30, Image.SCALE_SMOOTH);
                     ImageIcon two = new ImageIcon(scaledImage2);
                     soonEnd_btn.setIcon(two);
@@ -212,7 +212,7 @@ public class Home extends JPanel {
     	buttonGroup = new ButtonGroup();
     	
     	int btnsHeight = 100;
-    	ImageIcon originalIcon2 = new ImageIcon("./src/최신버튼2.png");
+    	ImageIcon originalIcon2 = new ImageIcon("./src/img/최신버튼2.png");
         Image scaledImage2 = originalIcon2.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
         ImageIcon two = new ImageIcon(scaledImage2);
          recent_btn  = new JToggleButton(two);
@@ -221,8 +221,12 @@ public class Home extends JPanel {
         recent_btn .setBorderPainted(false);
         buttonGroup.add(recent_btn);
         add(recent_btn);
+     // 호버 시에 표시할 이미지 설정
+        ImageIcon hoverIcon2 = new ImageIcon("./src/img/최신버튼.png");
+        Image scaledHoverImage2 = hoverIcon2.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
+        recent_btn.setRolloverIcon(new ImageIcon(scaledHoverImage2));
         
-        ImageIcon originalIcon1 = new ImageIcon("./src/인기버튼2.png");
+        ImageIcon originalIcon1 = new ImageIcon("./src/img/인기버튼2.png");
         Image scaledImage1 = originalIcon1.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
         ImageIcon one = new ImageIcon(scaledImage1);
         popula_btn  = new JToggleButton(one);
@@ -232,8 +236,12 @@ public class Home extends JPanel {
         buttonGroup.add(popula_btn );
         add(popula_btn );
 
+     // 호버 시에 표시할 이미지 설정
+        ImageIcon hoverIcon1 = new ImageIcon("./src/img/인기버튼.png");
+        Image scaledHoverImage1 = hoverIcon1.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
+        popula_btn.setRolloverIcon(new ImageIcon(scaledHoverImage1));
 
-        ImageIcon originalIcon3 = new ImageIcon("./src/무료버튼2.png");
+        ImageIcon originalIcon3 = new ImageIcon("./src/img/무료버튼2.png");
         Image scaledImage3 = originalIcon3.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
         ImageIcon three = new ImageIcon(scaledImage3);
          free_btn  = new JToggleButton(three);
@@ -242,8 +250,13 @@ public class Home extends JPanel {
         free_btn .setBorderPainted(false);
         buttonGroup.add(free_btn );
         add(free_btn );
+        
+     // 호버 시에 표시할 이미지 설정
+        ImageIcon hoverIcon3 = new ImageIcon("./src/img/무료버튼.png");
+        Image scaledHoverImage3 = hoverIcon3.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
+        free_btn.setRolloverIcon(new ImageIcon(scaledHoverImage3));
 
-        ImageIcon originalIcon4 = new ImageIcon("./src/곧종료버튼2.png");
+        ImageIcon originalIcon4 = new ImageIcon("./src/img/곧종료버튼2.png");
         Image scaledImage4 = originalIcon4.getImage().getScaledInstance(80, 30, Image.SCALE_SMOOTH);
         ImageIcon four = new ImageIcon(scaledImage4);
         soonEnd_btn  = new JToggleButton(four);
@@ -253,6 +266,10 @@ public class Home extends JPanel {
         buttonGroup.add(soonEnd_btn);
         add(soonEnd_btn);
      
+     // 호버 시에 표시할 이미지 설정
+        ImageIcon hoverIcon4 = new ImageIcon("./src/img/곧종료버튼.png");
+        Image scaledHoverImage4 = hoverIcon4.getImage().getScaledInstance(80, 30, Image.SCALE_SMOOTH);
+        soonEnd_btn.setRolloverIcon(new ImageIcon(scaledHoverImage4));
     }
 
     public void dispose() {

@@ -1,14 +1,20 @@
 package view.login;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Panel;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,6 +22,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 import controller.member.MemberController;
 import controller.member.MemberToken;
@@ -32,6 +39,7 @@ public class FrameLogin extends JPanel {
 
 	static String filename = "회원명단.txt";
 	JPanel frameLoginPanel;
+	private JPanel posterPanel;
 	
 	public FrameLogin() {
 		this(null);
@@ -40,9 +48,16 @@ public class FrameLogin extends JPanel {
 	public FrameLogin(JPanel homePanel) {
 		this.frameLoginPanel = homePanel;
 		
+		posterPanel = new JPanel();
+	    posterPanel.setLayout(null);
+	    posterPanel.setSize(363,70);
+	    posterPanel.setLocation(20, 610);
+	    posterPanel.setBackground(new Color(255, 255, 255));
+	    posterPanel.setVisible(true);
+	    add(posterPanel);
 
 		// JPanel 구조
-		setBackground(new Color(255, 255, 240));
+		setBackground(new Color(255, 255, 255));
 		setLayout(null);
 		setSize(400, 700);
 
@@ -74,38 +89,104 @@ public class FrameLogin extends JPanel {
 		add(tfID);
 		add(tfPW);
 
-		// 하단의 버튼 설정
-		JButton btnLogin = new JButton("로그인");
-		JButton btnIDSearch = new JButton("아이디 찾기");
-		JButton btnPWSearch = new JButton("비밀번호 찾기");
-		
+		// 로그인 버튼 이미지와 리스너 설정
+				ImageIcon originalLoginIcon = new ImageIcon("./src/img/로그인_로그인.png");
+				Image scaledLoginImage = originalLoginIcon.getImage().getScaledInstance(300, 40, Image.SCALE_SMOOTH);
+				ImageIcon loginIcon = new ImageIcon(scaledLoginImage);
+				ImageIcon originalLoginHoverIcon = new ImageIcon("./src/img/로그인_로그인hover.png");
+				Image scaledLoginHoverImage = originalLoginHoverIcon.getImage().getScaledInstance(300, 40, Image.SCALE_SMOOTH); // 호버 이미지 크기 조정
+				ImageIcon loginHoverIcon = new ImageIcon(scaledLoginHoverImage);
 
-		btnLogin.setSize(300, 40);
-		btnLogin.setLocation(getWidth() / 4 - 50, 260);
-		btnLogin.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 22));
+				// 아이디찾기 버튼 이미지와 리스너 설정
+				ImageIcon originalIDSearchIcon = new ImageIcon("./src/img/아이디찾기.png");
+				Image scaledIDSearchImage = originalIDSearchIcon.getImage().getScaledInstance(140, 40, Image.SCALE_SMOOTH);
+				ImageIcon idSearchIcon = new ImageIcon(scaledIDSearchImage);
+				ImageIcon originalIDSearchHoverIcon = new ImageIcon("./src/img/아이디찾기hover.png");
+				Image scaledIDSearchHoverImage = originalIDSearchHoverIcon.getImage().getScaledInstance(140, 40, Image.SCALE_SMOOTH); // 호버 이미지 크기 조정
+				ImageIcon idSearchHoverIcon = new ImageIcon(scaledIDSearchHoverImage);
 
-		btnIDSearch.setSize(140, 40);
-		btnIDSearch.setLocation((int) btnLogin.getLocation().getX(), (int) btnLogin.getLocation().getY() + 50);
-		btnIDSearch.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 15));
+				// 비밀번호찾기 버튼 이미지와 리스너 설정
+				ImageIcon originalPWSearchIcon = new ImageIcon("./src/img/비밀번호찾기.png");
+				Image scaledPWSearchImage = originalPWSearchIcon.getImage().getScaledInstance(140, 40, Image.SCALE_SMOOTH);
+				ImageIcon pwSearchIcon = new ImageIcon(scaledPWSearchImage);
+				ImageIcon originalPWSearchHoverIcon = new ImageIcon("./src/img/비밀번호찾기hover.png");
+				Image scaledPWSearchHoverImage = originalPWSearchHoverIcon.getImage().getScaledInstance(140, 40, Image.SCALE_SMOOTH); // 호버 이미지 크기 조정
+				ImageIcon pwSearchHoverIcon = new ImageIcon(scaledPWSearchHoverImage);
 
-		btnPWSearch.setSize(140, 40);
-		btnPWSearch.setLocation((int) btnIDSearch.getLocation().getX()+160, (int) btnIDSearch.getLocation().getY());
-		btnPWSearch.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 15));
-		
-		add(btnLogin);
-		add(btnIDSearch);
-		add(btnPWSearch);
-		
-		// 엔터 키 이벤트 처리
-		tfPW.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    // 엔터 키를 눌렀을 때 btnIDFind의 ActionListener 호출
-                	btnLogin.doClick();
-                }
-            }
-        });
+				JButton btnLogin = new JButton(loginIcon);
+				JButton btnIDSearch = new JButton(idSearchIcon);
+				JButton btnPWSearch = new JButton(pwSearchIcon);
+
+				btnLogin.setSize(300, 40);
+				btnLogin.setLocation(getWidth() / 4 - 50, 260);
+				btnLogin.setContentAreaFilled(false);
+				btnLogin.setBorderPainted(false);
+				btnLogin.setFocusPainted(false);
+
+				btnIDSearch.setSize(140, 40);
+				btnIDSearch.setLocation((int) btnLogin.getLocation().getX(), (int) btnLogin.getLocation().getY() + 50);
+				btnIDSearch.setContentAreaFilled(false);
+				btnIDSearch.setBorderPainted(false);
+				btnIDSearch.setFocusPainted(false);
+
+				btnPWSearch.setSize(140, 40);
+				btnPWSearch.setLocation((int) btnIDSearch.getLocation().getX() + 160, (int) btnIDSearch.getLocation().getY());
+				btnPWSearch.setContentAreaFilled(false);
+				btnPWSearch.setBorderPainted(false);
+				btnPWSearch.setFocusPainted(false);
+
+				// 버튼에 마우스 리스너 추가
+				btnLogin.addMouseListener(new MouseAdapter() {
+				    @Override
+				    public void mouseEntered(MouseEvent e) {
+				        btnLogin.setIcon(loginHoverIcon); // 마우스를 가져다 대면 호버 이미지로 변경
+				    }
+
+				    @Override
+				    public void mouseExited(MouseEvent e) {
+				        btnLogin.setIcon(loginIcon); // 마우스를 떼면 원래 이미지로 변경
+				    }
+				});
+
+				btnIDSearch.addMouseListener(new MouseAdapter() {
+				    @Override
+				    public void mouseEntered(MouseEvent e) {
+				        btnIDSearch.setIcon(idSearchHoverIcon); // 마우스를 가져다 대면 호버 이미지로 변경
+				    }
+
+				    @Override
+				    public void mouseExited(MouseEvent e) {
+				        btnIDSearch.setIcon(idSearchIcon); // 마우스를 떼면 원래 이미지로 변경
+				    }
+				});
+
+				btnPWSearch.addMouseListener(new MouseAdapter() {
+				    @Override
+				    public void mouseEntered(MouseEvent e) {
+				        btnPWSearch.setIcon(pwSearchHoverIcon); // 마우스를 가져다 대면 호버 이미지로 변경
+				    }
+
+				    @Override
+				    public void mouseExited(MouseEvent e) {
+				        btnPWSearch.setIcon(pwSearchIcon); // 마우스를 떼면 원래 이미지로 변경
+				    }
+				});
+
+				
+				add(btnLogin);
+				add(btnIDSearch);
+				add(btnPWSearch);
+				
+				// 엔터 키 이벤트 처리
+				tfPW.addKeyListener(new KeyAdapter() {
+		            @Override
+		            public void keyPressed(KeyEvent e) {
+		                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+		                    // 엔터 키를 눌렀을 때 btnIDFind의 ActionListener 호출
+		                	btnLogin.doClick();
+		                }
+		            }
+		        });
 		
 
 		// 버튼 이벤트
@@ -148,10 +229,11 @@ public class FrameLogin extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 
 				
-				removeAll();
-		        add(new FrameIDSearch());
-		        revalidate();
-		        repaint();
+				Window window1 = SwingUtilities.windowForComponent((Component) e.getSource());	// 현재 창 닫기
+                if (window1 != null) {
+                    window1.dispose(); 
+                }
+				FrameBase.getInstance(new FrameIDSearch());
 			}
 		});
 		
@@ -160,10 +242,11 @@ public class FrameLogin extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				removeAll();
-		        add(new FramePWSearch());
-		        revalidate();
-		        repaint();
+				Window window1 = SwingUtilities.windowForComponent((Component) e.getSource());	// 현재 창 닫기
+                if (window1 != null) {
+                    window1.dispose(); 
+                }
+				FrameBase.getInstance(new FramePWSearch());
 			}
 		});
 

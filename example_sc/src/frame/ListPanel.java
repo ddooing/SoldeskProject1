@@ -107,13 +107,13 @@ public class ListPanel extends JPanel {
         repaint();
         
         // 전역으로 사용할 다음 페이지 이동 버튼
-        ImageIcon originalIcon5 = new ImageIcon("./src/다음.png");
+        ImageIcon originalIcon5 = new ImageIcon("./src/img/다음.png");
         Image originalImage5 = originalIcon5.getImage();
         Image scaledImage5 = originalImage5.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         ImageIcon nextpage = new ImageIcon(scaledImage5);
 
         // 전역으로 사용할 이전 페이지 이동 버튼
-        ImageIcon originalIcon6 = new ImageIcon("./src/이전.png");
+        ImageIcon originalIcon6 = new ImageIcon("./src/img/이전.png");
         Image originalImage6 = originalIcon6.getImage();
         Image scaledImage6 = originalImage6.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         ImageIcon prepage = new ImageIcon(scaledImage6);
@@ -183,14 +183,18 @@ public class ListPanel extends JPanel {
         List<ArtGalleryInfo> filteredList = new ArrayList<>();
 
         for (int i = startIndex; i < endIndex; i++) {
-            int x = (i % 2 == 0) ? x1 : x2;
+            int x = (i % 2 == 0) ? x1 +10: x2 +10;
             int y = (i < startIndex + 2) ? y1 : y2;
 
             ArtGalleryInfo posterInfo = posterInfoList.get(i);
             
                 filteredList.add(posterInfo);
 
-                JButton posterImage = new JButton(HtmlItils1.imgHtmlParser(posterInfo.getImageURL()));
+                ImageIcon originalIcon9 = new ImageIcon(posterInfoList.get(i).getImageURL());
+                Image originalImage9 = originalIcon9.getImage();
+                Image scaledImage9 = originalImage9.getScaledInstance(120, 160, Image.SCALE_SMOOTH);
+                ImageIcon posterImage1 = new ImageIcon(scaledImage9);
+                JButton posterImage = new JButton(posterImage1);
                 posterImage.setBounds(x, y, 140, posterHeight);
                 posterImage.setBorderPainted(false);
                 posterImage.setContentAreaFilled(false);
@@ -198,12 +202,12 @@ public class ListPanel extends JPanel {
                 //System.out.println("posterImage 1 : "+posterInfo.getImageURL());
 
                 JLabel posterTitle = new JLabel(posterInfo.getArtName());
-                posterTitle.setBounds(x + 20, y + 170, posterWidth, 20);
+                posterTitle.setBounds(x + 10, y + 170, posterWidth, 20);
                 posterTitle.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 14));
                 add(posterTitle);
 
                 JLabel posterDate = new JLabel(dateFormat.format(posterInfo.getDateStart()) + "~" + dateFormat.format(posterInfo.getDateEnd()));
-                posterDate.setBounds(x + 20, y + 190, posterWidth, 20);
+                posterDate.setBounds(x + 10, y + 190, posterWidth, 20);
                 posterDate.setFont(new Font("나눔스퀘어OTF Bold", Font.PLAIN, 10));
                 add(posterDate);
 
@@ -219,7 +223,7 @@ public class ListPanel extends JPanel {
                                     window.dispose(); 
                                 }
                                 
-                                FrameBase.getInstance(new FramePosterClick(Member.tokeniD,posterInfo.getArtName()));			// 해당전시 페이지 출력
+                                FrameBase.getInstance(new FramePosterClick(Member.tokeniD,posterInfo.getArtName(),""));			// 해당전시 페이지 출력
                             }
                             
                         }			
@@ -254,21 +258,6 @@ public class ListPanel extends JPanel {
         
 		
     }
-	
-	public void out(ArrayList a,String id)
-	{
-		
-		
-		
-		/*
-		System.out.println("id:" + id);
-		for(int i=0;i<a.size();i++)
-		{
-			System.out.println(i+" :"+ a.get(i));
-		}
-		*/
-		
-	}
 	
 	
 }

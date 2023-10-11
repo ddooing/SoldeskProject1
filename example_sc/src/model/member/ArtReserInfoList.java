@@ -43,6 +43,8 @@ public class ArtReserInfoList {
 			if(a.getId().equals(Member.tokeniD))
 			{
 				idReserlist.add(a);
+				//확인용
+				System.out.println(Member.tokeniD + "가 예약한 리스트 "+a.toString());
 			}
 		}
 		return idReserlist;
@@ -51,6 +53,11 @@ public class ArtReserInfoList {
 			//토큰 잘 가져옴
 			System.out.println(Member.tokeniD);
 		
+	}
+	
+	public static void addReservation(ArtReserInfo reservation) {
+		// TODO Auto-generated method stub
+		arr.add(reservation);
 	}
     
 }

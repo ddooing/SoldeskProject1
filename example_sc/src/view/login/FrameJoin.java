@@ -3,14 +3,18 @@ package view.login;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -30,6 +34,7 @@ public class FrameJoin extends JPanel {
 
 	static String filename = "회원명단.txt";
 	JPanel frameJoinPanel;
+	private JPanel posterPanel;
 	
 	public FrameJoin() {
 		this(null);
@@ -37,9 +42,17 @@ public class FrameJoin extends JPanel {
 
 	public FrameJoin(JPanel homePanel) {
 		this.frameJoinPanel = homePanel;
+		
+		posterPanel = new JPanel();
+	    posterPanel.setLayout(null);
+	    posterPanel.setSize(363,70);
+	    posterPanel.setLocation(20, 610);
+	    posterPanel.setBackground(new Color(255, 255, 255));
+	    posterPanel.setVisible(true);
+	    add(posterPanel);
 
 		// JPanel 구조
-		setBackground(new Color(255, 255, 240));
+		setBackground(new Color(255, 255, 255));
 		setLayout(null);
 		setSize(400, 700);
 
@@ -60,20 +73,20 @@ public class FrameJoin extends JPanel {
 		ljoin.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 25));
 
 		lID.setSize(100, 40);
-		lID.setLocation(10, 150);
+		lID.setLocation(40, 150);
 		lID.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 18));
 
 		lPW.setSize(100, 40);
-		lPW.setLocation(10, 200);
+		lPW.setLocation(20, 200);
 		lPW.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 18));
 
 		lname.setSize(100, 40);
-		lname.setLocation(10, 250);
+		lname.setLocation(53, 250);
 		lname.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 18));
 
 
 		ltel.setSize(100, 40);
-		ltel.setLocation(10, 300);
+		ltel.setLocation(20, 300);
 		ltel.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 18));
 
 		tfID.setSize(280, 40);
@@ -103,18 +116,68 @@ public class FrameJoin extends JPanel {
 		add(tfname);
 		add(tftel);
 
-		// 하단의 버튼 설정
-		JButton btnDone = new JButton("완료");
-		JButton btnHome = new JButton("홈");
+		 // 완료 버튼 이미지와 리스너 설정
+        ImageIcon originalDoneIcon = new ImageIcon("./src/img/완료.png");
+        Image scaledDoneImage = originalDoneIcon.getImage().getScaledInstance(140, 40, Image.SCALE_SMOOTH);
+        ImageIcon doneIcon = new ImageIcon(scaledDoneImage);
 
-		btnDone.setSize(300, 40);
-		btnDone.setLocation(getWidth() / 4 -50, 400);
-		btnDone.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 20));
+        ImageIcon originalDoneHoverIcon = new ImageIcon("./src/img/완료hover.png");
+        Image scaledDoneHoverImage = originalDoneHoverIcon.getImage().getScaledInstance(140, 40, Image.SCALE_SMOOTH);
+        ImageIcon doneHoverIcon = new ImageIcon(scaledDoneHoverImage);
 
-		btnHome.setSize(300, 40);
-		btnHome.setLocation((int) btnDone.getLocation().getX(), (int) btnDone.getLocation().getY() + 50);
+        JButton btnDone = new JButton(doneIcon);
 
-		btnHome.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 20));
+        btnDone.setSize(140, 40);
+        btnDone.setLocation(135, 400);
+        btnDone.setContentAreaFilled(false);
+        btnDone.setBorderPainted(false);
+        btnDone.setFocusPainted(false);
+        
+
+        // 완료 버튼에 마우스 리스너 추가
+        btnDone.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                btnDone.setIcon(doneHoverIcon); // 마우스를 가져다 대면 hover 이미지로 변경
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                btnDone.setIcon(doneIcon); // 마우스를 떼면 원래 이미지로 변경
+            }
+        });
+        
+        
+
+        // 이전 버튼 이미지와 리스너 설정
+        ImageIcon originalHomeIcon = new ImageIcon("./src/img/회원가입_이전.png");
+        Image scaledHomeImage = originalHomeIcon.getImage().getScaledInstance(140, 40, Image.SCALE_SMOOTH);
+        ImageIcon homeIcon = new ImageIcon(scaledHomeImage);
+
+        ImageIcon originalHomeHoverIcon = new ImageIcon("./src/img/회원가입_이전hover.png");
+        Image scaledHomeHoverImage = originalHomeHoverIcon.getImage().getScaledInstance(140, 40, Image.SCALE_SMOOTH);
+        ImageIcon homeHoverIcon = new ImageIcon(scaledHomeHoverImage);
+
+        JButton btnHome = new JButton(homeIcon);
+
+        btnHome.setSize(140, 40);
+        btnHome.setLocation(135, (int) btnDone.getLocation().getY() + 50);
+        btnHome.setContentAreaFilled(false);
+        btnHome.setBorderPainted(false);
+        btnHome.setFocusPainted(false);
+
+        // 이전 버튼에 마우스 리스너 추가
+        btnHome.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                btnHome.setIcon(homeHoverIcon); // 마우스를 가져다 대면 hover 이미지로 변경
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                btnHome.setIcon(homeIcon); // 마우스를 떼면 원래 이미지로 변경
+            }
+        });
 
 		add(btnDone);
 		add(btnHome);
