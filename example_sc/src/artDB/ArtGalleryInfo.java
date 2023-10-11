@@ -7,12 +7,12 @@ public class ArtGalleryInfo {
 	private String artName; 		// 전시회 이름
 	private String fee;             // 입장료
 	private String place;			// 전시회 장소
-	private Date dateStart;       // 시작날짜
-	private Date dateEnd;         // 종료날짜
-	private String starttime;			// 전시 시작 시간
+	private Date dateStart;       	// 시작날짜
+	private Date dateEnd;         	// 종료날짜
+	private String starttime;		// 전시 시작 시간
 	private String endtime;			// 전시 종료 시간
 	private String placeURL;        // 지도 url
-	private String imageURL;		// 이미지 파일 위치
+	private String imageURL;		// 이미지 url
 	private Integer cnt;			// 예매수
 	
 	public ArtGalleryInfo(String artName, String fee,  String place, Date dateStart,
@@ -84,8 +84,6 @@ public class ArtGalleryInfo {
 	public void setDateEnd(Date dateEnd) {
 		this.dateEnd = dateEnd;
 	}
-
-	
 
 	public String getPlaceURL() {
 		return placeURL;

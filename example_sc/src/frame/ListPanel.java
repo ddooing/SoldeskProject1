@@ -259,20 +259,5 @@ public class ListPanel extends JPanel {
 		
     }
 	
-	public void out(ArrayList a,String id)
-	{
-		
-		
-		
-		/*
-		System.out.println("id:" + id);
-		for(int i=0;i<a.size();i++)
-		{
-			System.out.println(i+" :"+ a.get(i));
-		}
-		*/
-		
-	}
-	
 	
 }

@@ -138,12 +138,9 @@ public class FramePosterClick extends JPanel {
         JLabel placendate = new JLabel("<HTML><body>" +artInfo.getPlace() + "<br>" 
         + formattedDateStart + " ~ " + formattedDateEnd +"</body></HTML>");
         
-        if(artInfo.getFee().equals("무료")) {
-        	
-        }
 		JLabel story = new JLabel("<HTML><body>" +
-						"관람시간 : " + artInfo.getStarttime() + " ~ " + artInfo.getEndtime() + "<br>" + 
-						"입장료 : " + artInfo.getFee() +" 원" + "<br>" + 
+						"관람시간 : " + artInfo.getStarttime()+" ~ "+ artInfo.getEndtime() + "<br>" + 
+						"입장료 : " + artInfo.getFee() + "<br>" + 
 						"주소 : " + artInfo.getPlace() + "</body></HTML>");
 		
 		// "예약" 버튼 생성
@@ -261,7 +258,7 @@ public class FramePosterClick extends JPanel {
                 }
 				System.out.println(artInfo.getArtName()+" : 예매 버튼 클릭");
 				FrameBase.getInstance(new FrameReserve(artInfo, artInfo.getArtName()));	
-				reserInfoList.add(new ArtReserInfo(id,selectArt,reseveTime , reserveDate,reserverInt));
+				//reserInfoList.add(new ArtReserInfo(id,selectArt,reseveTime , reserveDate,reserverInt));
 				a.show();
 				
 			}

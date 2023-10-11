@@ -298,7 +298,7 @@ public class ArtGalleryList {
 		return filteredList;
 	}//getsoonEndPosters()
 	
-	
+
 	public List<String> generateTimeSlots(String startTime, String endTime, int intervalMinutes) throws ParseException {
         List<String> timeSlots = new ArrayList<>();
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
@@ -313,10 +313,7 @@ public class ArtGalleryList {
             timeSlots.add(sdf.format(calendar.getTime()));
             calendar.add(Calendar.MINUTE, intervalMinutes);
         }
-
         return timeSlots;
-    }
-		
-		
+	}
 		
 }

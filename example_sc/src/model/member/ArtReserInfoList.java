@@ -43,6 +43,8 @@ public class ArtReserInfoList {
 			if(a.getId().equals(Member.tokeniD))
 			{
 				idReserlist.add(a);
+				//확인용
+				System.out.println(Member.tokeniD + "가 예약한 리스트 "+a.toString());
 			}
 		}
 		return idReserlist;
