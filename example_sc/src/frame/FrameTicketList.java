@@ -4,11 +4,10 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.FontFormatException;
+import java.awt.Image;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.io.File;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,67 +15,57 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-public class FrameTicketList extends JPanel{
+import controller.member.MemberToken;
 
-    public FrameTicketList()
-    {
-        // JPanel 구조 설정
+public class FrameTicketList extends JPanel{
+	
+	public FrameTicketList(String id)
+	{
+		// JPanel 구조 설정
         setBackground(Color.white);
         setLayout(null);
         setSize(400, 700);
-        String fontFilePath = "src/font/Orbit-regular.ttf"; // ttf 파일 경로
-
-        ImageIcon menuLine = new ImageIcon("./src/line3.png");
-
         
-        try {
-            // TTF 파일을 읽어서 Font 객체 생성
-            Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File(fontFilePath));
+        ImageIcon menuLine = new ImageIcon("./src/img/line3.png");
 
-           
-            
         JLabel menuline = new JLabel(menuLine); // 메뉴선
         JLabel text = new JLabel("티켓 "); 
-
+        
         text.setSize(200,50);
-        text.setLocation(40, 40);
-        // 원하는 폰트 스타일과 크기로 설정
-        customFont = customFont.deriveFont(Font.PLAIN, 30); // 크기 24, 평범한 스타일로 설정
-        text.setFont(customFont);
-
+        text.setLocation(40, 60);
+        text.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 30));
+        
         menuline.setSize(380, 5);
         menuline.setLocation(10, text.getY() + text.getHeight());
-
+        
         add(text);
-        add(menuline);
+        add(menuline);  
         
-        } catch (IOException | FontFormatException e) {
-            e.printStackTrace();
-        }
-        
-        
-        
-        JButton back = new JButton();
-		back.setSize(50,40);
-		back.setLocation(30,640);
+        //back 버튼
+        ImageIcon originalIcon10 = new ImageIcon("./src/img/뒤로가기.png");
+		Image originalImage10 = originalIcon10.getImage();
+		Image scaledImage10 = originalImage10.getScaledInstance(50, 40, Image.SCALE_SMOOTH);
+		ImageIcon posterImage10 = new ImageIcon(scaledImage10);
+		JButton back = new JButton(posterImage10);
+		back.setSize(50, 40);
+		back.setLocation(30, 30);
 		back.setBorderPainted(false);
 		back.setContentAreaFilled(false);
 		back.setFocusPainted(false);
+
 		add(back);
-		
+
 		back.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				Window window1 = SwingUtilities.windowForComponent((Component) e.getSource());	// 현재 창 닫기
-                if (window1 != null) {
-                    window1.dispose(); 
-                }
+				Window window = SwingUtilities.windowForComponent((Component) e.getSource()); // 현재 창 닫기
+				if (window != null) {
+					window.dispose();
+				}
 				FrameBase.getInstance(new Home());
-				
 			}
 		});
-    }
-
+	}
+	
 }

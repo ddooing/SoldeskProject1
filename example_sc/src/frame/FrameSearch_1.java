@@ -28,6 +28,7 @@ import javax.swing.SwingUtilities;
 
 import artDB.ArtGalleryInfo;
 import artDB.ArtGalleryList;
+import model.member.Member;
 
 public class FrameSearch_1 extends JPanel {
 
@@ -59,7 +60,7 @@ public class FrameSearch_1 extends JPanel {
 
         // ArtGalleryList 객체 생성
         ArtGalleryList artgallerylist = new ArtGalleryList();
-        posterInfoList = artgallerylist.Info();
+        posterInfoList = artgallerylist.getPosters();
 
         // filteredList 초기화
         filteredList = new ArrayList<>();
@@ -79,7 +80,7 @@ public class FrameSearch_1 extends JPanel {
         textField.setForeground(Color.GRAY);
 
         // 텍스트 필드 위치 설정
-        textField.setBounds(30, 60, 280, 30);
+        textField.setBounds(30, 90, 280, 30);
 
         // 텍스트 필드 폰트 설정
         Font customFont = new Font("맑은 고딕", Font.BOLD, 14); // 원하는 폰트 설정
@@ -131,14 +132,14 @@ public class FrameSearch_1 extends JPanel {
         posterPanel.repaint();
 
         // 이미지
-        ImageIcon imageSearch = new ImageIcon("./src/30.png");
-        ImageIcon menuLine = new ImageIcon("./src/line3.png");
+        ImageIcon imageSearch = new ImageIcon("./src/img/30.png");
+        ImageIcon menuLine = new ImageIcon("./src/img/line3.png");
 
         JButton btnSearch = new JButton(imageSearch); // 검색 버튼
         JLabel menuline = new JLabel(menuLine); // 메뉴선
 
         btnSearch.setSize(50, 50);
-        btnSearch.setLocation(310, 40);
+        btnSearch.setLocation(310, 80);
         btnSearch.setBorderPainted(false); // 버튼 외각선 지우기
         btnSearch.setContentAreaFilled(false); // 버튼 투명하게 지우기(이미지는 남음)
         btnSearch.setFocusPainted(false); // 버튼 선택 표시 지우기
@@ -171,7 +172,7 @@ public class FrameSearch_1 extends JPanel {
         int endIndex = Math.min(startIndex + postersPerPage, filteredList.size());
 
         for (int i = startIndex; i < endIndex; i++) {
-            int x = (i % 2 == 0) ? x1 : x2;
+            int x = (i % 2 == 0) ? x1 +10: x2 +10;
             int y = (i < startIndex + 2) ? y1 : y2;
 
             ArtGalleryInfo posterInfo = filteredList.get(i);
@@ -187,7 +188,7 @@ public class FrameSearch_1 extends JPanel {
             posterPanel.add(posterImage);
 
             JLabel posterTitle = new JLabel(posterInfo.getArtName());
-            posterTitle.setBounds(x + 20, y + 170, posterWidth, 20);
+            posterTitle.setBounds(x + 10, y + 170, posterWidth, 20);
             try {
                 // TTF 파일을 읽어서 Font 객체 생성
                 Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File(fontFilePath));
@@ -198,7 +199,7 @@ public class FrameSearch_1 extends JPanel {
             posterPanel.add(posterTitle);
 
             JLabel posterDate = new JLabel(dateFormat.format(posterInfo.getDateStart()) + "~" + dateFormat.format(posterInfo.getDateEnd()));
-            posterDate.setBounds(x + 20, y + 190, posterWidth, 20);
+            posterDate.setBounds(x + 10, y + 190, posterWidth, 20);
             customFont = customFont.deriveFont(Font.PLAIN, 8);
             posterDate.setFont(customFont);
             posterPanel.add(posterDate);
@@ -220,19 +221,25 @@ public class FrameSearch_1 extends JPanel {
                                 window.dispose();
                             }
 
-                            FrameBase.getInstance(new FramePosterClick(e, posterInfo.getArtName())); // 해당전시 페이지 출력
+                            FrameBase.getInstance(new FramePosterClick(Member.tokeniD,posterInfo.getArtName(),"FrameSearch_1")); // 해당전시 페이지 출력
                         }
                     }
 
                 }
             });
         }
-        JButton back = new JButton();
+        
+        ImageIcon originalIcon9 = new ImageIcon("./src/뒤로가기.png");
+        Image originalImage9 = originalIcon9.getImage();
+        Image scaledImage9 = originalImage9.getScaledInstance(50, 40, Image.SCALE_SMOOTH);
+        ImageIcon posterImage1 = new ImageIcon(scaledImage9);
+        JButton back = new JButton(posterImage1);
 		back.setSize(50,40);
-		back.setLocation(30,640);
+		back.setLocation(30,30);
 		back.setBorderPainted(false);
 		back.setContentAreaFilled(false);
 		back.setFocusPainted(false);
+		
 		add(back);
 		
 		back.addActionListener(new ActionListener() {

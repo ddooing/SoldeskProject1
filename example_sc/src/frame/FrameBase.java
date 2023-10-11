@@ -1,8 +1,11 @@
 package frame;
 
+import java.awt.Frame;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -10,6 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import controller.member.MemberToken;
+import model.member.Member;
 import view.login.FrameIDSearch;
 
 public class FrameBase extends JFrame{
@@ -20,7 +25,7 @@ public class FrameBase extends JFrame{
 		Toolkit tk = Toolkit.getDefaultToolkit();//해상도
 
 		//기본 JFrame 구조
-		setTitle("미술관소개");
+		setTitle("ARTMEE");
 		setLayout(null);
 		setBounds(((int) tk.getScreenSize().getWidth() / 3), 
 				((int) tk.getScreenSize().getHeight()) / 2 - 400,
@@ -29,9 +34,12 @@ public class FrameBase extends JFrame{
 		add(e);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //x버튼
+	
+		
+		
+	    
 	}//생성자
 
-	
 	//싱글톤 기법을 사용하려고 한다
 	public static void getInstance(JPanel e) {
 			//static으로 선언했으므로 해당 메서드가 생성자보다도 먼저 호출된다
@@ -46,8 +54,8 @@ public class FrameBase extends JFrame{
 	
 	//기본 프레임 이미지를 저장하기 위한 메소드
 	public static void getImage(JPanel e) {
-		ImageIcon backGround = new ImageIcon("./src/backimg.png");
-		ImageIcon imagebottom = new ImageIcon("./src/하단바.png");
+		ImageIcon backGround = new ImageIcon("./src/img/backimg.png");
+		ImageIcon imagebottom = new ImageIcon("./src/img/하단바.png");
 		JLabel lblBackGround = new JLabel(backGround);
 		JLabel lblImagebottom = new JLabel(imagebottom);
 		lblBackGround.setSize(400, 700);
@@ -56,34 +64,21 @@ public class FrameBase extends JFrame{
 		lblImagebottom.setLocation(-90, 600);
 		e.add(lblBackGround);
 		e.add(lblImagebottom);
-	
+		
 		
 		JButton soon = new JButton();
 		JButton home = new JButton();
 		JButton ticket = new JButton();
 		JButton random = new JButton();
 		
-		JButton back = new JButton();
-		back.setSize(50,40);
-		back.setLocation(30,640);
-		back.setBorderPainted(false);
-		back.setContentAreaFilled(false);
-		back.setFocusPainted(false);
-		e.add(back);
 		
-		back.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// 뒤로가기 버튼은 각 페이지에서 할당
-			}
-		});
 		
 		soon.setSize(50,40);
-		soon.setLocation(97,640);
+		soon.setLocation(46,640);
 		soon.setBorderPainted(false);
 		soon.setContentAreaFilled(false);
 		soon.setFocusPainted(false);
+		
 		e.add(soon);
 		
 		soon.addActionListener(new ActionListener() {
@@ -100,10 +95,11 @@ public class FrameBase extends JFrame{
 		});
 		
 		home.setSize(50,40);
-		home.setLocation(175,640);
+		home.setLocation(137,640);
 		home.setBorderPainted(false);
 		home.setContentAreaFilled(false);
 		home.setFocusPainted(false);
+		
 		e.add(home);
 		
 		home.addActionListener(new ActionListener() {
@@ -118,10 +114,11 @@ public class FrameBase extends JFrame{
 		});
 		
 		ticket.setSize(50,40);
-		ticket.setLocation(245,640);
+		ticket.setLocation(210,640);
 		ticket.setBorderPainted(false);
 		ticket.setContentAreaFilled(false);
 		ticket.setFocusPainted(false);
+		
 		e.add(ticket);
 		
 		ticket.addActionListener(new ActionListener() {
@@ -132,17 +129,18 @@ public class FrameBase extends JFrame{
 				if(instance != null) {		// 1개 창 닫기
 					instance.dispose();
 					}
-				FrameBase.getInstance(new FrameTicketList());
+				FrameBase.getInstance(new FrameTicketList(Member.tokeniD));
 				
 			}
 		});
 		
 		
 		random.setSize(50,40);
-		random.setLocation(315,640);
+		random.setLocation(290,640);
 		random.setBorderPainted(false);
 		random.setContentAreaFilled(false);
 		random.setFocusPainted(false);
+		
 		e.add(random);
 		
 		random.addActionListener(new ActionListener() {
@@ -159,6 +157,19 @@ public class FrameBase extends JFrame{
 		
 		
 	}
+	
+	public static void closeAllFrames() {
+        if (instance != null) {
+            // 모든 열려있는 창을 닫기 위해 창을 순회하면서 각 창을 닫음
+            for (Frame frame : Frame.getFrames()) {
+                if (frame instanceof FrameBase) {
+                    continue; // FrameBase 창은 제외
+                }
+                frame.dispose();
+            }
+        }
+    }
+	
 
 	@Override
 	public void dispose() {

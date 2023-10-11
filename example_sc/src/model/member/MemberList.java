@@ -15,7 +15,6 @@ public class MemberList {
 		memberList.add(member);
 	}
 	
-	
 	public String loginMember(String id) {
 		
 		Iterator<Member> ir = memberList.iterator();

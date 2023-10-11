@@ -24,5 +24,4 @@ public class DateLabelFormatter extends javax.swing.JFormattedTextField.Abstract
         
         return "";
     }
-    
 }

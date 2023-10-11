@@ -1,23 +1,48 @@
 package model.member;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 
 public class Member implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	public static String tokeniD;
 	private String id;
 	private String pw;
 	private String name;
 	private String tel;
 	
+	
 
+	public static String getTokenID() {
+		return tokeniD;
+	}
+
+	public void setTokenID(String tokenID) {
+		this.tokeniD = tokenID;
+	}
 	public Member() {
 
 	}
 	
+	public ArrayList<ArtReserInfo> getTiketList(){ // id인 예매 정보 리스트 
+		
+		ArrayList<ArtReserInfo> tikeList;
+				
+		ArtReserInfoList a = new ArtReserInfoList();
+		tikeList=a.getIdReserList(); // ArtReserInfoList 에서 id 의 예매 정보리스트 가져옴
+         
+		 return tikeList;
+	}
 	
+	// 토큰 아이디 확인용 
+	/*
+	public void getTiketList(){
+		ArtReserInfoList list = new ArtReserInfoList();
+		list.showId();
+		
+	}*/
 
 	// 생성자
 	public Member(String id, String pw, String name, String tel) {

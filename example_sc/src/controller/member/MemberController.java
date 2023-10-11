@@ -20,7 +20,6 @@ public class MemberController {
 		try {
 			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filename), StandardCharsets.UTF_8));
 
-			
 				while(true) {
 					String text = br.readLine(); // 텍스트 파일 내 데이터를 한 줄 씪 읽음
 				

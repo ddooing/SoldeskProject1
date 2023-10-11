@@ -1,6 +1,27 @@
 package view.login;
 
-import javax.swing.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 import controller.member.MemberController;
 import frame.FrameBase;
@@ -8,103 +29,99 @@ import frame.FrameBegin;
 import model.member.Member;
 import model.member.MemberList;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.util.ArrayList;
 
 public class FrameJoin extends JPanel {
-    static String filename = "회원명단.txt";
-    JPanel frameJoinPanel;
-    private JPanel posterPanel;
 
-    public FrameJoin() {
-        this(null);
-    }
+	static String filename = "회원명단.txt";
+	JPanel frameJoinPanel;
+	private JPanel posterPanel;
+	
+	public FrameJoin() {
+		this(null);
+	}
 
-    
-    public FrameJoin(JPanel homePanel) {
-        this.frameJoinPanel = homePanel;
+	public FrameJoin(JPanel homePanel) {
+		this.frameJoinPanel = homePanel;
+		
+		posterPanel = new JPanel();
+	    posterPanel.setLayout(null);
+	    posterPanel.setSize(363,70);
+	    posterPanel.setLocation(20, 610);
+	    posterPanel.setBackground(new Color(255, 255, 255));
+	    posterPanel.setVisible(true);
+	    add(posterPanel);
 
-        posterPanel = new JPanel();
-        posterPanel.setLayout(null);
-        posterPanel.setSize(363, 70);
-        posterPanel.setLocation(20, 610);
-        posterPanel.setBackground(new Color(255, 255, 240));
-        posterPanel.setVisible(true);
-        add(posterPanel);
+		// JPanel 구조
+		setBackground(new Color(255, 255, 255));
+		setLayout(null);
+		setSize(400, 700);
 
-        setBackground(new Color(255, 255, 240));
-        setLayout(null);
-        setSize(400, 700);
+		// 아이디, 비번 입력창
+		JLabel ljoin = new JLabel("회 원 가 입");
+		JLabel lID = new JLabel("아이디");
+		JLabel lPW = new JLabel("비밀번호");
+		JLabel lname = new JLabel("이름");
+		JLabel ltel = new JLabel("전화번호");
 
-        // 아이디, 비밀번호 입력창 및 라벨
-        JLabel ljoin = new JLabel("회 원 가 입");
-        JLabel lID = new JLabel("아이디");
-        JLabel lPW = new JLabel("비밀번호");
-        JLabel lname = new JLabel("이름");
-        JLabel ltel = new JLabel("전화번호");
+		JTextField tfID = new JTextField(10);
+		JPasswordField tfPW = new JPasswordField(10);
+		JTextField tfname = new JTextField(10);
+		JTextField tftel = new JTextField(10);
 
-        JTextField tfID = new JTextField(10);
-        JPasswordField tfPW = new JPasswordField(10);
-        JTextField tfname = new JTextField(10);
-        JTextField tftel = new JTextField(10);
+		ljoin.setSize(300, 40);
+		ljoin.setLocation(getWidth() / 2 - 50, 60);
+		ljoin.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 25));
 
-        ljoin.setSize(300, 40);
-        ljoin.setLocation(getWidth() / 2 - 50, 60);
-        ljoin.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 25));
+		lID.setSize(100, 40);
+		lID.setLocation(40, 150);
+		lID.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 18));
 
-        lID.setSize(100, 40);
-        lID.setLocation(25, 150);
-        lID.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 18));
+		lPW.setSize(100, 40);
+		lPW.setLocation(20, 200);
+		lPW.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 18));
 
-        lPW.setSize(100, 40);
-        lPW.setLocation(19, 200);
-        lPW.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 18));
+		lname.setSize(100, 40);
+		lname.setLocation(53, 250);
+		lname.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 18));
 
-        lname.setSize(100, 40);
-        lname.setLocation(35, 250);
-        lname.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 18));
 
-        ltel.setSize(100, 40);
-        ltel.setLocation(20, 300);
-        ltel.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 18));
+		ltel.setSize(100, 40);
+		ltel.setLocation(20, 300);
+		ltel.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 18));
 
-        tfID.setSize(280, 40);
-        tfID.setLocation(getWidth() / 4, 150);
-        tfID.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 18));
+		tfID.setSize(280, 40);
+		tfID.setLocation(getWidth() / 4 , 150);
+		tfID.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 18));
 
-        tfPW.setSize(280, 40);
-        tfPW.setLocation(getWidth() / 4, 200);
-        tfPW.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 18));
-        tfPW.setEchoChar('*');
+		tfPW.setSize(280, 40);
+		tfPW.setLocation(getWidth() / 4 , 200);
+		tfPW.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 18));
+		tfPW.setEchoChar('*');
 
-        tfname.setSize(280, 40);
-        tfname.setLocation(getWidth() / 4, 250);
-        tfname.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 18));
+		tfname.setSize(280, 40);
+		tfname.setLocation(getWidth() / 4, 250);
+		tfname.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 18));
 
-        tftel.setSize(280, 40);
-        tftel.setLocation(getWidth() / 4, 300);
-        tftel.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 18));
+		tftel.setSize(280, 40);
+		tftel.setLocation(getWidth() / 4, 300);
+		tftel.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 18));
 
-        add(ljoin);
-        add(lID);
-        add(lPW);
-        add(lname);
-        add(ltel);
-        add(tfID);
-        add(tfPW);
-        add(tfname);
-        add(tftel);
+		add(ljoin);
+		add(lID);
+		add(lPW);
+		add(lname);
+		add(ltel);
+		add(tfID);
+		add(tfPW);
+		add(tfname);
+		add(tftel);
 
-        
-        // 완료 버튼 이미지와 리스너 설정
-        ImageIcon originalDoneIcon = new ImageIcon("./src/완료.png");
+		 // 완료 버튼 이미지와 리스너 설정
+        ImageIcon originalDoneIcon = new ImageIcon("./src/img/완료.png");
         Image scaledDoneImage = originalDoneIcon.getImage().getScaledInstance(140, 40, Image.SCALE_SMOOTH);
         ImageIcon doneIcon = new ImageIcon(scaledDoneImage);
 
-        ImageIcon originalDoneHoverIcon = new ImageIcon("./src/완료hover.png");
+        ImageIcon originalDoneHoverIcon = new ImageIcon("./src/img/완료hover.png");
         Image scaledDoneHoverImage = originalDoneHoverIcon.getImage().getScaledInstance(140, 40, Image.SCALE_SMOOTH);
         ImageIcon doneHoverIcon = new ImageIcon(scaledDoneHoverImage);
 
@@ -115,6 +132,7 @@ public class FrameJoin extends JPanel {
         btnDone.setContentAreaFilled(false);
         btnDone.setBorderPainted(false);
         btnDone.setFocusPainted(false);
+        
 
         // 완료 버튼에 마우스 리스너 추가
         btnDone.addMouseListener(new MouseAdapter() {
@@ -128,13 +146,15 @@ public class FrameJoin extends JPanel {
                 btnDone.setIcon(doneIcon); // 마우스를 떼면 원래 이미지로 변경
             }
         });
+        
+        
 
         // 이전 버튼 이미지와 리스너 설정
-        ImageIcon originalHomeIcon = new ImageIcon("./src/회원가입_이전.png");
+        ImageIcon originalHomeIcon = new ImageIcon("./src/img/회원가입_이전.png");
         Image scaledHomeImage = originalHomeIcon.getImage().getScaledInstance(140, 40, Image.SCALE_SMOOTH);
         ImageIcon homeIcon = new ImageIcon(scaledHomeImage);
 
-        ImageIcon originalHomeHoverIcon = new ImageIcon("./src/회원가입_이전hover.png");
+        ImageIcon originalHomeHoverIcon = new ImageIcon("./src/img/회원가입_이전hover.png");
         Image scaledHomeHoverImage = originalHomeHoverIcon.getImage().getScaledInstance(140, 40, Image.SCALE_SMOOTH);
         ImageIcon homeHoverIcon = new ImageIcon(scaledHomeHoverImage);
 
@@ -159,68 +179,74 @@ public class FrameJoin extends JPanel {
             }
         });
 
-        add(btnDone);
-        add(btnHome);
+		add(btnDone);
+		add(btnHome);
 
-        // 버튼 이벤트
-        btnDone.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String inputID = tfID.getText();
-                String inputPW = new String(tfPW.getPassword());
-                String inputName = tfname.getText();
-                String inputTel = tftel.getText();
+		// 버튼 이벤트
+		btnDone.addActionListener(new ActionListener() {
 
-                if (!inputID.isEmpty() && (!inputPW.isEmpty()) && !inputName.isEmpty() && !inputTel.isEmpty()) {
-                    MemberController cm = new MemberController();
-                    ArrayList<Member> memberArr = cm.readFile(filename);
-                    MemberList memberList = new MemberList();
+			@Override
+			public void actionPerformed(ActionEvent e) {
 
-                    for (int i = 0; i < memberArr.size(); i++) {
-                        memberList.addMember(memberArr.get(i));
-                    }
+				String inputID = tfID.getText();
+				String inputPW = new String(tfPW.getPassword());
+				String inputName = tfname.getText();
+				String inputTel = tftel.getText();
 
-                    String idCheck = memberList.joinMember(inputID);
+				if (!inputID.isEmpty() && (!inputPW.isEmpty()) && !inputName.isEmpty() && !inputTel.isEmpty()) {
+					
+					MemberController cm = new MemberController();
+					ArrayList<Member> memberArr = cm.readFile(filename);
+					MemberList memberList = new MemberList();
 
-                    if (!idCheck.isEmpty()) {
-                        JOptionPane.showMessageDialog(null, idCheck);
-                        return;
-                    }
+					for (int i = 0; i < memberArr.size(); i++) {
+						memberList.addMember(memberArr.get(i));
+					}
 
-                    try (BufferedWriter br = new BufferedWriter(new FileWriter("회원명단.txt", true))) {
+					String idCheck = memberList.joinMember(inputID);
+					
+					if(!idCheck.isEmpty()) {
+						JOptionPane.showMessageDialog(null, idCheck);
+						return;
+					}
 
-                        br.write(inputID + "/");
-                        br.write(inputPW + "/");
-                        br.write(inputName + "/");
-                        br.write(inputTel + "\n");
-                        System.out.println("저장완료");
-                    } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(null, "회원가입이 실패했습니다.");
-                    }
+					try (BufferedWriter br = new BufferedWriter(new FileWriter("회원명단.txt", true))) {
 
-                    JOptionPane.showMessageDialog(null, "회원가입에 성공했습니다.");
-                    System.out.println("회원가입 성공");
-                    dispose();
-                    FrameBase.getInstance(new FrameBegin());
+						br.write(inputID + "/");
+						br.write(inputPW + "/");
+						br.write(inputName + "/");
+						br.write(inputTel + "\n");
+						System.out.println("저장완료");
+					} catch (Exception ex) {
+						JOptionPane.showMessageDialog(null, "회원가입이 실패했습니다.");
+					}
 
-                } else {
-                    JOptionPane.showMessageDialog(null, "회원가입이 실패했습니다.");
-                }
+					JOptionPane.showMessageDialog(null, "회원가입에 성공했습니다.");
+					System.out.println("회원가입 성공");
+					dispose();
+					FrameBase.getInstance(new FrameBegin());
 
-            }
-        });
+				} else {
+					JOptionPane.showMessageDialog(null, "회원가입이 실패했습니다.");
+				}
 
-        btnHome.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                FrameBase.getInstance(new FrameBegin());
-            }
-        });
-    }
+			}
+		});
 
-    public void dispose() {
-        JFrame parent = (JFrame) this.getTopLevelAncestor();
-        parent.dispose();
-    }
+		
+		btnHome.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				FrameBase.getInstance(new FrameBegin());
+			}
+		});
+
+	}// 생성자
+	
+	public void dispose() {
+	    JFrame parent = (JFrame) this.getTopLevelAncestor();
+	    parent.dispose();
+	}
 }

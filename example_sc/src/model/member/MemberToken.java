@@ -1,6 +1,7 @@
-package controller.member;
+package model.member;
 
 public class MemberToken {
+	
 	public static String tokenID;
 
 	public static String getTokenID() {
@@ -10,5 +11,4 @@ public class MemberToken {
 	public void setTokenID(String tokenID) {
 		this.tokenID = tokenID;
 	}
-
 }
