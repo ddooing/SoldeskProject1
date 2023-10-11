@@ -142,7 +142,6 @@ public class FrameSoonPage extends JPanel {
                                 window.dispose(); 
                             }
                             
-                            FrameBase.getInstance(new FramePosterClick(Member.tokeniD,posterInfo.getArtName(),"FrameSoonPage"));	// 해당전시 페이지 출력
                         }
                     }
                 }

@@ -138,11 +138,7 @@ public class FrameReserve extends JPanel {
 	                window.dispose();
 	            }
 	            
-	            if(artName.equals("문도멘도 판타스틱시티라이프") || artName.equals("요시토모 나라") || artName.equals("세르주 블로크展 ′KISS′") || artName.equals("캣아트 : 고양이 미술사")) {
-	            	FrameBase.getInstance(new FramePosterClick(Member.tokeniD,artName,"FrameSoonPage"));
-	            } else {
-	            FrameBase.getInstance(new FramePosterClick(Member.tokeniD,artName,""));
-	            }
+	            
 			}
 		});
         

@@ -44,7 +44,7 @@ public class FramePosterClick extends JPanel {
 	
 	private String id ;
 	
-	public FramePosterClick(String id,String artname, String prepage) {
+	public FramePosterClick(String id,String artname) {
 		
 		setSize(400, 700); // homepanel 과 같은 사이즈 
         setLayout(null);
@@ -81,27 +81,7 @@ public class FramePosterClick extends JPanel {
 		back.addActionListener(new ActionListener() {
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
-	            if ("Home".equals(prepage)) {
-	                // Home()에서 넘어왔을 때의 동작
-	                FrameBase.getInstance(new Home());
-	            } else if ("FrameSearch_1".equals(prepage)) {
-	                // FrameSearch_1에서 넘어왔을 때의 동작
-	                FrameBase.getInstance(new FrameSearch_1());
-	            } else if("FrameTicketList".equals(prepage)){
-	            	 // FrameSearch_1에서 넘어왔을 때의 동작
-	            	FrameBase.getInstance(new FrameTicketList(Member.tokeniD));
-	            } else if("FrameHomePopularClick".equals(prepage)) {
-	                // 다른 조건에 따른 동작 설정
-	            	FrameBase.getInstance(new Home());
-	            } else if("FrameSoonPage".equals(prepage)) {
-	                // 다른 조건에 따른 동작 설정
-	            	FrameBase.getInstance(new FrameSoonPage());
-	            } else if("".equals(prepage)) {
-	                // 다른 조건에 따른 동작 설정
-	            	FrameBase.getInstance(new Home());
-	            } else {
-	            	FrameBase.getInstance(new Home());
-	            }
+	        	
 	        
 	            // 현재 창을 닫습니다.
 	            Window window1 = SwingUtilities.windowForComponent((Component) e.getSource());
@@ -252,14 +232,11 @@ public class FramePosterClick extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// 예매 버튼 클릭시
-				Window window = SwingUtilities.windowForComponent((Component) e.getSource());	// 현재 창 닫기
-                if (window != null) {
-                    window.dispose(); 
-                }
+
 				System.out.println(artInfo.getArtName()+" : 예매 버튼 클릭");
 				FrameBase.getInstance(new FrameReserve(artInfo, artInfo.getArtName()));	
-				//reserInfoList.add(new ArtReserInfo(id,selectArt,reseveTime , reserveDate,reserverInt));
-				a.show();
+
+				//a.show();
 				
 			}
 		});

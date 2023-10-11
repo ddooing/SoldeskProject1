@@ -216,12 +216,8 @@ public class FrameSearch_1 extends JPanel {
                         if (posterInfo.getImageURL().equals(filteredList.get(i).getImageURL())) {
                             System.out.println(filteredList.get(i).getArtName()); // 클릭 이미지 전시회이름 출력
 
-                            Window window = SwingUtilities.windowForComponent((Component) e.getSource()); // 현재 창 닫기
-                            if (window != null) {
-                                window.dispose();
-                            }
 
-                            FrameBase.getInstance(new FramePosterClick(Member.tokeniD,posterInfo.getArtName(),"FrameSearch_1")); // 해당전시 페이지 출력
+                            FrameBase.getInstance(new FramePosterClick(Member.tokeniD,posterInfo.getArtName())); // 해당전시 페이지 출력
                         }
                     }
 

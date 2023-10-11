@@ -24,12 +24,9 @@ import model.member.ArtReserInfo;
 import model.member.Member;
 
 public class FrameTicketList extends JPanel{
-	
-	private int currentPage=0; // 현재 페이지 인덱스
-    private int postersPerPage=4; // 한 페이지당 포스터 개수
-    private int totalPosters; // 전체 포스터 개수
-    private int totalPages = (int) Math.ceil((double) totalPosters / postersPerPage); // 총 페이지 수
+
     ArrayList<ArtReserInfo> idReserlist;
+    
 	public FrameTicketList(String id)
 	{
 		// JPanel 구조 설정
@@ -79,9 +76,9 @@ public class FrameTicketList extends JPanel{
         	System.out.println("예약한 날짜 "+ idReserlist.get(i).getReserveDate());
 	        	
         }
-        totalPosters= idReserlist.size();
+        //totalPosters= idReserlist.size();
 		
-        updatePosters( currentPage, postersPerPage, totalPosters, totalPages);
+        updatePosters( );
 		
 
 		add(back);
@@ -103,7 +100,7 @@ public class FrameTicketList extends JPanel{
 	}
 	
 	
-	private void updatePosters(int currentPage,int postersPerPage,int totalPosters, int totalPages) {
+	private void updatePosters() {
 
 		//removeAll();
        // revalidate();
@@ -183,11 +180,12 @@ public class FrameTicketList extends JPanel{
         
         List<ArtGalleryInfo> filteredList = new ArrayList<>();
 
-        for (int i = 0; i < 4; i++) {
+        int x= 40; 
+    	int y= 130;
+       for (int i = 0; i < idReserlist.size(); i++) {
             
             ArtReserInfo posterInfo = idReserlist.get(i);
-            	int x= 10; // 시작 
-            	int y= 115;
+            	
                 //filteredList.add(posterInfo);
 
                 ImageIcon originalIcon9 = new ImageIcon(posterInfo.getA().getImageURL());
@@ -195,21 +193,22 @@ public class FrameTicketList extends JPanel{
                 Image scaledImage9 = originalImage9.getScaledInstance(posterWidth, posterHeight, Image.SCALE_SMOOTH);
                 ImageIcon posterImage1 = new ImageIcon(scaledImage9);
                 JLabel posterImage = new JLabel(posterImage1);
-                
+                posterImage.setBounds(x, y, posterWidth, posterHeight);
                 add(posterImage);
                 //System.out.println("posterImage 1 : "+posterInfo.getImageURL());
 
                 JLabel posterTitle = new JLabel(posterInfo.getA().getArtName());
-                posterTitle.setBounds(10, 135, posterWidth, 100);
+                posterTitle.setBounds(posterImage.getX()+posterWidth+10,posterImage.getY()+posterImage.getWidth()/2 -5,
+                		150,30);
                 posterTitle.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 14));
                 add(posterTitle);
-
+                
+                
                 ImageIcon infoclickimg = new ImageIcon("./src/img/info_btn.png");
-                Image infoclick = originalImage9.getScaledInstance(posterWidth, posterHeight, Image.SCALE_SMOOTH);
-                //ImageIcon infoclickimgscale = new Ima
-                //geIcon(scaledImage9);
-                JButton infoclick_btn = new JButton(posterImage1);
-               // infoclick_btn.setBounds(x, y, 140, posterHeight);
+                
+                JButton infoclick_btn = new JButton(infoclickimg);
+                infoclick_btn.setBounds(posterTitle.getX()+posterTitle.getWidth()+50,posterImage.getY()+posterImage.getWidth()/2 -5,
+                		30, 30);
                 infoclick_btn.setBorderPainted(false);
                 infoclick_btn.setContentAreaFilled(false);
                 add(infoclick_btn);
@@ -218,13 +217,30 @@ public class FrameTicketList extends JPanel{
 
                 JLabel menuline = new JLabel(menuLine); // 메뉴선
                 menuline.setSize(380, 5);
-                menuline.setLocation(10, infoclick_btn.getY() + infoclick_btn.getHeight());
+                menuline.setLocation(10,posterImage.getY()+posterImage.getHeight());
 
                 add(menuline);  
+                
+                y+=menuline.getY();
+                
+                infoclick_btn.addActionListener(new ActionListener() {
+        			
+        			@Override
+        			public void actionPerformed(ActionEvent e) {
+        				
+        				FrameBase.getInstance(new FrameInqueryPage(posterInfo));
+        				
+        			}
+        		});
                 
 
                 
             }
 	
+       
     }
+	
+
+	
+	
 }

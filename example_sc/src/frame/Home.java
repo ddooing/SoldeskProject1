@@ -83,6 +83,7 @@ public class Home extends JPanel {
         baseButton(); //버튼 생성
         
         listPanel = new ListPanel(""); // 리스트 보이게될 listPanel
+        recent_btn.setSelected(true);
     	add(listPanel);
     	
     	
