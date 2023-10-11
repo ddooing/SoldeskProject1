@@ -21,6 +21,7 @@ import model.member.ArtReserInfo;
 import model.member.ArtReserInfoList;
 
 public class FrameTicketList extends JPanel {
+	
 	 public FrameTicketList()
 	    {
 	        // JPanel 구조 설정
@@ -37,8 +38,6 @@ public class FrameTicketList extends JPanel {
 	            // TTF 파일을 읽어서 Font 객체 생성
 	            Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File(fontFilePath));
 
-
-	            
 		        JLabel menuline = new JLabel(menuLine); // 메뉴선
 		        JLabel text = new JLabel("티켓 "); 
 	
@@ -104,4 +103,6 @@ public class FrameTicketList extends JPanel {
 				}
 			});
 	    }
+	  
 }
+

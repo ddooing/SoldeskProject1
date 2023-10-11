@@ -57,7 +57,7 @@ public class FrameReserve extends JPanel {
 
         // 이미지 표시
         JLabel imageLabel = new JLabel(HtmlUtils.imgHtmlParser(info.getImageURL()));
-        imageLabel.setSize(360, 280);
+        imageLabel.setSize(360, 20);
         imageLabel.setLocation(20, 70);
         add(imageLabel);
 

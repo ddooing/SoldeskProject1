@@ -2,6 +2,7 @@ package main;
 
 import frame.FrameBase;
 import frame.FrameBegin;
+import frame.FrameInqueryPage;
 
 
 

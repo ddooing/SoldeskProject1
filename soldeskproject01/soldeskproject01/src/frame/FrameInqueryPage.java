@@ -25,37 +25,48 @@ public class FrameInqueryPage extends JPanel {
 	        this.reservation = reservation; // 생성자에서 예약 정보를 전달받음
 	        setLayout(null);
 	        setSize(400, 700);
-
+	        
 	        // 이미지 표시
 	        JLabel imageLabel = new JLabel("예약된 작품 이미지"); // 예약된 작품 이미지를 표시
-	        imageLabel.setSize(360, 250);
+	        imageLabel.setBackground(Color.white);
+	        imageLabel.setSize(360,280);
 	        imageLabel.setLocation(20, 70);
 	        add(imageLabel);
 
-	        // 예약 정보 표시
-	        JLabel idLabel = new JLabel("예약자 ID: " + reservation.getId());
-	        idLabel.setBounds(20, 330, 200, 20);
-	        add(idLabel);
-
-	        JLabel artNameLabel = new JLabel("예약된 작품: " + reservation.getA().getArtName());
-	        artNameLabel.setBounds(20, 360, 300, 20);
+	        JLabel artNameLabel = new JLabel(reservation.getA().getArtName());
+	        artNameLabel.setBounds(30, 360, 400, 30);
 	        add(artNameLabel);
+	        
+	        JLabel artplace = new JLabel(reservation.getA().getPlace());
+	        artplace.setBounds(30, 410, 400, 60);
+	        add(artplace);
 
-	        JLabel dateLabel = new JLabel("예약일: " + reservation.getReserveDate());
-	        dateLabel.setBounds(20, 390, 200, 20);
+	        JLabel dateLabel = new JLabel(reservation.getReserveDate());
+	        dateLabel.setBounds(30, 500, 400, 70);
 	        add(dateLabel);
 
-	        JLabel timeLabel = new JLabel("예약 시간: " + reservation.getReseveTime());
+	        // 구분선 추가
+	        JSeparator separator1 = new JSeparator();
+	        separator1.setBounds(20, 395, 360, 10); // 구분선의 위치와 크기 조정
+	        separator1.setForeground(Color.BLACK);
+	        add(separator1);
+
+			JSeparator separator2 = new JSeparator();
+			separator2.setBounds(20, 490, 360, 10); // 구분선의 위치와 크기 조정
+			separator2.setForeground(Color.BLACK); 
+			add(separator2);
+	        
+	        JLabel timeLabel = new JLabel(reservation.getReseveTime());
 	        timeLabel.setBounds(20, 420, 200, 20);
 	        add(timeLabel);
 
-	        JLabel ticketLabel = new JLabel("티켓 수량: " + reservation.getReserverInt());
+	        JLabel ticketLabel = new JLabel(reservation.getReserverInt() + "장");
 	        ticketLabel.setBounds(20, 450, 200, 20);
 	        add(ticketLabel);
 
 	        // 뒤로 가는 버튼
 	        JButton backButton = new JButton("뒤로 가기");
-	        backButton.setBounds(20, 550, 120, 40);
+	        backButton.setBounds(30, 640, 50, 40);
 	        add(backButton);
 
 	        backButton.addActionListener(e -> {
@@ -74,11 +85,7 @@ public class FrameInqueryPage extends JPanel {
 	            }
 	        });
 	        
-	        // 구분선 추가
-	        JSeparator separator1 = new JSeparator();
-	        separator1.setBounds(20, 395, 360, 10); // 구분선의 위치와 크기 조정
-	        separator1.setForeground(Color.BLACK);
-	        add(separator1);
 	 
     }
+
 }
