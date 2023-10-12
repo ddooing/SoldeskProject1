@@ -1,4 +1,4 @@
-package frame;
+package frame.underbtn;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -28,6 +28,9 @@ import javax.swing.SwingUtilities;
 
 import artDB.ArtGalleryInfo;
 import artDB.ArtGalleryList;
+import frame.base.FrameBase;
+import frame.home.FramePosterClick;
+import frame.home.Home;
 import model.member.Member;
 
 public class FrameSearch_1 extends JPanel {
@@ -212,14 +215,9 @@ public class FrameSearch_1 extends JPanel {
                 public void actionPerformed(ActionEvent e) {
                     // 포스터 눌렀을 때
                     
-                    for (int i = 0; i < filteredList.size(); i++) {
-                        if (posterInfo.getImageURL().equals(filteredList.get(i).getImageURL())) {
-                            System.out.println(filteredList.get(i).getArtName()); // 클릭 이미지 전시회이름 출력
-
 
                             FrameBase.getInstance(new FramePosterClick(Member.tokeniD,posterInfo.getArtName())); // 해당전시 페이지 출력
-                        }
-                    }
+
 
                 }
             });

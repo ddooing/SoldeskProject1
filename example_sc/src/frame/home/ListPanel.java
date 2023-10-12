@@ -1,4 +1,4 @@
-package frame;
+package frame.home;
 
 
 import java.awt.Color;
@@ -24,6 +24,7 @@ import javax.swing.SwingUtilities;
 import artDB.ArtGalleryInfo;
 import artDB.ArtGalleryList;
 import controller.member.MemberToken;
+import frame.base.FrameBase;
 import model.member.Member;
 
 import java.util.ArrayList;
@@ -45,9 +46,7 @@ public class ListPanel extends JPanel {
 
         ArtGalleryList artgallerylist = new ArtGalleryList();
 
-        
-        System.out.println("home id : "+Member.tokeniD);
-        
+
         // 필터링된 포스터 정보를 담을 리스트
         filteredPosterInfoList = new ArrayList<>();
         
@@ -160,6 +159,7 @@ public class ListPanel extends JPanel {
 
         // "이전 페이지" 버튼을 초기에 비활성화
         prepageButton.setEnabled(false);
+        
 
         // 컴포넌트 추가
         //add(btnSearch);
@@ -214,14 +214,10 @@ public class ListPanel extends JPanel {
                 posterImage.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                    	for (int i = 0; i < posterInfoList.size(); i++) {
-                            if (posterInfo.getImageURL().equals(posterInfoList.get(i).getImageURL())) {
-
-                                
+       
                                 FrameBase.getInstance(new FramePosterClick(Member.tokeniD,posterInfo.getArtName()));			// 해당전시 페이지 출력
-                            }
-                            
-                        }			
+
+                        			
                     }
                 });
             }

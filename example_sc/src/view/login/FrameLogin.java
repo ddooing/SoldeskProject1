@@ -25,12 +25,9 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import controller.member.MemberController;
-import controller.member.MemberToken;
-
-import frame.FrameBase;
-import frame.FrameBegin;
-
-import frame.Home;
+import frame.base.FrameBase;
+import frame.home.FrameBegin;
+import frame.home.Home;
 import model.member.Member;
 import model.member.MemberList;
 
@@ -211,7 +208,7 @@ public class FrameLogin extends JPanel {
 				} else {
 					if (idCheck.equals(new String(tfPW.getPassword()))) {
 						Member.tokeniD = id;
-						System.out.println("id : "+Member.tokeniD);
+						//System.out.println("id : "+Member.tokeniD);
 						JOptionPane.showMessageDialog(null, id + "님, 환영합니다!");
 						FrameBase.getInstance(new Home());
 						dispose();

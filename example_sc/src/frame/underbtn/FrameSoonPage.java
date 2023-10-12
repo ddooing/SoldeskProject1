@@ -1,8 +1,10 @@
-package frame;
+package frame.underbtn;
 
 import javax.swing.*;
 import artDB.ArtGalleryInfo;
 import artDB.ArtGalleryList;
+import frame.base.FrameBase;
+import frame.home.FramePosterClick;
 import model.member.Member;
 
 import java.awt.*;
@@ -133,17 +135,9 @@ public class FrameSoonPage extends JPanel {
             posterImage.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    for (int i = 0; i < posterInfoList.size(); i++) {
-                        if (posterInfo.getImageURL().equals(posterInfoList.get(i).getImageURL())) {
-                            System.out.println(posterInfoList.get(i).getArtName());							// 클릭 이미지 전시회이름 출력
-                            
-                            Window window = SwingUtilities.windowForComponent((Component) e.getSource());	// 현재 창 닫기
-                            if (window != null) {
-                                window.dispose(); 
-                            }
-                            
-                        }
-                    }
+                    
+                            FrameBase.getInstance(new FramePosterClick(Member.tokeniD,posterInfo.getArtName()));	// 해당전시 페이지 출력
+
                 }
             });
         }

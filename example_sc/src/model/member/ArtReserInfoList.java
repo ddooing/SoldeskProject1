@@ -24,12 +24,7 @@ public class ArtReserInfoList {
  
     }
 
-	public void show() {
-		for( ArtReserInfo a : arr)
-		{
-			System.out.println(a.toString());
-		}
-	}
+
 	public List<ArtReserInfo> getArtReserInfoList() {
 		return arr;
 	}
@@ -44,20 +39,26 @@ public class ArtReserInfoList {
 			{
 				idReserlist.add(a);
 				//확인용
-				System.out.println(Member.tokeniD + "가 예약한 리스트 "+a.toString());
+				//System.out.println(Member.tokeniD + "가 예약한 리스트 "+a.toString());
 			}
 		}
 		return idReserlist;
 	}
-	public void showId() {
-			//토큰 잘 가져옴
-			System.out.println(Member.tokeniD);
-		
-	}
+
 	
 	public static void addReservation(ArtReserInfo reservation) {
 		// TODO Auto-generated method stub
 		arr.add(reservation);
 	}
+	
+	
+    /*
+    //확인용
+	public void show() {
+		for( ArtReserInfo a : arr)
+		{
+			System.out.println(a.toString());
+		}
+	}*/
     
 }

@@ -1,4 +1,4 @@
-package frame;
+package frame.underbtn;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -20,8 +20,11 @@ import javax.swing.SwingUtilities;
 
 import artDB.ArtGalleryInfo;
 import controller.member.MemberToken;
+import frame.base.FrameBase;
+import frame.home.Home;
 import model.member.ArtReserInfo;
 import model.member.Member;
+
 
 public class FrameTicketList extends JPanel{
 
@@ -49,17 +52,7 @@ public class FrameTicketList extends JPanel{
         add(text);
         add(menuline);  
         System.out.println(menuline.getY() + menuline.getHeight());
-        //back 버튼
-        ImageIcon originalIcon10 = new ImageIcon("./src/img/뒤로가기.png");
-		Image originalImage10 = originalIcon10.getImage();
-		Image scaledImage10 = originalImage10.getScaledInstance(50, 40, Image.SCALE_SMOOTH);
-		ImageIcon posterImage10 = new ImageIcon(scaledImage10);
-		JButton back = new JButton(posterImage10);
-		back.setSize(50, 40);
-		back.setLocation(30, 30);
-		back.setBorderPainted(false);
-		back.setContentAreaFilled(false);
-		back.setFocusPainted(false);
+        
 
 		//리스트 만들기 
 		Member m = new Member();
@@ -81,19 +74,7 @@ public class FrameTicketList extends JPanel{
         updatePosters( );
 		
 
-		add(back);
-
-		back.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Window window = SwingUtilities.windowForComponent((Component) e.getSource()); // 현재 창 닫기
-				if (window != null) {
-					window.dispose();
-				}
-				FrameBase.getInstance(new Home());
-			}
-		});
+	
 		
 		
 		
@@ -102,9 +83,6 @@ public class FrameTicketList extends JPanel{
 	
 	private void updatePosters() {
 
-		//removeAll();
-       // revalidate();
-       // repaint();
         
         // 전역으로 사용할 다음 페이지 이동 버튼
         ImageIcon originalIcon5 = new ImageIcon("./src/img/다음.png");
@@ -118,65 +96,13 @@ public class FrameTicketList extends JPanel{
         Image scaledImage6 = originalImage6.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         ImageIcon prepage = new ImageIcon(scaledImage6);
 
-        /*
-        // "다음 페이지" 버튼 생성
-        JButton nextpageButton = new JButton(nextpage);
-        nextpageButton.setBounds(310, 460, 30, 30);
-        nextpageButton.setContentAreaFilled(false);
-        nextpageButton.setBorderPainted(false);
-        nextpageButton.setFocusPainted(false);
 
-        // "이전 페이지" 버튼 생성
-        JButton prepageButton = new JButton(prepage);
-        prepageButton.setBounds(20, 460, 30, 30);
-        prepageButton.setContentAreaFilled(false);
-        prepageButton.setBorderPainted(false);
-        prepageButton.setFocusPainted(false);
-
-        nextpageButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // 다음 페이지로 이동
-                if (currentPage < totalPages - 1) { // 다음 페이지로 이동 가능한 경우에만 이동
-                    prepageButton.setEnabled(true);
-                    int currentPagesPlus = currentPage+1;
-                    updatePosters(currentPagesPlus, postersPerPage, totalPosters, totalPages);
-                    System.out.println("다음페이지 클릭");
-                }
-            }
-        });
-
-        // "이전 페이지" 버튼에 ActionListener 추가
-        prepageButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // 이전 페이지로 이동
-                if (currentPage > 0) { // 이전 페이지로 이동 가능한 경우에만 이동
-                	int currentPagesMinus = currentPage-1;
-                    updatePosters(currentPagesMinus, postersPerPage, totalPosters, totalPages);
-                    System.out.println("이전페이지 클릭");
-                }
-            }
-        });
-
-        // "이전 페이지" 버튼을 초기에 비활성화
-        prepageButton.setEnabled(false);
-
-        // 컴포넌트 추가
-        //add(btnSearch);
-        add(nextpageButton);
-        add(prepageButton);
-	*/
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         
         int posterWidth = 60;
         int posterHeight = 80;
         
-        //int startIndex = 0;
-        //int endIndex = 1;//Math.min(startIndex + postersPerPage, idReserlist.size());
 
-        // 포스터 개수 확인용
-        //System.out.println("posterInfoList.size(): "+posterInfoList.size());
         
         List<ArtGalleryInfo> filteredList = new ArrayList<>();
 
@@ -217,11 +143,11 @@ public class FrameTicketList extends JPanel{
 
                 JLabel menuline = new JLabel(menuLine); // 메뉴선
                 menuline.setSize(380, 5);
-                menuline.setLocation(10,posterImage.getY()+posterImage.getHeight());
+                menuline.setLocation(10,posterImage.getY()+posterImage.getHeight()+10);
 
                 add(menuline);  
                 
-                y+=menuline.getY();
+                y=menuline.getY()+30;
                 
                 infoclick_btn.addActionListener(new ActionListener() {
         			
@@ -244,3 +170,4 @@ public class FrameTicketList extends JPanel{
 	
 	
 }
+

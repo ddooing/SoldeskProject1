@@ -1,4 +1,4 @@
-package frame;
+package frame.reserve;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 import java.util.Vector;
 
@@ -31,6 +32,9 @@ import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 import artDB.ArtGalleryInfo;
+import artDB.ArtGalleryList;
+import frame.base.FrameBase;
+import frame.home.FramePosterClick;
 import model.member.ArtReserInfo;
 import model.member.ArtReserInfoList;
 import model.member.Member;
@@ -46,6 +50,7 @@ public class FrameReserve extends JPanel {
     private String artName; // 추가: 전달된 예약에 필요한 예술 작품 이름
     private JTable reservationTable;
     private DefaultTableModel tableModel;
+    private JComboBox<String> timeComboBox;
     
     public FrameReserve(ArtGalleryInfo info, String artName) {
         this.info = info;
@@ -68,7 +73,7 @@ public class FrameReserve extends JPanel {
 
         // 티켓 수량 선택
         JLabel ticketLabel = new JLabel("티켓 수량:"); // 라벨 생성
-        ticketLabel.setBounds(30, 360, 80, 30); // 라벨 위치와 크기 설정
+        ticketLabel.setBounds(30, 460, 80, 30); // 라벨 위치와 크기 설정
         add(ticketLabel); // 라벨을 패널에 추가
         
 
@@ -79,7 +84,7 @@ public class FrameReserve extends JPanel {
         JFormattedTextField ticketTextField = ((JSpinner.DefaultEditor) ticketSpinner.getEditor()).getTextField(); // 텍스트 필드 가져오기 (선택된 값 표시를 위해)
         //ticketTextField.setBackground(Color.WHITE);
         ticketTextField.setEditable(false); // 텍스트 필드를 수정 불가능하도록 설정 (스피너 값을 직접 입력하지 못하게 함)
-        ticketSpinner.setBounds(120, 360, 50, 30); // 스피너 위치와 크기 설정
+        ticketSpinner.setBounds(120, 460, 50, 30); // 스피너 위치와 크기 설정
         add(ticketSpinner); // 스피너를 패널에 추가
 
         // 시간대 선택
@@ -87,22 +92,29 @@ public class FrameReserve extends JPanel {
         timeLabel.setBounds(30, 410, 80, 30);
         add(timeLabel);
 
-        String[] timeOptions = {"08:00 - 09:20","9:20 - 10:20", "10:20 - 11:20", "12:00 - 13:20", "14:00 - 15:20", "16:00 - 17:20", "18:00 - 17:20"};
-        JComboBox<String> timeComboBox = new JComboBox<>(timeOptions);
-        //timeComboBox.setBackground(Color.WHITE); 
-        timeComboBox.setBounds(120, 410, 120, 30);
-        add(timeComboBox);
+        try {
+            ArtGalleryList artGalleryList = new ArtGalleryList();
+            List<String> timeSlots = artGalleryList.generateTimeSlots(info.getStarttime(), info.getEndtime(), 120);
+
+            String[] timeOptions = timeSlots.toArray(new String[timeSlots.size()]);
+            timeComboBox = new JComboBox<>(timeOptions); // 시간대 선택 컴보박스 초기화
+            timeComboBox.setBounds(120, 410, 80, 30);
+            add(timeComboBox);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         // 날짜 선택
         JLabel dateLabel = new JLabel("날짜:");
-        dateLabel.setBounds(30, 460, 80, 30);
+        dateLabel.setBounds(30, 360, 80, 30);
         add(dateLabel);
         
         UtilDateModel model = new UtilDateModel();
+        model.setValue(new Date());		// 디폴트값 : 오늘날짜 
         JDatePanelImpl datePanel = new JDatePanelImpl(model);
         datePanel.setBackground(Color.WHITE);
         JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());     
-        datePicker.setBounds(120, 460, 150, 30);
+        datePicker.setBounds(120, 360, 150, 30);
         add(datePicker);
         
         // 예약 목록 테이블 생성 
@@ -115,6 +127,31 @@ public class FrameReserve extends JPanel {
         scrollPane.setBounds(30, 600, 350, 100);
         scrollPane.setVisible(false); // 이 부분 추가
         add(scrollPane);
+        
+        datePicker.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (datePicker.getModel().getValue() != null) {
+                    // 날짜 선택이 있는 경우
+                    int year = model.getYear();
+                    int month = model.getMonth() + 1;
+                    int day = model.getDay();
+                    String chosenDateStr = year + "-" + month + "-" + day;
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    try {
+                        Date chosenDate = sdf.parse(chosenDateStr);
+
+                        if (chosenDate.before(info.getDateStart()) || chosenDate.after(info.getDateEnd())) {
+                            // 선택한 날짜가 유효한 범위 내에 없는 경우
+                            JOptionPane.showMessageDialog(FrameReserve.this, "전시 운영 기간이 아닙니다.", "경고", JOptionPane.WARNING_MESSAGE);
+                            datePicker.getModel().setValue(null);
+                        }
+                    } catch (ParseException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+        });
         
         ImageIcon originalIcon10 = new ImageIcon("./src/img/뒤로가기.png");
         Image originalImage10 = originalIcon10.getImage();
@@ -137,26 +174,42 @@ public class FrameReserve extends JPanel {
 	            if (window != null) {
 	                window.dispose();
 	            }
-	            
-	            
+
 			}
 		});
         
         // 예약 버튼
-        JButton reserveButton = new JButton("결제하기");
-        reserveButton.setBounds(150, 550, 100, 40);
+		ImageIcon originalIcon11 = new ImageIcon("./src/img/결제하기.png");
+        Image originalImage11 = originalIcon11.getImage();
+        Image scaledImage11 = originalImage11.getScaledInstance(120, 40, Image.SCALE_SMOOTH);
+        ImageIcon posterImage11 = new ImageIcon(scaledImage11);
+        JButton reserveButton = new JButton(posterImage11);
+        reserveButton.setBounds(140, 550, 120, 40);
+        reserveButton.setBorderPainted(false); // 버튼 외각선 지우기
+        reserveButton.setContentAreaFilled(false); // 버튼 투명하게 지우기(이미지는 남음)
+        reserveButton.setFocusPainted(false); // 버튼 선택 표시 지우기
         add(reserveButton);
+        
+        // 예약버튼 호버
+        ImageIcon reserveButton1 = new ImageIcon("./src/img/결제하기hover.png");
+        Image scaledHoverImage1 = reserveButton1.getImage().getScaledInstance(120, 40, Image.SCALE_SMOOTH);
+        reserveButton.setRolloverIcon(new ImageIcon(scaledHoverImage1));
 
         reserveButton.addActionListener(new ActionListener() {
+        	
+            
             @Override
             public void actionPerformed(ActionEvent e) {
+            	
+            	
+                
                 int selectedTicket = (int) ticketSpinner.getValue();
-                String selectedTime = (String) timeComboBox.getSelectedItem();
+                String selectedTime = (String) timeComboBox.getSelectedItem(); 
 
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                String selectedDate="";
+                String selectedDate = "";
                 String selectedName = info.getArtName();
-                
+
                 JFormattedTextField dateTextField = datePicker.getJFormattedTextField();
 
                 if (datePicker.getModel().getValue() != null) {
@@ -166,35 +219,34 @@ public class FrameReserve extends JPanel {
                     String chosenDateStr = year + "-" + month + "-" + day;
                     try {
                         Date chosenDate = sdf.parse(chosenDateStr);
-                        selectedDate= sdf.format(chosenDate);
-                        
+                        selectedDate = sdf.format(chosenDate);
+
                         if (selectedTicket > 0 && !selectedDate.isEmpty()) {
                             
-                           ArtReserInfo reservation = new ArtReserInfo(Member.tokeniD, info, selectedTime, selectedDate, selectedTicket);
-                           
-                           ArtReserInfoList artReserInfoList = new ArtReserInfoList();
 
-                           ArtReserInfoList.addReservation(reservation);
-                           
-                          ticketSpinner.setValue(1);
-                          timeComboBox.setSelectedIndex(0);
-                          datePicker.getModel().setValue(null);
+                            
 
-                          // 예약 확인 창 띄우기
-                          FrameGalleryConfirm confirmFrame =
-                              new FrameGalleryConfirm(selectedName, selectedDate, selectedTime,selectedTicket);
-                          confirmFrame.setVisible(true);
+                            ticketSpinner.setValue(1);
+                            timeComboBox.setSelectedIndex(0);
+                            datePicker.getModel().setValue(null);
 
-                        } else if (selectedTicket == 0){
-                             JOptionPane.showMessageDialog(FrameReserve.this,"티켓 수량을 확인해주세요.", "경고", JOptionPane.WARNING_MESSAGE);
+                            FrameGalleryConfirm confirmFrame = new FrameGalleryConfirm(selectedName, selectedDate, selectedTime, selectedTicket,info);
+                            confirmFrame.setVisible(true);
+                            
+                            Window window = SwingUtilities.windowForComponent((Component) e.getSource());	// 현재 창 닫기
+                            if (window != null) {
+                                window.dispose(); 
+                            }
+                            
+                        } else if (selectedTicket == 0) {
+                            JOptionPane.showMessageDialog(FrameReserve.this, "티켓 수량을 확인해주세요.", "경고", JOptionPane.WARNING_MESSAGE);
                         }
-                       
-                   } catch (ParseException ex) {
-                       ex.printStackTrace();
-                   }
-               } else{
-                  JOptionPane.showMessageDialog(FrameReserve.this, "날짜를 선택해주세요.", "경고", JOptionPane.WARNING_MESSAGE);
-               }
+                    } catch (ParseException ex) {
+                        ex.printStackTrace();
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(FrameReserve.this, "날짜를 선택해주세요.", "경고", JOptionPane.WARNING_MESSAGE);
+                }
             }
         });
     }

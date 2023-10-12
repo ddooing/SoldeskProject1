@@ -1,11 +1,13 @@
 
-package frame;
+package frame.home;
 
 
 import javax.swing.*;
 import artDB.ArtGalleryInfo;
 import artDB.ArtGalleryList;
 import controller.member.MemberToken;
+import frame.base.FrameBase;
+import frame.underbtn.FrameSearch_1;
 import view.login.FrameLogin;
 
 import java.awt.*;
@@ -82,9 +84,17 @@ public class Home extends JPanel {
         
         baseButton(); //버튼 생성
         
-        listPanel = new ListPanel(""); // 리스트 보이게될 listPanel
-        recent_btn.setSelected(true);
+        listPanel = new ListPanel("최신"); // 리스트 보이게될 listPanel
+        
     	add(listPanel);
+    	
+    	// recent_btn을 선택되어 있는 상태로 만듦
+        recent_btn.setSelected(true);
+
+        ImageIcon originalIcon2 = new ImageIcon("./src/img/최신버튼.png");
+        Image scaledImage2 = originalIcon2.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
+        ImageIcon two = new ImageIcon(scaledImage2);
+        recent_btn.setIcon(two);
     	
     	
     	btnSearch.addActionListener(new ActionListener() {
@@ -108,6 +118,7 @@ public class Home extends JPanel {
                     Image scaledImage2 = originalIcon2.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
                     ImageIcon two = new ImageIcon(scaledImage2);
                     recent_btn.setIcon(two);
+                    
             
                      remove(listPanel);
                      listPanel = new ListPanel("최신");
@@ -134,6 +145,7 @@ public class Home extends JPanel {
                     Image scaledImage2 = originalIcon2.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
                     ImageIcon two = new ImageIcon(scaledImage2);
                     popula_btn.setIcon(two);
+                    
             
                      remove(listPanel);
                      listPanel = new ListPanel("인기");
@@ -162,6 +174,7 @@ public class Home extends JPanel {
                     Image scaledImage2 = originalIcon2.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
                     ImageIcon two = new ImageIcon(scaledImage2);
                     free_btn.setIcon(two);
+                    
             
 
                      remove(listPanel);
@@ -189,6 +202,7 @@ public class Home extends JPanel {
                     Image scaledImage2 = originalIcon2.getImage().getScaledInstance(80, 30, Image.SCALE_SMOOTH);
                     ImageIcon two = new ImageIcon(scaledImage2);
                     soonEnd_btn.setIcon(two);
+                    
 					
                      remove(listPanel);
                      listPanel = new ListPanel("곧종료");

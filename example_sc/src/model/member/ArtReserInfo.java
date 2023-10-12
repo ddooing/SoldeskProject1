@@ -8,10 +8,10 @@ public class ArtReserInfo {
 	private String reseveTime;
 	private String reserveDate;
 	private int reserverInt;
-	
+	private String totalfee;
 
 						//로그인한 사용자의 id 
-	public ArtReserInfo(String id,ArtGalleryInfo a,String reseveTime,String reserveDate,int reserverInt)
+	public ArtReserInfo(String id,ArtGalleryInfo a,String reseveTime,String reserveDate,int reserverInt, String totalfee)
 	{
 		
 		this.id=id;
@@ -19,6 +19,7 @@ public class ArtReserInfo {
 		this.reserveDate=reserveDate;
 		this.reseveTime=reseveTime;
 		this.reserverInt=reserverInt;
+		this.totalfee=totalfee;
 		//System.out.println(id +" "+reserveDate+ " "+reseveTime + " "+reserverInt);
 	}
 	
@@ -66,6 +67,14 @@ public class ArtReserInfo {
 
 	public void setReserverInt(int reserverInt) {
 		this.reserverInt = reserverInt;
+	}
+
+	public String getTotalfee() {
+		return totalfee;
+	}
+
+	public void setTotalfee(String totalfee) {
+		this.totalfee = totalfee;
 	}
 	
 	

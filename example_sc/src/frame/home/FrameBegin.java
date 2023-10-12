@@ -1,4 +1,4 @@
-package frame;
+package frame.home;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import artDB.ArtGalleryList;
-
+import frame.base.FrameBase;
 import view.login.FrameJoin;
 import view.login.FrameLogin;
 
