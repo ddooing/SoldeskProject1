@@ -51,54 +51,21 @@ public class FrameTicketList extends JPanel{
         
         add(text);
         add(menuline);  
-        System.out.println(menuline.getY() + menuline.getHeight());
-        
 
-		//리스트 만들기 
 		Member m = new Member();
         
         idReserlist = new ArrayList<ArtReserInfo>();
-        
-        System.out.println("티켓 페이지 ");
-        
+      
         idReserlist =m.getTiketList(); // 내 티켓 정보 리스트 가져옴 
-        
-        for(int i=0;i<idReserlist.size();i++)
-        {
-        	System.out.println("예약한 제목 "+ idReserlist.get(i).getA().getArtName());
-        	System.out.println("예약한 날짜 "+ idReserlist.get(i).getReserveDate());
-	        	
-        }
-        //totalPosters= idReserlist.size();
+
 		
         updatePosters( );
-		
-
 	
-		
-		
-		
 	}
 	
 	
 	private void updatePosters() {
 
-        
-        // 전역으로 사용할 다음 페이지 이동 버튼
-        ImageIcon originalIcon5 = new ImageIcon("./src/img/다음.png");
-        Image originalImage5 = originalIcon5.getImage();
-        Image scaledImage5 = originalImage5.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-        ImageIcon nextpage = new ImageIcon(scaledImage5);
-
-        // 전역으로 사용할 이전 페이지 이동 버튼
-        ImageIcon originalIcon6 = new ImageIcon("./src/img/이전.png");
-        Image originalImage6 = originalIcon6.getImage();
-        Image scaledImage6 = originalImage6.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-        ImageIcon prepage = new ImageIcon(scaledImage6);
-
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        
         int posterWidth = 60;
         int posterHeight = 80;
         
