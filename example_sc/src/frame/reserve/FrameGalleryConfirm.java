@@ -87,6 +87,7 @@ public class FrameGalleryConfirm extends JFrame {
 
                 ArtReserInfoList.addReservation(reservation);
                 
+                info.addCnt(selectedTicket);
             	dispose(); // 현재 창 닫기
                 
             }
