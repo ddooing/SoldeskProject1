@@ -150,17 +150,10 @@ public class ArtGalleryList {
             		 "./src/poster/문도멘도 판타스틱시티라이프.jpg", 0));
             
              startDate = dateFormat.parse("2023-10-31");
-             endDate = dateFormat.parse("2023-12-31");
-             arr.add(new ArtGalleryInfo("문도멘도 ", "15,000", "그라운드시소 서촌", startDate, endDate, "10:00","19:00", "https://naver.me/xKQWUady",
-            		 "./src/poster/문도멘도 판타스틱시티라이프.jpg", 0));
-             startDate = dateFormat.parse("2023-10-31");
-             endDate = dateFormat.parse("2023-12-31");
-             arr.add(new ArtGalleryInfo("문도멘도 ", "15,000", "그라운드시소 서촌", startDate, endDate, "10:00","19:00", "https://naver.me/xKQWUady",
-            		 "./src/poster/문도멘도 판타스틱시티라이프.jpg", 0));
-             startDate = dateFormat.parse("2023-10-31");
-             endDate = dateFormat.parse("2023-12-31");
-             arr.add(new ArtGalleryInfo("문도멘도 ", "15,000", "그라운드시소 서촌", startDate, endDate, "10:00","19:00", "https://naver.me/xKQWUady",
-            		 "./src/poster/문도멘도 판타스틱시티라이프.jpg", 0));
+             endDate = dateFormat.parse("2024-2-5");
+             arr.add(new ArtGalleryInfo("Into Drawing 48 이채영 <이해의 자리> ", "무료", "소마 미술관", startDate, endDate, "10:00","18:00", "https://naver.me/xKQWUady",
+            		 "./src/poster/이채영.jpg", 0));
+             
             
             
             
