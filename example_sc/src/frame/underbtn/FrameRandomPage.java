@@ -196,7 +196,7 @@ public class FrameRandomPage extends JPanel {
 				if (window != null) {
 					window.dispose();
 				}
-				FrameBase.getInstance(new Home());
+				//FrameBase.getInstance(new Home());
 			}
 		});
 		

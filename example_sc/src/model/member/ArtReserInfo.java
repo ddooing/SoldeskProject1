@@ -20,7 +20,6 @@ public class ArtReserInfo {
 		this.reseveTime=reseveTime;
 		this.reserverInt=reserverInt;
 		this.totalfee=totalfee;
-		//System.out.println(id +" "+reserveDate+ " "+reseveTime + " "+reserverInt);
 	}
 	
 	@Override

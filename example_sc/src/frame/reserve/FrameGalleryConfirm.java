@@ -6,6 +6,7 @@ import artDB.ArtGalleryInfo;
 import frame.base.FrameBase;
 import frame.home.FramePosterClick;
 import frame.home.Home;
+import frame.home.ListPanel;
 import model.member.ArtReserInfo;
 import model.member.ArtReserInfoList;
 import model.member.Member;
@@ -17,11 +18,14 @@ import java.awt.event.ActionListener;
 public class FrameGalleryConfirm extends JFrame {
     private FramePosterClick framePosterClick;
     private ArtGalleryInfo info;
-
+    
+    public FrameGalleryConfirm() {
+    	
+    }
 	public FrameGalleryConfirm(String selectedName, String selectedDate, String selectedTime, int selectedTicket,ArtGalleryInfo info) {
     	 this.framePosterClick = framePosterClick; // FramePosterClick 인스턴스 초기화
     	 this.info = info;
-    	String totalfee;
+    	 String totalfee;
     	 
     	// 프레임 설정
     	Toolkit tk = Toolkit.getDefaultToolkit();//해상도
@@ -47,8 +51,7 @@ public class FrameGalleryConfirm extends JFrame {
         	totalfee = info.getFee();
         	confirmPanel.add(new JLabel("총 가격: " + totalfee));
         } else {
-        	
-        	
+
         	String feeWithComma = info.getFee(); // 예: "15,000"
         	String feeWithoutComma = feeWithComma.replaceAll(",", ""); // 쉼표 제거: "15000"
         	int fee = Integer.parseInt(feeWithoutComma); // 정수로 변환
@@ -58,28 +61,55 @@ public class FrameGalleryConfirm extends JFrame {
         	confirmPanel.add(new JLabel("총 가격: " + totalfee));
         }
         
-        // 닫기 버튼 생성 및 추가
-        ImageIcon originalIcon10 = new ImageIcon("./src/img/닫기.png");
+      //취소 버튼 생성 및 추가
+        ImageIcon originalIcon13 = new ImageIcon("./src/img/취소.png");
+        Image originalImage13 = originalIcon13.getImage();
+        Image scaledImage13 = originalImage13.getScaledInstance(120, 30, Image.SCALE_SMOOTH);
+        ImageIcon posterImage13 = new ImageIcon(scaledImage13);
+        JButton closebtn = new JButton(posterImage13);
+        
+        closebtn.setBorderPainted(false);
+        closebtn.setContentAreaFilled(false);
+        closebtn.setFocusPainted(false);
+        
+        JPanel buttonPanel = new JPanel(new GridLayout(1, 2));
+        
+        // 취소 버튼 호버
+        ImageIcon closbtn1 = new ImageIcon("./src/img/취소hover.png");
+        Image scaledHoverImage12 = closbtn1.getImage().getScaledInstance(120, 30, Image.SCALE_SMOOTH);
+        closebtn.setRolloverIcon(new ImageIcon(scaledHoverImage12));
+        
+        closebtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				
+			}
+		});
+        
+        
+        
+        
+     // 닫기 버튼 생성 및 추가
+        ImageIcon originalIcon10 = new ImageIcon("./src/img/결제하기1.png");
         Image originalImage10 = originalIcon10.getImage();
         Image scaledImage10 = originalImage10.getScaledInstance(120, 30, Image.SCALE_SMOOTH);
         ImageIcon posterImage10 = new ImageIcon(scaledImage10);
-        JButton closeButton = new JButton(posterImage10);
-        closeButton.setBorderPainted(false);
-        closeButton.setContentAreaFilled(false);
-        closeButton.setFocusPainted(false);
+        JButton paymentbtn = new JButton(posterImage10);
+        paymentbtn.setBorderPainted(false);
+        paymentbtn.setContentAreaFilled(false);
+        paymentbtn.setFocusPainted(false);
         
         // 예약버튼 호버
-        ImageIcon reserveButton1 = new ImageIcon("./src/img/닫기hover.png");
+        ImageIcon reserveButton1 = new ImageIcon("./src/img/결제하기1hover.png");
         Image scaledHoverImage1 = reserveButton1.getImage().getScaledInstance(120, 30, Image.SCALE_SMOOTH);
-        closeButton.setRolloverIcon(new ImageIcon(scaledHoverImage1));
+        paymentbtn.setRolloverIcon(new ImageIcon(scaledHoverImage1));
         
-        closeButton.addActionListener(new ActionListener() {
+        paymentbtn.addActionListener(new ActionListener() {
         	
-        	
-            
             @Override
             public void actionPerformed(ActionEvent e) {
-            	
             	
             	ArtReserInfo reservation = new ArtReserInfo(Member.tokeniD, info, selectedTime, selectedDate, selectedTicket,totalfee);
 
@@ -87,15 +117,29 @@ public class FrameGalleryConfirm extends JFrame {
 
                 ArtReserInfoList.addReservation(reservation);
                 
-                info.addCnt(selectedTicket);
-            	dispose(); // 현재 창 닫기
+                info.addCnt(selectedTicket);         
+
+                dispose(); // 현재 창 닫기
+                
+                FrameBase.getInstance(new Home(ListPanel.whatfiltername));
+                
+                
                 
             }
         });
-        confirmPanel.add(closeButton);
+        buttonPanel.add(paymentbtn);
+        buttonPanel.add(closebtn);
+        confirmPanel.add(buttonPanel);
 
         add(confirmPanel); // 패널을 프레임에 추가
 
         setVisible(true); // 프레임 보이게 설정
     }
+
+	@Override
+	public void dispose() {
+		super.dispose();
+	}
+
+	
 }

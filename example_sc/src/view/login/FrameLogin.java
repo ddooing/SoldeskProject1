@@ -26,7 +26,7 @@ import javax.swing.SwingUtilities;
 
 import controller.member.MemberController;
 import frame.base.FrameBase;
-import frame.home.FrameBegin;
+//import frame.home.FrameBegin;
 import frame.home.Home;
 import model.member.Member;
 import model.member.MemberList;
@@ -45,13 +45,14 @@ public class FrameLogin extends JPanel {
 	public FrameLogin(JPanel homePanel) {
 		this.frameLoginPanel = homePanel;
 		
+		/*
 		posterPanel = new JPanel();
 	    posterPanel.setLayout(null);
-	    posterPanel.setSize(363,70);
+	    posterPanel.setSize(363,70);//363
 	    posterPanel.setLocation(20, 610);
 	    posterPanel.setBackground(new Color(255, 255, 255));
 	    posterPanel.setVisible(true);
-	    add(posterPanel);
+	    add(posterPanel);*/
 
 		// JPanel 구조
 		setBackground(new Color(255, 255, 255));
@@ -210,7 +211,7 @@ public class FrameLogin extends JPanel {
 						Member.tokeniD = id;
 						//System.out.println("id : "+Member.tokeniD);
 						JOptionPane.showMessageDialog(null, id + "님, 환영합니다!");
-						FrameBase.getInstance(new Home());
+						FrameBase.getInstance(new Home("최신"));
 						dispose();
 					} else {
 						JOptionPane.showMessageDialog(null, "비밀번호를 확인해주세요.");

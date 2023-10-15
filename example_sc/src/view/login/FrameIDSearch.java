@@ -39,13 +39,14 @@ public class FrameIDSearch extends JPanel {
 	public FrameIDSearch(JPanel homePanel) {
 		this.frameLoginPanel = homePanel;
 
+		/*
 		posterPanel = new JPanel();
 		posterPanel.setLayout(null);
 		posterPanel.setSize(363, 70);
 		posterPanel.setLocation(20, 610);
 		posterPanel.setBackground(new Color(255, 255, 255));
 		posterPanel.setVisible(true);
-		add(posterPanel);
+		add(posterPanel);*/
 
 		// JPanel 구조
 		setLayout(null);

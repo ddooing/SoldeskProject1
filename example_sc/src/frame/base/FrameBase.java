@@ -23,7 +23,7 @@ import view.login.FrameIDSearch;
 
 public class FrameBase extends JFrame{
 	private static FrameBase instance;
-
+	
 	private FrameBase(JPanel e) {
 		//시스템 정보(화면 크기를 얻기 위한 Toolkit)
 		Toolkit tk = Toolkit.getDefaultToolkit();//해상도
@@ -38,10 +38,7 @@ public class FrameBase extends JFrame{
 		add(e);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //x버튼
-	
-		
-		
-	    
+   
 	}//생성자
 
 	//싱글톤 기법을 사용하려고 한다
@@ -54,6 +51,7 @@ public class FrameBase extends JFrame{
 		
 		instance.revalidate(); //레이아웃 관리자에게 레이아웃정보를 다시 계산하도록 지시
 		instance.repaint(); //레이아웃을 새로 그린다
+
 	}//getInstance()
 	
 	//기본 프레임 이미지를 저장하기 위한 메소드
@@ -89,11 +87,9 @@ public class FrameBase extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				if(instance != null) {		// 1개 창 닫기
-					instance.dispose();
-					}
+
 				FrameBase.getInstance(new FrameSoonPage());
+				
 				
 			}
 		});
@@ -110,10 +106,11 @@ public class FrameBase extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(instance != null) {		// 1개 창 닫기
-					instance.dispose();
-					}
-				FrameBase.getInstance(new Home());
+				
+				
+				
+				FrameBase.getInstance(new Home("최신"));
+				
 			}
 		});
 		
@@ -130,9 +127,7 @@ public class FrameBase extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				if(instance != null) {		// 1개 창 닫기
-					instance.dispose();
-					}
+				
 				FrameBase.getInstance(new FrameTicketList(Member.tokeniD));
 				
 			}
@@ -151,15 +146,11 @@ public class FrameBase extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(instance != null) {		// 1개 창 닫기
-					instance.dispose();
-					}
+
 				FrameBase.getInstance(new FrameRandomPage());
 			}
 		});
-		
-		
-		
+	
 	}
 	
 	public static void closeAllFrames() {
@@ -179,7 +170,8 @@ public class FrameBase extends JFrame{
 	public void dispose() {
 		super.dispose();
 	}
-	
+
+
 	public static void getDispose() {
 		instance.dispose();
 	}

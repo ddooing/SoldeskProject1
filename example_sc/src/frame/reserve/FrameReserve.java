@@ -45,14 +45,14 @@ import net.sourceforge.jdatepicker.impl.UtilDateModel;
 
 public class FrameReserve extends JPanel {
 	
-	
     private ArtGalleryInfo info;
     private String artName; // 추가: 전달된 예약에 필요한 예술 작품 이름
     private JTable reservationTable;
     private DefaultTableModel tableModel;
     private JComboBox<String> timeComboBox;
-    
-    public FrameReserve(ArtGalleryInfo info, String artName) {
+
+
+	public FrameReserve(ArtGalleryInfo info, String artName) {
         this.info = info;
         this.artName = artName;
         
@@ -100,6 +100,7 @@ public class FrameReserve extends JPanel {
             timeComboBox = new JComboBox<>(timeOptions); // 시간대 선택 컴보박스 초기화
             timeComboBox.setBounds(120, 410, 80, 30);
             add(timeComboBox);
+            
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -119,7 +120,7 @@ public class FrameReserve extends JPanel {
         
         // 예약 목록 테이블 생성 
         String[] columnNames = {"예약번호", "예술 작품", "날짜", "시간", "티켓 수량"};
-        tableModel = new DefaultTableModel(columnNames, 0); // ??
+        tableModel = new DefaultTableModel(columnNames, 0); 
         reservationTable = new JTable(tableModel);
         reservationTable.setVisible(false);
 
@@ -230,13 +231,9 @@ public class FrameReserve extends JPanel {
                             timeComboBox.setSelectedIndex(0);
                             datePicker.getModel().setValue(null);
 
-                            FrameGalleryConfirm confirmFrame = new FrameGalleryConfirm(selectedName, selectedDate, selectedTime, selectedTicket,info);
+                            FrameGalleryConfirm  confirmFrame = new FrameGalleryConfirm(selectedName, selectedDate, selectedTime, selectedTicket,info);
                             confirmFrame.setVisible(true);
-                            
-                            Window window = SwingUtilities.windowForComponent((Component) e.getSource());	// 현재 창 닫기
-                            if (window != null) {
-                                window.dispose(); 
-                            }
+
                             
                         } else if (selectedTicket == 0) {
                             JOptionPane.showMessageDialog(FrameReserve.this, "티켓 수량을 확인해주세요.", "경고", JOptionPane.WARNING_MESSAGE);
@@ -249,5 +246,9 @@ public class FrameReserve extends JPanel {
                 }
             }
         });
+        
+        
     }
+	
+
 }

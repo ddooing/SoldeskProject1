@@ -31,6 +31,7 @@ public class Home extends JPanel {
 	private JPanel homePanel;
     private JPanel listPanel;
     private JPanel filterMenuFrame;
+    private String setFilter;
     
     JToggleButton recent_btn;
     JToggleButton popula_btn;
@@ -40,27 +41,19 @@ public class Home extends JPanel {
     
     List<ArtReserInfo> reserInfoList;
     
-    public Home() {
-
+    public Home(String filter) {
+    	setFilter=filter;
+    	
         // JPanel 구조 설정
         setBackground(Color.white);
         setLayout(null);
         setSize(400, 700);
-        
-        
-        
-        
+
       //예매 추가하기
 
         ArtReserInfoList a = new ArtReserInfoList();
-        //a.show();
          reserInfoList =a.getArtReserInfoList();
-         /*
-          * 확인용
-         for( ArtReserInfo reser : reserInfoList)
- 		{
-         	System.out.println(reser.toString());
- 		}*/
+
            
      // 이미지
         ImageIcon imageSearch = new ImageIcon("./src/img/30.png");
@@ -83,20 +76,12 @@ public class Home extends JPanel {
         
         
         baseButton(); //버튼 생성
+        buttonSetting(); //버튼 세팅 
         
-        listPanel = new ListPanel("최신"); // 리스트 보이게될 listPanel
+        listPanel = new ListPanel(filter); // 리스트 보이게될 listPanel
         
     	add(listPanel);
-    	
-    	// recent_btn을 선택되어 있는 상태로 만듦
-        recent_btn.setSelected(true);
 
-        ImageIcon originalIcon2 = new ImageIcon("./src/img/최신버튼.png");
-        Image scaledImage2 = originalIcon2.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
-        ImageIcon two = new ImageIcon(scaledImage2);
-        recent_btn.setIcon(two);
-    	
-    	
     	btnSearch.addActionListener(new ActionListener() {
 
 			@Override
@@ -104,8 +89,6 @@ public class Home extends JPanel {
 				//새로운 FrameBase창 생성
 				FrameBase.getInstance(new FrameSearch_1());
 				dispose();
-
-
 			}
 		});
 		recent_btn.addItemListener(new ItemListener() {
@@ -118,8 +101,7 @@ public class Home extends JPanel {
                     Image scaledImage2 = originalIcon2.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
                     ImageIcon two = new ImageIcon(scaledImage2);
                     recent_btn.setIcon(two);
-                    
-            
+
                      remove(listPanel);
                      listPanel = new ListPanel("최신");
                      add(listPanel);
@@ -287,6 +269,38 @@ public class Home extends JPanel {
         soonEnd_btn.setRolloverIcon(new ImageIcon(scaledHoverImage4));
     }
 
+    public void buttonSetting() {
+    	if(setFilter.equals("최신"))
+    	{
+    		recent_btn.setSelected(true);
+    		ImageIcon originalIcon2 = new ImageIcon("./src/img/최신버튼.png");
+            Image scaledImage2 = originalIcon2.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
+            ImageIcon two = new ImageIcon(scaledImage2);
+            recent_btn.setIcon(two);
+    	}else if(setFilter.equals("인기"))
+    	{
+    		popula_btn.setSelected(true);
+    		ImageIcon originalIcon2 = new ImageIcon("./src/img/인기버튼.png");
+            Image scaledImage2 = originalIcon2.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
+            ImageIcon two = new ImageIcon(scaledImage2);
+            popula_btn.setIcon(two);
+    		
+    	}else if(setFilter.equals("무료"))
+    	{
+    		free_btn.setSelected(true);
+    		ImageIcon originalIcon2 = new ImageIcon("./src/img/무료버튼.png");
+            Image scaledImage2 = originalIcon2.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
+            ImageIcon two = new ImageIcon(scaledImage2);
+            free_btn.setIcon(two);
+    	}else if(setFilter.equals("곧종료"))
+    	{
+    		soonEnd_btn.setSelected(true);
+    		ImageIcon originalIcon2 = new ImageIcon("./src/img/곧종료버튼.png");
+            Image scaledImage2 = originalIcon2.getImage().getScaledInstance(80, 30, Image.SCALE_SMOOTH);
+            ImageIcon two = new ImageIcon(scaledImage2);
+            soonEnd_btn.setIcon(two);
+    	}
+    }
     public void dispose() {
 	    JFrame parent = (JFrame) this.getTopLevelAncestor();
 	    parent.dispose();

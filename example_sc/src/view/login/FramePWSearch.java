@@ -23,7 +23,8 @@ import javax.swing.SwingUtilities;
 
 import controller.member.MemberController;
 import controller.member.MemberList;
-import frame.base.FrameBase;
+//import frame.base.FrameBase;
+import frame.base.FrameDisplay;
 import model.member.Member;
 
 public class FramePWSearch extends JPanel {
@@ -44,13 +45,15 @@ public class FramePWSearch extends JPanel {
 
 		setVisible(true);
 
+		/*
 		posterPanel = new JPanel();
 	    posterPanel.setLayout(null);
 	    posterPanel.setSize(363,70);
 	    posterPanel.setLocation(20, 610);
 	    posterPanel.setBackground(new Color(255, 255, 255));
 	    posterPanel.setVisible(true);
-	    add(posterPanel);
+	    add(posterPanel);*/
+		
 		
 		JLabel lName = new JLabel("이름");
 		JLabel lPhone = new JLabel("전화번호");
@@ -208,7 +211,7 @@ public class FramePWSearch extends JPanel {
                 if (window1 != null) {
                     window1.dispose(); 
                 }
-				FrameBase.getInstance(new FrameLogin());
+                FrameDisplay.getInstance(new FrameLogin());
 			}
 		});
 

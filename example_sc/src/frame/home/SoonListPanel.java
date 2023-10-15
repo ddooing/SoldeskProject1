@@ -1,3 +1,4 @@
+
 package frame.home;
 
 
@@ -33,7 +34,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class ListPanel extends JPanel {
+public class SoonListPanel extends JPanel {
 
 	private int currentPage=0; // 현재 페이지 인덱스
     private int postersPerPage=4; // 한 페이지당 포스터 개수
@@ -43,7 +44,7 @@ public class ListPanel extends JPanel {
     List<ArtGalleryInfo> filteredPosterInfoList;
     public static String whatfiltername;
     
-    public List<ArtGalleryInfo> getFreeList(String filtername) { //전시회 리스트 가져오기
+    public List<ArtGalleryInfo> getFreeList() { //전시회 리스트 가져오기
 
     	
         ArtGalleryList artgallerylist = new ArtGalleryList();
@@ -51,56 +52,36 @@ public class ListPanel extends JPanel {
 
         // 필터링된 포스터 정보를 담을 리스트
         filteredPosterInfoList = new ArrayList<>();
-        
-        if(filtername == "최신")
-        {
-        	filteredPosterInfoList=artgallerylist.getSortByDateStart();
-        }else if(filtername == "인기")
-        {
-        	filteredPosterInfoList = artgallerylist.getPopulaPosters();            
-        }
-        else if(filtername == "무료")
-        {
-        	filteredPosterInfoList = artgallerylist.getFreePosters(); 
-        }
-        else if(filtername == "곧종료")
-        {
-            filteredPosterInfoList = artgallerylist.getsoonEndPosters();
-            
-            
-        }
-        
-        this.totalPosters = filteredPosterInfoList.size();
+        posterInfoList = artgallerylist.getsoonPosters();
+        this.totalPosters = posterInfoList.size();
         this.totalPages = (int) Math.ceil((double) totalPosters / postersPerPage);
+        
         
         return filteredPosterInfoList;
     }
     
     
-	public ListPanel(String filtername) {
+	public SoonListPanel() {
 		// 패널의 위치와 크기 설정
 		setSize(361,500);
 		setLocation(20, 137);
 		setLayout(null);
 	    setBackground(new Color(241, 239, 239));//new Color(250, 241, 228) Color.white
 	    
-        posterInfoList = getFreeList(filtername); // 필터링된 포스터 정보를 사용
-        updatePosters(currentPage, postersPerPage,totalPosters,totalPages);
-        whatfiltername=filtername;
+	    ArtGalleryList artgallerylist = new ArtGalleryList();
+
+
+        // 필터링된 포스터 정보를 담을 리스트
+        filteredPosterInfoList = new ArrayList<>();
+        posterInfoList = artgallerylist.getsoonPosters();
+        this.totalPosters = posterInfoList.size();
+        this.totalPages = (int) Math.ceil((double) totalPosters / postersPerPage);
         
-        /*
-         * 필터링된 리스트 확인용
-        for(ArtGalleryInfo a:posterInfoList )
-		{
-			System.out.println("posterInfoList : "+ a.toString());
-		}
-		*/
-        
-        
+        updatePosters(currentPage, postersPerPage,totalPosters,totalPages);   
 	}
 	
 	private void updatePosters(int currentPage,int postersPerPage,int totalPosters, int totalPages) {
-
+		
 		removeAll();
         revalidate();
         repaint();
@@ -152,7 +133,7 @@ public class ListPanel extends JPanel {
                 if (currentPage > 0) { // 이전 페이지로 이동 가능한 경우에만 이동
                 	int currentPagesMinus = currentPage-1;
                     updatePosters(currentPagesMinus, postersPerPage, totalPosters, totalPages);
-                    
+                   
                 }
             }
         });
@@ -215,13 +196,8 @@ public class ListPanel extends JPanel {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                     	
-                          FrameBase.getInstance(new FramePosterClick(Member.tokeniD,posterInfo.getArtName()));			// 해당전시 페이지 출력
-                         
-                          Window window = SwingUtilities.windowForComponent((Component) e.getSource());	// 현재 창 닫기
-                          if (window != null) {
-                              window.dispose(); 
-                          }
-                        			
+                          FrameBase.getInstance(new FramePosterClick_Soon(posterInfo.getArtName()));			// 해당전시 페이지 출력
+  			
                     }
                 });
             }

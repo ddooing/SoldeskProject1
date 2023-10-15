@@ -27,7 +27,6 @@ import javax.swing.SwingUtilities;
 import artDB.ArtGalleryInfo;
 import artDB.ArtGalleryList;
 import frame.base.FrameBase;
-import frame.reserve.FrameGalleryConfirm;
 import frame.reserve.FrameReserve;
 import frame.underbtn.FrameSearch_1;
 import frame.underbtn.FrameSoonPage;
@@ -37,26 +36,20 @@ import frame.underbtn.FrameTicketList;
 import model.member.ArtReserInfo;
 import model.member.ArtReserInfoList;
 
-public class FramePosterClick extends JPanel {
-	
-	JPanel framehomePanel;
-	private int ad;
+public class FramePosterClick_Soon extends JPanel {
+
 	private ArtGalleryList artgallerylist;//전시회 정보 리스트
 	private ArtGalleryInfo art;//제목이 artname인 객체 넣을 공간 
 	private List<ArtGalleryInfo> posterInfoList;
-	
-	List<ArtReserInfo> reserInfoList;
-	
-	private String id ;
-	
-	public FramePosterClick(String id,String artname) {
+
+	public FramePosterClick_Soon(String artname) {
 		
 		setSize(400, 700); // homepanel 과 같은 사이즈 
         setLayout(null);
         setVisible(true);
         
 		artgallerylist = new ArtGalleryList();
-		this.id= id;
+
 
         // 전시회 정보 리스트에서 제목이 artname인 객체 찾아내기 
         for(int i=0; i<artgallerylist.getPosters().size();i++) {
@@ -128,20 +121,9 @@ public class FramePosterClick extends JPanel {
 						"입장료 : " + artInfo.getFee() + "<br>" + 
 						"주소 : " + artInfo.getPlace() + "</body></HTML>");
 		
-		// "예약" 버튼 생성
-		ImageIcon originalIcon = new ImageIcon("./src/img/예매.png");
-        Image originalImage = originalIcon.getImage();
-        Image scaledImage = originalImage.getScaledInstance(60, 30, Image.SCALE_SMOOTH);
-        ImageIcon reservebtn = new ImageIcon(scaledImage);
-        JButton reservebtn1 = new JButton(reservebtn);
+		
         
-        reservebtn1.setBounds(300, 450, 60, 30);
-        reservebtn1.setBorderPainted(false); // 버튼 외각선 지우기
-        reservebtn1.setContentAreaFilled(false); // 버튼 투명하게 지우기(이미지는 남음)
-        reservebtn1.setFocusPainted(false); // 버튼 선택 표시 지우기
-        add(reservebtn1);
-        
-		title.setSize(400,30);
+		title.setSize(400,40);
 		title.setLocation(30, 360);
 		title.setBackground(new Color(255, 255, 255));
 		title.setFont(new Font("나눔스퀘어OTF Bold", Font.BOLD, 25));
@@ -174,62 +156,42 @@ public class FramePosterClick extends JPanel {
 		
        
      // "길찾기" 버튼 생성
-      		ImageIcon originalIcon1 = new ImageIcon("./src/img/길찾기.png");
-              Image originalImage1 = originalIcon1.getImage();
-              Image scaledImage1 = originalImage1.getScaledInstance(70, 30, Image.SCALE_SMOOTH);
-              ImageIcon mapgobtn = new ImageIcon(scaledImage1);
-              JButton mapgobtn1 = new JButton(mapgobtn);
-              
-              mapgobtn1.setBounds(295, 550, 70, 30);
-              mapgobtn1.setBorderPainted(false); // 버튼 외각선 지우기
-              mapgobtn1.setContentAreaFilled(false); // 버튼 투명하게 지우기(이미지는 남음)
-              mapgobtn1.setFocusPainted(false); // 버튼 선택 표시 지우기
-              add(mapgobtn1);
-              
-              // 호버 시에 표시할 이미지 설정
-              ImageIcon hoverIcon1 = new ImageIcon("./src/img/예매hover.png");
-              Image scaledHoverImage1 = hoverIcon1.getImage().getScaledInstance(60, 30, Image.SCALE_SMOOTH);
-              reservebtn1.setRolloverIcon(new ImageIcon(scaledHoverImage1));
-       
-              // 호버 시에 표시할 이미지 설정
-              ImageIcon hoverIcon2 = new ImageIcon("./src/img/길찾기hover.png");
-              Image scaledHoverImage2 = hoverIcon2.getImage().getScaledInstance(70, 30, Image.SCALE_SMOOTH);
-              mapgobtn1.setRolloverIcon(new ImageIcon(scaledHoverImage2));
-     		
-     		
-     		mapgobtn1.addActionListener(new ActionListener() {
-     			
-     			@Override
-     			public void actionPerformed(ActionEvent e) {
-     				try {
-     		            // 크롬 브라우저 열기
-     					String URL = posterInfoList.get(i).getPlaceURL();
-     		            Desktop.getDesktop().browse(new URI(URL));
-     		        } catch (IOException | URISyntaxException ex) {
-     		            ex.printStackTrace(); // 예외 처리
-     		        }
-     				
-     			}
-     		});
-        
-        
-		reservebtn1.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
 
-				FrameReserve freamreserve = new FrameReserve(artInfo, artInfo.getArtName());
-				FrameBase.getInstance(freamreserve);
-				
+		ImageIcon originalIcon1 = new ImageIcon("./src/img/길찾기.png");
+        Image originalImage1 = originalIcon1.getImage();
+        Image scaledImage1 = originalImage1.getScaledInstance(70, 30, Image.SCALE_SMOOTH);
+	    ImageIcon mapgobtn = new ImageIcon(scaledImage1);
+	    JButton mapgobtn1 = new JButton(mapgobtn);
+	      
+        mapgobtn1.setBounds(295, 580, 70, 30);
+        mapgobtn1.setBorderPainted(false); // 버튼 외각선 지우기
+        mapgobtn1.setContentAreaFilled(false); // 버튼 투명하게 지우기(이미지는 남음)
+        mapgobtn1.setFocusPainted(false); // 버튼 선택 표시 지우기
+        add(mapgobtn1);
+          
+        
+   
+        // 호버 시에 표시할 이미지 설정
+        ImageIcon hoverIcon2 = new ImageIcon("./src/img/길찾기hover.png");
+        Image scaledHoverImage2 = hoverIcon2.getImage().getScaledInstance(70, 30, Image.SCALE_SMOOTH);
+        mapgobtn1.setRolloverIcon(new ImageIcon(scaledHoverImage2));
 	
-			}
-		});
-		
-		
-		
+     		
+ 		mapgobtn1.addActionListener(new ActionListener() {
+ 			
+ 			@Override
+ 			public void actionPerformed(ActionEvent e) {
+ 				try {
+ 		            // 크롬 브라우저 열기
+ 					String URL = posterInfoList.get(i).getPlaceURL();
+ 		            Desktop.getDesktop().browse(new URI(URL));
+ 		        } catch (IOException | URISyntaxException ex) {
+ 		            ex.printStackTrace(); // 예외 처리
+ 		        }
+ 				
+ 			}
+ 		});
+        	
 	}
-	
-
-	
 	
 }

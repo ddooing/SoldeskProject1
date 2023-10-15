@@ -1,3 +1,4 @@
+
 package frame.home;
 
 import java.awt.Color;
@@ -19,32 +20,14 @@ import javax.swing.SwingUtilities;
 
 import artDB.ArtGalleryList;
 import frame.base.FrameBase;
+import frame.base.FrameDisplay;
 import view.login.FrameJoin;
 import view.login.FrameLogin;
 
-public class FrameBegin extends JPanel {
-	
-	private JPanel posterPanel;
-   
-    ImageIcon icon;
-    public FrameBegin() {
-    	this(null);
-    }
+public class FrameLanding extends JPanel {
 
-    public FrameBegin(JPanel homePanel) {
-        // ArtGalleryList와 PopupList 객체 생성
-        ArtGalleryList artgallerylist = new ArtGalleryList();
-        
-        posterPanel = new JPanel();
-	    posterPanel.setLayout(null);
-	    posterPanel.setSize(363,70);
-	    posterPanel.setLocation(20, 610);
-	    posterPanel.setVisible(true);
-	    add(posterPanel);
-        
-        // JPanel 구조 설정
-        //setBackground(Color.white);
-        
+    public FrameLanding() {
+  
         setLayout(null);
         setSize(400, 700);
         setVisible(true);
@@ -128,29 +111,23 @@ public class FrameBegin extends JPanel {
 		
 		
 		//로그인 버튼 
-				btnLogin.addActionListener(new ActionListener() {
+		btnLogin.addActionListener(new ActionListener() {
 
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						Window window1 = SwingUtilities.windowForComponent((Component) e.getSource());	// 현재 창 닫기
-		                if (window1 != null) {
-		                    window1.dispose(); 
-		                }
-						FrameBase.getInstance(new FrameLogin());
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+                FrameDisplay.getInstance(new FrameLogin());
 
-					}
-				});
+			}
+		});
 
-				// 회원가입 버튼
-				btnJoin.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						Window window1 = SwingUtilities.windowForComponent((Component) e.getSource());	// 현재 창 닫기
-		                if (window1 != null) {
-		                    window1.dispose(); 
-		                }
-						FrameBase.getInstance(new FrameJoin());
-					}
-				});
+		// 회원가입 버튼
+		btnJoin.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+                FrameDisplay.getInstance(new FrameJoin());
+			}
+		});
 }
 }

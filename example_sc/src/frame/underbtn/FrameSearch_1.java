@@ -223,32 +223,7 @@ public class FrameSearch_1 extends JPanel {
             });
         }
         
-        ImageIcon originalIcon9 = new ImageIcon("./src/뒤로가기.png");
-        Image originalImage9 = originalIcon9.getImage();
-        Image scaledImage9 = originalImage9.getScaledInstance(50, 40, Image.SCALE_SMOOTH);
-        ImageIcon posterImage1 = new ImageIcon(scaledImage9);
-        JButton back = new JButton(posterImage1);
-		back.setSize(50,40);
-		back.setLocation(30,30);
-		back.setBorderPainted(false);
-		back.setContentAreaFilled(false);
-		back.setFocusPainted(false);
-		
-		add(back);
-		
-		back.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				Window window1 = SwingUtilities.windowForComponent((Component) e.getSource());	// 현재 창 닫기
-                if (window1 != null) {
-                    window1.dispose(); 
-                }
-				FrameBase.getInstance(new Home());
-				
-			}
-		});
+        
 		
     }
 

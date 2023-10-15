@@ -14,6 +14,18 @@ public class Member implements Serializable {
 	private String tel;
 	
 	
+	public Member() {
+
+	}
+	
+	// 생성자
+	public Member(String id, String pw, String name, String tel) {
+		this.id = id;
+		this.pw = pw;
+		this.name = name;
+		this.tel = tel;
+	}
+	
 
 	public static String getTokenID() {
 		return tokeniD;
@@ -22,9 +34,7 @@ public class Member implements Serializable {
 	public void setTokenID(String tokenID) {
 		this.tokeniD = tokenID;
 	}
-	public Member() {
-
-	}
+	
 	
 	public ArrayList<ArtReserInfo> getTiketList(){ // id인 예매 정보 리스트 
 		
@@ -44,13 +54,6 @@ public class Member implements Serializable {
 		
 	}*/
 
-	// 생성자
-	public Member(String id, String pw, String name, String tel) {
-		this.id = id;
-		this.pw = pw;
-		this.name = name;
-		this.tel = tel;
-	}
 
 	public String getId() {
 		return id;
@@ -90,7 +93,6 @@ public class Member implements Serializable {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return id + " " + pw + " " + name;
 	}
 

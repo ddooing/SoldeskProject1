@@ -24,8 +24,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import controller.member.MemberController;
-import frame.base.FrameBase;
-import frame.home.FrameBegin;
+import frame.base.FrameDisplay;
 import model.member.Member;
 import model.member.MemberList;
 
@@ -42,14 +41,14 @@ public class FrameJoin extends JPanel {
 
 	public FrameJoin(JPanel homePanel) {
 		this.frameJoinPanel = homePanel;
-		
+		/*
 		posterPanel = new JPanel();
 	    posterPanel.setLayout(null);
 	    posterPanel.setSize(363,70);
 	    posterPanel.setLocation(20, 610);
 	    posterPanel.setBackground(new Color(255, 255, 255));
 	    posterPanel.setVisible(true);
-	    add(posterPanel);
+	    add(posterPanel);*/
 
 		// JPanel 구조
 		setBackground(new Color(255, 255, 255));
@@ -224,7 +223,6 @@ public class FrameJoin extends JPanel {
 					JOptionPane.showMessageDialog(null, "회원가입에 성공했습니다.");
 					System.out.println("회원가입 성공");
 					dispose();
-					FrameBase.getInstance(new FrameBegin());
 
 				} else {
 					JOptionPane.showMessageDialog(null, "회원가입이 실패했습니다.");
@@ -239,7 +237,7 @@ public class FrameJoin extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				FrameBase.getInstance(new FrameBegin());
+				
 			}
 		});
 

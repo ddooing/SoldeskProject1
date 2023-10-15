@@ -114,11 +114,12 @@ public class ArtGalleryInfo {
 	{
 		this.cnt += num;
 	}
-	// 확인용 함수 
+	
+	
 	@Override
-	public String toString() {
+	public String toString() {// 확인용 함수 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		return this.artName +" 가격!!:"+this.fee+" 시작:"+dateFormat.format(this.dateStart)+ " 종료:"+dateFormat.format(this.dateEnd);
+		return this.artName +" : "+this.fee+" ,시작:"+dateFormat.format(this.dateStart)+ " ,종료:"+dateFormat.format(this.dateEnd);
 	}
 	
 	public String getPo()// 인기순 목록 보기

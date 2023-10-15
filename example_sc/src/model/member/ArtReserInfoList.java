@@ -47,7 +47,6 @@ public class ArtReserInfoList {
 
 	
 	public static void addReservation(ArtReserInfo reservation) {
-		// TODO Auto-generated method stub
 		arr.add(reservation);
 	}
 	
