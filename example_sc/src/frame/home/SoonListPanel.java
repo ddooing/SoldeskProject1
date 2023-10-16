@@ -66,7 +66,7 @@ public class SoonListPanel extends JPanel {
 		setSize(361,500);
 		setLocation(20, 137);
 		setLayout(null);
-	    setBackground(new Color(241, 239, 239));//new Color(250, 241, 228) Color.white
+	    setBackground(Color.white);//new Color(250, 241, 228) Color.white
 	    
 	    ArtGalleryList artgallerylist = new ArtGalleryList();
 
