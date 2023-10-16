@@ -92,7 +92,7 @@ public class FrameGalleryConfirm extends JFrame {
         
         
      // 닫기 버튼 생성 및 추가
-        ImageIcon originalIcon10 = new ImageIcon("./src/img/결제하기1.png");
+        ImageIcon originalIcon10 = new ImageIcon("./src/img/확인1.png");
         Image originalImage10 = originalIcon10.getImage();
         Image scaledImage10 = originalImage10.getScaledInstance(120, 30, Image.SCALE_SMOOTH);
         ImageIcon posterImage10 = new ImageIcon(scaledImage10);
@@ -102,7 +102,7 @@ public class FrameGalleryConfirm extends JFrame {
         paymentbtn.setFocusPainted(false);
         
         // 예약버튼 호버
-        ImageIcon reserveButton1 = new ImageIcon("./src/img/결제하기1hover.png");
+        ImageIcon reserveButton1 = new ImageIcon("./src/img/확인1hover.png");
         Image scaledHoverImage1 = reserveButton1.getImage().getScaledInstance(120, 30, Image.SCALE_SMOOTH);
         paymentbtn.setRolloverIcon(new ImageIcon(scaledHoverImage1));
         
